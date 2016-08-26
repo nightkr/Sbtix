@@ -19,4 +19,4 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 
 ## How?
 
-Add the SBT plugin to your project and run `$ sbt genNix`. Do check the generated `repo.nix` into your source control. Then copy `default.nix` from `src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
+Add the SBT plugin to your project and run `$ sbt genNix`. Do check the generated `repo.nix` into your source control. Then copy `sbtix.nix` and `default.nix` from `src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
