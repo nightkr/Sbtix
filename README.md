@@ -13,6 +13,7 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 ## Why not? (caveats)
 
 * Alpha quality, beware (and please report any issues!)
+* Private (password-protected) Maven stores are currently unsupported (see issue #3)
 * Plugins and SBT itself are not cached by Sbtix (see issue #2)
 * POMs are redownloaded several times (see issue #1)
 * You must use the Coursier dependency resolver instead of Ivy (because SBT's Ivy resolver does not report the original artifact URLs)
