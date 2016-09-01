@@ -3,7 +3,7 @@ let
     sbtix = pkgs.callPackage ./sbtix.nix {};
 in
     sbtix.buildSbtProject {
-        name = "sbt2nix-simple";
+        name = "sbtix-simple";
         src = ./.;
         repo = import ./repo.nix;
         sbtOptions = "-Dplugin.version=0.1-SNAPSHOT";
