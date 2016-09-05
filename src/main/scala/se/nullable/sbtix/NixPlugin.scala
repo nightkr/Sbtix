@@ -18,7 +18,7 @@ object NixPlugin extends AutoPlugin {
 
       val sVersion = scalaVersion.value
       val isDotty = ScalaInstance.isDotty(sVersion)
-      fetcher.buildNixRepo(allDependencies.value.toSet -- projectDependencies.value, externalResolvers.value)
+      fetcher.buildNixRepo(allDependencies.value.toSet -- projectDependencies.value, externalResolvers.value, CoursierPlugin.autoImport.coursierCredentials.value)
     }
   lazy val genNixCommand =
     Command.command("genNix") { initState =>
