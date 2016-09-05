@@ -21,3 +21,8 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 ## How?
 
 Add the SBT plugin to your project and run `$ sbt genNix`. Do check the generated `repo.nix` into your source control. Then copy `sbtix.nix` and `default.nix` from `src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
+
+### Authentication
+
+In order to use a private repository, add your credentials to `coursierCredentials`. Note that the key should be the name of the repository, see `src/sbt-test/sbtix/simple/build.sbt` for an example! Also, you must currently set the credentials for each project, `in ThisBuild` 
+In order to use a private repository, add your credentials to `coursierCredentials`. Note that the key should be the name of the repository, see `src/sbt-test/sbtix/simple/build.sbt` for an example! Also, you must currently set the credentials for each project, `in ThisBuild` doesn't work currently. This is for consistency with Coursier-SBT.
