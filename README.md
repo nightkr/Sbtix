@@ -24,5 +24,4 @@ Add the SBT plugin to your project and run `$ sbt genNix`. Do check the generate
 
 ### Authentication
 
-In order to use a private repository, add your credentials to `coursierCredentials`. Note that the key should be the name of the repository, see `src/sbt-test/sbtix/simple/build.sbt` for an example! Also, you must currently set the credentials for each project, `in ThisBuild` 
 In order to use a private repository, add your credentials to `coursierCredentials`. Note that the key should be the name of the repository, see `src/sbt-test/sbtix/simple/build.sbt` for an example! Also, you must currently set the credentials for each project, `in ThisBuild` doesn't work currently. This is for consistency with Coursier-SBT.
