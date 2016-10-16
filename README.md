@@ -20,7 +20,17 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 
 ## How?
 
-Add the SBT plugin to your project and run `$ sbt genNix`. Do check the generated `repo.nix` into your source control. Then copy `sbtix.nix` and `default.nix` from `src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
+To install sbtix clone the sbtix git repo and run the following:
+```
+cd Sbtix
+nix-env -f . -i sbtix
+```
+
+Sbtix provides a script which will connect your project to the sbtix global plugin and launch sbt, it does this by setting the `sbt.global.base` directory to `$HOME/.sbtix`.  
+
+To generate nix expressions describing your project dependencies run `sbtix-gen`. Do check the generated `repo.nix` into your source control. Then copy `sbtix.nix` and `default.nix` from `src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
+
+To launch sbt with the sbtix global plugin loaded, run `sbtix`. To then generate nix expressions from inside sbt, run `genNix`.
 
 ### Authentication
 
