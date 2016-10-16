@@ -7,7 +7,7 @@ let
   
     src = fetchurl {
       url = https://github.com/cessationoftime/Sbtix/releases/download/bootstrap/sbtix-ivyrepo-0.1.tar.gz;
-      sha256 = "0cf01k265a6rz05wwzc3saqw5q9afk37zbyg832c6dbcrmjx7h4z";
+      sha256 = "16k9w94cq933ap1psq5kdvcl6n9rkzjxbw27pc212n89xxl8vnfl";
     };
 
     phases = [ "unpackPhase" "installPhase" ];
