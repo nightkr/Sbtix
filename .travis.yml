@@ -2,7 +2,7 @@ language: scala
 before_install:
   - curl https://nixos.org/nix/install | sh
   - . /home/travis/.nix-profile/etc/profile.d/nix.sh
-  - nix-env -iA nix-prefetch-scripts
+  - nix-env -i nix-prefetch-scripts
 sudo: required
 script:
   - cd plugin
