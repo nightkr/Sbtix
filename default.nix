@@ -25,22 +25,22 @@ let
   '';
 
   sbtixScript = writeScriptBin "sbtix" ''
-     #! ${stdenv.shell}
+    #! ${stdenv.shell}
 
-     #the global plugins directory must be writeable
-     SBTIX_GLBASE_DIR="$HOME/.sbtix"
+    #the global plugins directory must be writeable
+    SBTIX_GLBASE_DIR="$HOME/.sbtix"
 
-     if [ ! -d "$SBTIX_GLBASE_DIR" ]; then
-       mkdir -p "$SBTIX_GLBASE_DIR/plugins"
-       ln -s ${pluginsSbtix} "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt"
-     fi
+    if [ ! -d "$SBTIX_GLBASE_DIR" ]; then
+      mkdir -p "$SBTIX_GLBASE_DIR/plugins"
+      ln -s ${pluginsSbtix} "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt"
+    fi
 
     #the sbt.global.base directory must be writable
     sbt -Dsbt.global.base=$SBTIX_GLBASE_DIR "$@"
   '';
 
   sbtixGenScript = writeScriptBin "sbtix-gen" ''
-     #! ${stdenv.shell}
+    #! ${stdenv.shell}
 
     sbtix genNix
   '';

@@ -6,7 +6,6 @@ in
         name = "sbtix-simple";
         src = ./.;
         repo = import ./repo.nix;
-        sbtOptions = "-Dplugin.version=0.1-SNAPSHOT";
 
         installPhase =
             ''
