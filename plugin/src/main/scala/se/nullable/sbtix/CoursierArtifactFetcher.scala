@@ -31,37 +31,66 @@ class CoursierArtifactFetcher(scalaVersion: String,
 
         NixRepoModule(
           module = ToSbt.moduleId(dependency),
-          artifacts = Seq(
-            buildArtifact(
-              tpe,
-              new URL(artifact.url),
-              downloadedArtifact.toOption,
-              artifact.authentication
-            ),
-            // TODO: Cleaner way to get POM?
-            buildArtifact(
-              "pom",
-              new URL(artifact.url.replaceAll(s"\\.$tpe$$", ".pom")),
-              None,
-              artifact.authentication
-            )
-          )
+          artifacts = 
+            downloadedArtifact.toOption.map(d=>findArtifacts(new URL(artifact.url),d,  artifact.authentication)).toSeq.flatten
         )
       }
     )
-  }
+  } 
 
-  def buildArtifact(`type`: String, url: URL, localFile: Option[File], auth: Option[Authentication]): NixRepoArtifact = {
-    val authedUrl = auth match {
-      case Some(a) => new URI(url.getProtocol, s"${a.user}:${a.password}", url.getHost, url.getPort, url.getPath, url.getQuery, url.getRef).toURL
-      case None => url
+  def findArtifacts(url: URL, localFile: File, auth: Option[Authentication]): Seq[NixRepoArtifact] = {
+
+    val authedUri = auth match {
+          case Some(a) => new URI(url.getProtocol, s"${a.user}:${a.password}", url.getHost, url.getPort, url.getPath, url.getQuery, url.getRef)
+          case None => url.toURI
     }
 
-    NixRepoArtifact(
-      `type`,
-      authedUrl,
-      fetchChecksum(localFile.map(_.toURI.toURL).getOrElse(authedUrl))
-    )
+    val isIvy = localFile.getParentFile().getName() == "jars"
+
+    val localSearchLocation = if (isIvy) {
+       localFile.getParentFile().getParentFile()
+    } else {
+       localFile.getParentFile()
+    }
+
+    def parentURI(uri:URI) = if (uri.getPath().endsWith("/")) uri.resolve("..") else uri.resolve(".")
+
+    val calculatedParentURI = if (isIvy) {
+      parentURI(parentURI(authedUri))
+    } else {
+      parentURI(authedUri)
+    }
+
+    def calculateURI(f:File) = if (isIvy) {
+      calculatedParentURI.resolve(f.getParentFile().getName() + "/" + f.getName())
+    } else {
+      calculatedParentURI.resolve(f.getName())
+    }
+                 
+    def recursiveListFiles(f: File): Array[File] = {
+       val these = f.listFiles
+          these ++ these.filter(_.isDirectory).flatMap(recursiveListFiles)
+    }
+
+    val allArtifacts = recursiveListFiles(localSearchLocation)
+    val targetArtifacts = allArtifacts.filter(f => """.*(\.jar|\.pom|ivy.xml)$""".r.findFirstIn(f.getName).isDefined)
+
+    def getFileType(file:File) : String = {
+       val name = file.getName()
+       if (name == "ivy.xml") return "ivy"
+             
+       name.substring(name.lastIndexOf(".") + 1);
+    }
+
+    targetArtifacts.map{ artifactLocalFile =>
+
+      val calcUrl = calculateURI(artifactLocalFile).toURL
+
+      NixRepoArtifact(
+       getFileType(artifactLocalFile),
+       calcUrl,
+       fetchChecksum(artifactLocalFile.toURI.toURL)
+    )}.toSeq
   }
 
   def fetchChecksum(url: URL): String = {
