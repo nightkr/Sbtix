@@ -42,7 +42,7 @@ rec {
              ${sbtOptions}'';
             
 
-            buildPhase = ''sbt compile'';
+            buildPhase = ''unshare -n -- sbt compile'';
         } // args // {
             repo = null;
             buildInputs = [ jdk sbt ] ++ buildInputs;

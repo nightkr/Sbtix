@@ -2,4 +2,4 @@
 > genNix
 $ exists repo.nix
 $ exec nix-build --show-trace
-$ exec result/bin/three
+$ exec unshare -n -- result/bin/three

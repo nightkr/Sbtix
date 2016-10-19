@@ -9,7 +9,7 @@ in
 
         installPhase =
             ''
-                sbt three/stage
+                unshare -n -- sbt three/stage
                 cp -r three/target/universal/stage $out
             '';
     }

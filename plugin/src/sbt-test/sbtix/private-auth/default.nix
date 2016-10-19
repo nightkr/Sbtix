@@ -3,13 +3,13 @@ let
     sbtix = pkgs.callPackage ./sbtix.nix {};
 in
     sbtix.buildSbtProject {
-        name = "sbtix-simple";
+        name = "sbtix-private-auth";
         src = ./.;
         repo = import ./repo.nix;
 
         installPhase =
             ''
-                sbt three/stage
+                unshare -n -- sbt three/stage
                 cp -r three/target/universal/stage $out
             '';
     }
