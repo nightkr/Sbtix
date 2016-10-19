@@ -1,0 +1,10 @@
+language: scala
+before_install:
+  - jdk_switcher use oraclejdk8
+  - curl https://nixos.org/nix/install | sh
+  - . /home/travis/.nix-profile/etc/profile.d/nix.sh
+  - nix-env -i nix-prefetch-scripts
+sudo: required
+script:
+  - cd plugin
+  - sbt scripted
