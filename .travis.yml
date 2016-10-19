@@ -5,6 +5,9 @@ before_install:
   - . /home/travis/.nix-profile/etc/profile.d/nix.sh
   - nix-env -i nix-prefetch-scripts
   - sudo sysctl -w kernel.unprivileged_userns_clone=1
+  # Breaks purity, but this is just a temporary testing environment...
+  - sudo chown root $(nix-build '<nixpkgs>' -A utillinux)/bin/unshare
+  - sudo chmod u+s $(nix-build '<nixpkgs>' -A utillinux)/bin/unshare
 sudo: required
 dist: trusty
 script:
