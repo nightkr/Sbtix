@@ -1,4 +1,3 @@
-> compile
 > genNix
 $ exists repo.nix
 $ exec unshare -n -- nix-build --show-trace
