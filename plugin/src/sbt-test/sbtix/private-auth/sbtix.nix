@@ -1,5 +1,12 @@
-{ runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText }:
+{ runCommand, fetchurl, lib, stdenv, utillinux, jdk, sbt, writeText }:
 rec {
+    unshareify = cmd:
+        let
+            useUnshare = builtins.getEnv "TRAVIS" == "true";
+            unsharePrefix = "${utillinux}/bin/unshare -n -- ";
+        in
+            "${lib.optionalString useUnshare unsharePrefix}${cmd}"
+
     mkMavenRepo = name: repo: runCommand name {}
         (let
             slashify = builtins.replaceStrings ["."] ["/"];
@@ -40,9 +47,9 @@ rec {
              -Dsbt.override.build.repos=true
              -Dsbt.repository.config=${sbtixRepos}
              ${sbtOptions}'';
-            
 
-            buildPhase = ''unshare -n -- sbt compile'';
+
+            buildPhase = unshareify "sbt compile";
         } // args // {
             repo = null;
             buildInputs = [ jdk sbt ] ++ buildInputs;

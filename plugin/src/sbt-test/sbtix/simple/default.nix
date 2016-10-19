@@ -10,7 +10,7 @@ in
 
         installPhase =
             ''
-                ${pkgs.lib.optionalString isTravis "unshare -n -- "}sbt three/stage
+                ${sbtix.unshareify "sbt three/stage"}
                 cp -r three/target/universal/stage $out
             '';
     }

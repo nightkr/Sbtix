@@ -1,7 +1,6 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
     sbtix = pkgs.callPackage ./sbtix.nix {};
-    isTravis = builtins.getEnv "TRAVIS" == "true";
 in
     sbtix.buildSbtProject {
         name = "sbtix-private-auth";
@@ -10,7 +9,7 @@ in
 
         installPhase =
             ''
-                ${pkgs.lib.optionalString isTravis "unshare -n -- "}sbt three/stage
+                ${sbtix.unshareify "sbt three/stage"}
                 cp -r three/target/universal/stage $out
             '';
     }
