@@ -5,7 +5,7 @@ rec {
             useUnshare = builtins.getEnv "TRAVIS" == "true";
             unsharePrefix = "${utillinux}/bin/unshare -n -- ";
         in
-            "${lib.optionalString useUnshare unsharePrefix}${cmd}";
+            lib.optionalString useUnshare unsharePrefix + cmd;
 
     mkMavenRepo = name: repo: runCommand name {}
         (let

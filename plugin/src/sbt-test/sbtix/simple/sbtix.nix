@@ -5,7 +5,7 @@ rec {
             useUnshare = builtins.getEnv "TRAVIS" == "true";
             unsharePrefix = "${utillinux}/bin/unshare -n -- ";
         in
-            "${lib.optionalString useUnshare unsharePrefix}${cmd}"
+            lib.optionalString useUnshare unsharePrefix + cmd;
 
     mkMavenRepo = name: repo: runCommand name {}
         (let
@@ -47,7 +47,7 @@ rec {
              -Dsbt.override.build.repos=true
              -Dsbt.repository.config=${sbtixRepos}
              ${sbtOptions}'';
-            
+
 
             buildPhase = unshareify "sbt compile";
         } // args // {
