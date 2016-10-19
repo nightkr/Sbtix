@@ -5,3 +5,7 @@ if (sys.props.contains("plugin.version")) {
 }
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.1.4")
+
+resolvers += Resolver.typesafeIvyRepo("releases")
+
+resolvers += Resolver.sbtPluginRepo("releases")
