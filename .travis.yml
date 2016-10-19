@@ -4,8 +4,8 @@ before_install:
   - curl https://nixos.org/nix/install | sh
   - . /home/travis/.nix-profile/etc/profile.d/nix.sh
   - nix-env -i nix-prefetch-scripts
-  - sudo apt-get install util-linux
 sudo: required
+dist: trusty
 script:
   - cd plugin
   - sbt scripted
