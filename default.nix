@@ -1,27 +1,31 @@
 with import <nixpkgs> {};
 
 let
+  version = "0.2";
+  versionSnapshotSuffix = "-SNAPSHOT";
 
-  sbtixRepo = stdenv.mkDerivation {
-    name = "sbtix-repo-0.1";
-  
-    src = fetchurl {
-      url = https://github.com/cessationoftime/Sbtix/releases/download/artifacts-bootstrap/sbtix-ivyrepo-0.1.tar.gz;
-      sha256 = "1ncwli6b3di7hxmp67p5chn3f5z7yfljkfk1xxv3j8i52wa53acp";
-    };
+  sbtix = pkgs.callPackage ./sbtix.nix {};
 
-    phases = [ "unpackPhase" "installPhase" ];
+  sbtixPluginRepo = sbtix.buildSbtProject {
+        name = "sbtix-plugin";
 
-    installPhase =''
-        mkdir -p $out/plugin-repo
-        cp ./* $out/plugin-repo -r
-    '';
+        src = ./plugin;
+        repo = [ ./plugin/repo-build.nix
+                 ./plugin/repo-plugins.nix
+               ];
+
+        installPhase =''
+          sbt publish
+          cd target
+          mkdir -p $out/plugin-repo
+          cp ./sbtixRepo/* $out/plugin-repo -r
+        '';
   };
 
   pluginsSbtix = writeText "plugins.sbt" ''
-    resolvers += Resolver.file("Sbtix Plugin Repo", file("${sbtixRepo}/plugin-repo"))(Resolver.ivyStylePatterns)
+    resolvers += Resolver.file("Sbtix Plugin Repo", file("${sbtixPluginRepo}/plugin-repo"))(Resolver.ivyStylePatterns)
 
-    addSbtPlugin("se.nullable.sbtix" % "sbtix" % "0.1-SNAPSHOT")
+    addSbtPlugin("se.nullable.sbtix" % "sbtix" % "${version}${versionSnapshotSuffix}")
   '';
 
   sbtixScript = writeScriptBin "sbtix" ''
@@ -30,10 +34,18 @@ let
     #the global plugins directory must be writeable
     SBTIX_GLBASE_DIR="$HOME/.sbtix"
 
-    if [ ! -d "$SBTIX_GLBASE_DIR" ]; then
+    # if the directory doesn't exist then create it
+    if ! [ -d "$SBTIX_GLBASE_DIR" ]; then
+      echo "Creating $HOME/.sbtix, sbtix global configuration directory"
       mkdir -p "$SBTIX_GLBASE_DIR/plugins"
-      ln -s ${pluginsSbtix} "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt"
     fi
+
+    # if sbtix_plugin.sbt is a link or does not exist then update the link. If it is a regular file do not replace it.
+    if [ -L "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt" ] || [ ! -f "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt" ]; then
+      echo "Updating $HOME/.sbtix/plugins/sbtix_plugin.sbt symlink"
+      ln -sf ${pluginsSbtix} "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt"
+    fi
+
 
     #the sbt.global.base directory must be writable
     sbt -Dsbt.global.base=$SBTIX_GLBASE_DIR "$@"
@@ -45,9 +57,26 @@ let
     sbtix genNix
   '';
 
+  sbtixGenallScript = writeScriptBin "sbtix-gen-all" ''
+    #! ${stdenv.shell}
+
+    sbtix genNix "reload plugins" genNix
+    mv ./repo.nix ./repo-build.nix
+    mv ./project/repo.nix ./repo-plugins.nix
+  '';
+
+  sbtixGenall2Script = writeScriptBin "sbtix-gen-all2" ''
+    #! ${stdenv.shell}
+
+    sbtix genNix "reload plugins" genNix "reload plugins" genNix
+    mv ./repo.nix ./repo-build.nix
+    mv ./project/repo.nix ./repo-plugins.nix
+    mv ./project/project/repo.nix ./repo-plugins-plugins.nix
+  '';
+
 in
 stdenv.mkDerivation {
-  name = "sbtix-0.1";
+  name = "sbtix-${version}";
   
   src = ./.;
 
@@ -57,7 +86,9 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     ln -s ${sbtixScript}/bin/sbtix $out/bin/.
     ln -s ${sbtixGenScript}/bin/sbtix-gen $out/bin/.
-    ln -s ${sbtixRepo}/plugin-repo $out
+    ln -s ${sbtixGenallScript}/bin/sbtix-gen-all $out/bin/.
+    ln -s ${sbtixGenall2Script}/bin/sbtix-gen-all2 $out/bin/.
+    ln -s ${sbtixPluginRepo}/plugin-repo $out
     ln -s ${pluginsSbtix} $out/sbtix_plugin.sbt
   '';
 }

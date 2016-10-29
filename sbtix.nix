@@ -13,13 +13,13 @@ rec {
             lib.concatStringsSep "\n" (lib.concatLists (lib.mapAttrsToList linkArtifact artifacts)));
     
     repoConfig = repos: nixrepo:
-		let
-		    repoPatternOptional = repoPattern:
-		        optionalString (repoPattern != "") ", ${repoPattern}";
-		    repoPath = repoName: repoPattern:
-		        [ "${repoName}: file://${nixrepo}/${repoName}${repoPatternOptional repoPattern}" ];
-		in
-		    lib.concatStringsSep "\n  " (lib.concatLists (lib.mapAttrsToList repoPath repos));
+    let
+        repoPatternOptional = repoPattern:
+            optionalString (repoPattern != "") ", ${repoPattern}";
+        repoPath = repoName: repoPattern:
+            [ "${repoName}: file://${nixrepo}/${repoName}${repoPatternOptional repoPattern}" ];
+    in
+        lib.concatStringsSep "\n  " (lib.concatLists (lib.mapAttrsToList repoPath repos));
 
     mergeAttr = attr: repo:
         fold (a: b: a // b) {} (catAttrs attr repo);
