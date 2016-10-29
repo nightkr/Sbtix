@@ -1,39 +1,53 @@
 { runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText }:
+with stdenv.lib;
 rec {
-    mkMavenRepo = name: repo: runCommand name {}
+    mkRepo = name: artifacts: runCommand name {}
         (let
-            slashify = builtins.replaceStrings ["."] ["/"];
-            linkArtifact = organization: module: version: type: urlAttrs:
-                "ln -fsn ${fetchurl urlAttrs} $out/${slashify organization}/${module}/${version}/${module}-${version}.${type}";
-            linkVersion = organization: module: version: versionAttrs:
-                [ "mkdir -p $out/${slashify organization}/${module}/${version}/" ]
-                ++ lib.mapAttrsToList (linkArtifact organization module version) versionAttrs;
-            linkModule = organization: module: moduleAttrs:
-                lib.concatLists (lib.mapAttrsToList (linkVersion organization module) moduleAttrs);
-            linkOrganization = organization: organizationAttrs:
-                lib.concatLists (lib.mapAttrsToList (linkModule organization) organizationAttrs);
-            linkProject = projectName: project:
-                lib.concatLists (lib.mapAttrsToList linkOrganization project);
+            parentDirs = filePath: 
+                concatStringsSep "/" (init (splitString "/" filePath));
+            linkArtifact = outputPath: urlAttrs:
+                [ "mkdir -p \"$out/${parentDirs outputPath}\""
+                  "ln -fsn \"${fetchurl urlAttrs}\" \"$out/${outputPath}\""
+                ];
         in
-            lib.concatStringsSep "\n" (lib.concatLists (lib.mapAttrsToList linkProject repo)));
+            lib.concatStringsSep "\n" (lib.concatLists (lib.mapAttrsToList linkArtifact artifacts)));
+    
+    repoConfig = repos: nixrepo:
+    let
+        repoPatternOptional = repoPattern:
+            optionalString (repoPattern != "") ", ${repoPattern}";
+        repoPath = repoName: repoPattern:
+            [ "${repoName}: file://${nixrepo}/${repoName}${repoPatternOptional repoPattern}" ];
+    in
+        lib.concatStringsSep "\n  " (lib.concatLists (lib.mapAttrsToList repoPath repos));
 
-    buildSbtProject = args@{repo, name, buildInputs ? [], sbtOptions ? "", ...}:
-        stdenv.mkDerivation (rec {
-            mvn = mkMavenRepo "${name}-repo" repo;
+    mergeAttr = attr: repo:
+        fold (a: b: a // b) {} (catAttrs attr repo);
 
-            #eventually this repo list should only contain the nix repo
+    loadRepo = repo:
+        map (a: import a) repo;
+
+    buildSbtProject = args@{repo, name, manualRepo ? ./manual-repo.nix, buildInputs ? [], sbtOptions ? "", ...}:
+      let
+          loadedRepo = loadRepo (repo ++ singleton manualRepo);
+          artifacts = mergeAttr "artifacts" loadedRepo;
+          repos = mergeAttr "repos" loadedRepo;
+          nixrepo = mkRepo "${name}-repo" artifacts;
+          repoDefs = repoConfig repos nixrepo;
+      in stdenv.mkDerivation (rec {
+            
+            dontPatchELF      = true;
+            dontStrip         = true;
+
+            # SBT Launcher Configuration
+            # http://www.scala-sbt.org/0.13.5/docs/Launcher/Configuration.html
             sbtixRepos = writeText "sbtixRepos" ''
               [repositories]
-                nix: file://${mvn}
-                local
-                maven-local
-                scala-tools-releases
-                typesafe-ivy-releases: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/[revision]/[type]s/[artifact](-[classifier]).[ext], bootOnly
-                maven-central
-                sbt-plugin-releases: http://dl.bintray.com/sbt/sbt-plugin-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
-                sonatype-oss-releases'';
+              # name: url(, pattern)(,descriptorOptional)(,skipConsistencyCheck)
+                ${repoDefs}
+            '';
 
-            #set environment variable to affect all SBT commands
+            # set environment variable to affect all SBT commands
             SBT_OPTS = ''
              -Dsbt.ivy.home=./.ivy2/
              -Dsbt.boot.directory=./.sbt/boot/

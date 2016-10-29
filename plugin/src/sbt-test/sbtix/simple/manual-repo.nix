@@ -5,6 +5,14 @@
     "nix-typesafe-ivy-releases" = "[organisation]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]";
   };
   "artifacts" = {
+    "nix-public/org/scalamacros/quasiquotes_2.10/2.0.0/quasiquotes_2.10-2.0.0.jar" = {
+      url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.0/quasiquotes_2.10-2.0.0.jar";
+      sha256 = "0pxsjfmby90k92av63c59v4c8awazihrgx8fy0yx5q01x5mdwnf4";
+    };
+    "nix-public/org/scalamacros/quasiquotes_2.10/2.0.0/quasiquotes_2.10-2.0.0.pom" = {
+      url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.0/quasiquotes_2.10-2.0.0.pom";
+      sha256 = "0mk6v1dpa7mgvdcrvl5z1gmzgs1c1w0bhjdf3vw9azpbdff3wmyb";
+    };
     # dependencies so sbt can build the sbt-compiler-interface (http://www.scala-sbt.org/0.13/docs/Compiler-Interface.html)
     "nix-public/org/scala-lang/jline/2.10.6/jline-2.10.6.pom" = {
       url = "https://repo1.maven.org/maven2/org/scala-lang/jline/2.10.6/jline-2.10.6.pom";

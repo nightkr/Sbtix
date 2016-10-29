@@ -13,13 +13,24 @@ import scala.sys.process._
 
 object FindArtifacts {
  
-    def apply(repoName:String,rootUrl:String)(logger:Logger, modules:Seq[GenericModule]) : Seq[NixArtifact] = {
+    def apply(repoName:String,root:String)(logger:Logger, modules:Seq[GenericModule]) : Seq[NixArtifact] = {
+      val rootUrl = new URL(root);
+
+       
+
        def findArtifacts(url: URL, localFile: File, auth: Option[Authentication]): Seq[NixArtifact] = {
 
-        val authedUri = auth match {
-              case Some(a) => new URI(url.getProtocol, s"${a.user}:${a.password}", url.getHost, url.getPort, url.getPath, url.getQuery, url.getRef)
+        def authed(url:URL) = {
+          auth match {
+              case Some(a) => 
+                new URI(url.getProtocol, s"${a.user}:${a.password}", url.getHost, url.getPort, url.getPath, url.getQuery, url.getRef)
               case None => url.toURI
+          }
         }
+
+        val authedRootURI = authed(rootUrl)
+
+        val authedUri = authed(url)
 
         val isIvy = localFile.getParentFile().getName() == "jars"
 
@@ -56,11 +67,10 @@ object FindArtifacts {
           val calcUrl = calculateURI(artifactLocalFile).toURL
 
           logger.info(s"Fetching $calcUrl")
-          //logger.info(s"Coursier cache $artifactLocalFile")
 
           NixArtifact(
             repoName,
-            calcUrl.toString.replace(rootUrl,""),
+            calcUrl.toString.replace(authedRootURI.toString,""),
             calcUrl,
             fetchChecksum(artifactLocalFile.toURI.toURL)
           )
