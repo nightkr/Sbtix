@@ -60,7 +60,7 @@ in
  * generate your repo.nix files with one of the commands listed above. `sbtix-gen-all` is recommended.
  * check the generated nix files into your source control. 
  * finally, run `nix-build` to build!
- * any additional missing dependencies that `nix-build` encounters should be fetched with `nix-prefetch-url` and added to `manual-repo.nix`. These *SHOULD*  be rare, so can be submitted to sbtix as a Pull Request. 
+ * any additional missing dependencies that `nix-build` encounters should be fetched with `nix-prefetch-url` and added to `manual-repo.nix`.
 
 ### Authentication
 
