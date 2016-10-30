@@ -1,9 +1,9 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-    sbtix = pkgs.callPackage ./sbtix.nix {};
+    sbtix = pkgs.callPackage ../../../../../sbtix.nix {};
 in
     sbtix.buildSbtProject {
-        name = "sbtix-simple";
+        name = "sbtix-private-auth";
         src = ./.;
         repo = [ ./repo-build.nix
                  ./repo-plugins.nix

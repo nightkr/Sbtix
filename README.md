@@ -31,7 +31,9 @@ nix-env -f . -i sbtix
 
 Sbtix provides a script which will connect your project to the sbtix global plugin and launch sbt, it does this by setting the `sbt.global.base` directory to `$HOME/.sbtix`.  
 
-To generate `repo.nix` describing your build dependencies run `sbtix-gen`. To generate `repo-build.nix` and `repo-plugins.nix` describing your build dependencies and plugin dependencies run `sbtix-gen-all`. Do check the generated nix files into your source control. Then copy `manual-repo.nix`, `sbtix.nix` and `default.nix` from `plugin/src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
+To generate `repo.nix` describing your build dependencies run `sbtix-gen`. To generate `repo-build.nix` and `repo-plugins.nix` describing your build dependencies and plugin dependencies run 
+`sbtix-gen-all`. Do check the generated nix files into your source control. Copy `manual-repo.nix`, `sbtix.nix` from the root of the repo and `default.nix` from 
+`plugin/src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
 
 To launch sbt with the sbtix global plugin loaded, run `sbtix`. To then generate nix expressions from inside sbt, run `genNix`.
 
