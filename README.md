@@ -31,11 +31,36 @@ nix-env -f . -i sbtix
 
 Sbtix provides a script which will connect your project to the sbtix global plugin and launch sbt, it does this by setting the `sbt.global.base` directory to `$HOME/.sbtix`.  
 
-To generate `repo.nix` describing your build dependencies run `sbtix-gen`. To generate `repo-build.nix` and `repo-plugins.nix` describing your build dependencies and plugin dependencies run 
-`sbtix-gen-all`. Do check the generated nix files into your source control. Copy `manual-repo.nix`, `sbtix.nix` from the root of the repo and `default.nix` from 
-`plugin/src/sbt-test/sbtix/simple` and customize to your needs. Finally, run `nix-build` to build!
+### Sbtix commands
 
-To launch sbt with the sbtix global plugin loaded, run `sbtix`. To then generate nix expressions from inside sbt, run `genNix`.
+ * `sbtix` - loads the sbtix global plugin and launches sbt. Sets `sbt.global.base` directory to `$HOME/.sbtix`.
+ * `sbtix-gen` - gen build dependencies only, produces `repo.nix`. Alias: `sbtix genNix`.
+ * `sbtix-gen-all` - gen build and plugin dependencies, produces `repo-build.nix` and `repo-plugins.nix`. Alias: `sbtix genNix "reload plugins" genNix`
+ * `sbtix-gen-all2` - gen build, plugin and pluginplugin dependencies, produces `repo-build.nix`, `repo-plugins.nix`, and `repo-plugins-plugins.nix`. Alias: `sbtix genNix "reload plugins" genNix "reload plugins" genNix`
+
+### Creating a build
+
+ * create default.nix. As shown below.
+
+```
+{ pkgs ? import <nixpkgs> {} }: with pkgs;
+let
+    sbtix = pkgs.callPackage ./sbtix.nix {};
+in
+    sbtix.buildSbtProject {
+        name = "sbtix-example";
+        src = ./.;
+        repo = [ ./repo-build.nix
+                 ./repo-plugins.nix
+               ];
+    }
+```
+
+ * copy `manual-repo.nix` and `sbtix.nix` from the root of the sbtix git repository
+ * generate your repo.nix files with one of the commands listed above. `sbtix-gen-all` is recommended.
+ * check the generated nix files into your source control. 
+ * finally, run `nix-build` to build!
+ * any additional missing dependencies that `nix-build` encounters should be fetched with `nix-prefetch-url` and added to `manual-repo.nix`. These *SHOULD*  be rare, so can be submitted to sbtix as a Pull Request. 
 
 ### Authentication
 
@@ -43,7 +68,7 @@ In order to use a private repository, add your credentials to `coursierCredentia
 
 ### FAQ
 
-Q: Why do I get an assertion error when I try to generate a Nix file?
+Q: Why do I get an assertion error when I try to generate a `repo.nix` files?
 
 ```
 java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom)))
@@ -68,7 +93,7 @@ java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sb
         at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
         at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
         at java.lang.Thread.run(Thread.java:745)
-[error] (*:genNixProject) java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom)))
+[error](*:genNixProject) java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom)))
 [error] genNixProject task did not complete Incomplete(node=Some(ScopedKey(Scope(Select(ProjectRef(file:/home/cessationoftime/workspace/sbtix/plugin/project/,project)),Global,Global,Global),genNixProject)), tpe=Error, msg=None, causes=List(), directCause=Some(java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom))))) for project ProjectRef(file:/home/cessationoftime/workspace/sbtix/plugin/project/,project)
 ```
 
