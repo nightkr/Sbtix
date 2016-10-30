@@ -70,11 +70,11 @@ object FindArtifacts {
 
           NixArtifact(
             repoName,
-            calcUrl.toString.replace(authedRootURI.toString,""),
-            calcUrl,
+            calcUrl.toString.replace(authedRootURI.toString,"").stripPrefix("/"),
+            calcUrl.toString,
             fetchChecksum(artifactLocalFile.toURI.toURL)
           )
-        }.toSeq
+        }
       }
 
       def fetchChecksum(url: URL): String = {

@@ -68,7 +68,7 @@ case class NixRepoCollection(repos: Seq[NixRepo])  extends NixBuilder {
 
   def toNixValue: String =
       s"""{
-          |  ${indent(repos.map(_.toNix).mkString("\r\n"))}
+          |  ${indent(repos.distinct.map(_.toNix).mkString("\r\n"))}
           |}""".stripMargin 
   
 }
@@ -86,17 +86,17 @@ case class NixArtifactCollection(artifacts: Seq[NixArtifact])  extends NixBuilde
 
   def toNixValue: String = 
       s"""{
-          |  ${indent(artifacts.map(_.toNix).mkString("\r\n"))}
+          |  ${indent(artifacts.distinct.map(_.toNix).mkString("\r\n"))}
           |}""".stripMargin
 
 }
 
-case class NixArtifact(repoName:String, relative: String, url: URL, sha256: String) extends NixBuilder {
-  def toNixRef = s"${quote(repoName + "/" + relative.stripPrefix("/"))}"
+case class NixArtifact(repoName:String, relative: String, url: String, sha256: String) extends NixBuilder {
+  def toNixRef = s"${quote(repoName + "/" + relative)}"
 
   def toNixValue =
     s"""{
-        |  url = ${quote(url.toString)};
+        |  url = ${quote(url)};
         |  sha256 = ${quote(sha256)};
         |}""".stripMargin
 }
