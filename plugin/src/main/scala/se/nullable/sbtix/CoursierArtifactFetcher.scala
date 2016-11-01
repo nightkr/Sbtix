@@ -16,17 +16,10 @@ case class GenericModule(artifact: Artifact, dep:Dependency, localFile:java.io.F
   val url = new URL(artifact.url)
 }
 
-class CoursierArtifactFetcher(scalaVersion: String,
-                              scalaBinaryVersion: String,
-                              logger: Logger
-                             ) {
-  def buildNixProject(projectRef:ProjectRef,modules: Set[ModuleID], resolvers: Seq[Resolver], credentials: Map[String, Credentials]): (Seq[se.nullable.sbtix.GenericModule], Seq[sbt.Resolver])
+class CoursierArtifactFetcher(logger: Logger) {
+  def buildNixProject(resolvers: Seq[Resolver], credentials: Map[String, Credentials])(module: Dependency): (Seq[se.nullable.sbtix.GenericModule], Seq[sbt.Resolver])
 = {
-    val initResolution = Resolution(
-      modules
-        .flatMap(FromSbt.dependencies(_, scalaVersion, scalaBinaryVersion, "jar"))
-        .map(_._2)
-    )
+    val initResolution = Resolution(Set(module))
  
     val repos = resolvers.flatMap{resolver => 
       FromSbt.repository(resolver, ivyProps, logger, credentials.get(resolver.name).map(_.authentication))}

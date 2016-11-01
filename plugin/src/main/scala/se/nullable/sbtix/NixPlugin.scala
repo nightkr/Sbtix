@@ -10,15 +10,17 @@ object NixPlugin extends AutoPlugin {
 
   lazy val genNixProjectTask =
     Def.task {
-      val fetcher = new CoursierArtifactFetcher(
-        scalaVersion.value,
-        scalaBinaryVersion.value,
-        sLog.value
-      )
+      val fetcher = new CoursierArtifactFetcher(sLog.value)
 
       val sVersion = scalaVersion.value
       val isDotty = ScalaInstance.isDotty(sVersion)
-      fetcher.buildNixProject(thisProjectRef.value,allDependencies.value.toSet -- projectDependencies.value, externalResolvers.value, CoursierPlugin.autoImport.coursierCredentials.value)
+
+      val modules = allDependencies.value.toSet -- projectDependencies.value
+      val deps = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
+
+      //coursier must take dependencies one at a time, otherwise it only resolves the most recent version of a module, which causes missed dependencies.
+      val (a,b) = deps.toSeq.map(fetcher.buildNixProject(externalResolvers.value, CoursierPlugin.autoImport.coursierCredentials.value)).unzip
+      (a.flatten,b.flatten)
     }
   lazy val genNixCommand =
     Command.command("genNix") { initState =>
