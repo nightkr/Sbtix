@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-    sbtix = pkgs.callPackage ../../../../../sbtix.nix {};
+    sbtix = pkgs.callPackage ./sbtix.nix {};
 in
     sbtix.buildSbtProject {
         name = "sbtix-private-auth";
