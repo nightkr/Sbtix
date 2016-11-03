@@ -31,6 +31,11 @@ let
   sbtixScript = writeScriptBin "sbtix" ''
     #! ${stdenv.shell}
 
+    # remove the ivy cache of sbtix so sbt retrieves from the sbtix nix repo. 
+    # without this your version of sbtix may be overriden by the local ivy cache.
+    echo "Deleting any cached sbtix plugins in '~/.ivy'. So the most recent version from nix is used."
+    find ~/.ivy2 -name 'se.nullable.sbtix' -type d -exec rm -rf {} \; > /dev/null 2>&1
+
     #the global plugins directory must be writeable
     SBTIX_GLBASE_DIR="$HOME/.sbtix"
 
