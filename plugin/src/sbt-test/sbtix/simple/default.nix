@@ -5,8 +5,9 @@ in
     sbtix.buildSbtProject {
         name = "sbtix-simple";
         src = ./.;
-        repo = [ ./repo-build.nix
-                 ./repo-plugins.nix
+        repo = [ (import ./repo.nix)
+                 (import ./project/repo.nix)
+                 (import ./manual-repo.nix)
                ];
 
         installPhase =

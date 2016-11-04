@@ -10,8 +10,9 @@ let
         name = "sbtix-plugin";
 
         src = ./plugin;
-        repo = [ ./plugin/repo-build.nix
-                 ./plugin/repo-plugins.nix
+        repo = [ (import ./plugin/repo.nix)
+                 (import ./plugin/project/repo.nix)
+                 (import ./manual-repo.nix)
                ];
 
         installPhase =''
@@ -66,17 +67,12 @@ let
     #! ${stdenv.shell}
 
     sbtix genNix "reload plugins" genNix
-    mv ./repo.nix ./repo-build.nix
-    mv ./project/repo.nix ./repo-plugins.nix
   '';
 
   sbtixGenall2Script = writeScriptBin "sbtix-gen-all2" ''
     #! ${stdenv.shell}
 
     sbtix genNix "reload plugins" genNix "reload plugins" genNix
-    mv ./repo.nix ./repo-build.nix
-    mv ./project/repo.nix ./repo-plugins.nix
-    mv ./project/project/repo.nix ./repo-plugins-plugins.nix
   '';
 
 in

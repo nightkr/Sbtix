@@ -24,14 +24,10 @@ rec {
     mergeAttr = attr: repo:
         fold (a: b: a // b) {} (catAttrs attr repo);
 
-    loadRepo = repo:
-        map (a: import a) repo;
-
-    buildSbtProject = args@{repo, name, manualRepo ? ./manual-repo.nix, buildInputs ? [], sbtOptions ? "", ...}:
+    buildSbtProject = args@{repo, name, buildInputs ? [], sbtOptions ? "", ...}:
       let
-          loadedRepo = loadRepo (repo ++ singleton manualRepo);
-          artifacts = mergeAttr "artifacts" loadedRepo;
-          repos = mergeAttr "repos" loadedRepo;
+          artifacts = mergeAttr "artifacts" repo;
+          repos = mergeAttr "repos" repo;
           nixrepo = mkRepo "${name}-repo" artifacts;
           repoDefs = repoConfig repos nixrepo;
       in stdenv.mkDerivation (rec {

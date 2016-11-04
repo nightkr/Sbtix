@@ -2,9 +2,7 @@
 > genNix
 > reload plugins
 > genNix
-$ exec mv repo.nix repo-build.nix
-$ exec mv project/repo.nix repo-plugins.nix
-$ exists repo-build.nix
-$ exists repo-plugins.nix
+$ exists repo.nix
+$ exists project/repo.nix
 $ exec nix-build --show-trace
 $ exec result/bin/three
