@@ -20,6 +20,7 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 * Alpha quality, beware (and please report any issues!)
 * Nix file for SBT compiler interface dependencies currently must be created manually.
 * You must use the Coursier dependency resolver instead of Ivy (because SBT's Ivy resolver does not report the original artifact URLs)
+* Parent poms are not yet being located and must be added manually.
 
 ## How?
 
@@ -35,12 +36,12 @@ Sbtix provides a script which will connect your project to the sbtix global plug
 
  * `sbtix` - loads the sbtix global plugin and launches sbt. Sets `sbt.global.base` directory to `$HOME/.sbtix`.
  * `sbtix-gen` - gen build dependencies only, produces `repo.nix`. Alias: `sbtix genNix`.
- * `sbtix-gen-all` - gen build and plugin dependencies, produces `repo-build.nix` and `repo-plugins.nix`. Alias: `sbtix genNix "reload plugins" genNix`
- * `sbtix-gen-all2` - gen build, plugin and pluginplugin dependencies, produces `repo-build.nix`, `repo-plugins.nix`, and `repo-plugins-plugins.nix`. Alias: `sbtix genNix "reload plugins" genNix "reload plugins" genNix`
+ * `sbtix-gen-all` - gen build and plugin dependencies, produces `repo.nix` and `project/repo.nix`. Alias: `sbtix genNix "reload plugins" genNix`
+ * `sbtix-gen-all2` - gen build, plugin and pluginplugin dependencies, produces `repo.nix`, `project/repo.nix`, and `project/project/repo.nix`. Alias: `sbtix genNix "reload plugins" genNix "reload plugins" genNix`
 
 ### Creating a build
 
- * create default.nix. As shown below.
+ * create default.nix. As shown below. Edit as necessary.
 
 ```
 { pkgs ? import <nixpkgs> {} }: with pkgs;
@@ -50,8 +51,9 @@ in
     sbtix.buildSbtProject {
         name = "sbtix-example";
         src = ./.;
-        repo = [ ./repo-build.nix
-                 ./repo-plugins.nix
+        repo = [ (import ./manual-repo.nix)
+                 (import ./repo.nix)
+                 (import ./project/repo.nix)
                ];
     }
 ```
@@ -68,7 +70,7 @@ In order to use a private repository, add your credentials to `coursierCredentia
 
 ### FAQ
 
-Q: Why do I get an assertion error when I try to generate a `repo.nix` files?
+Q: Why do I get an assertion error when I try to generate `repo.nix` files?
 
 ```
 java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom)))
