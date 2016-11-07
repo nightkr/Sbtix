@@ -8,17 +8,19 @@ object NixPlugin extends AutoPlugin {
 
   import autoImport._
 
-  lazy val genNixRepoTask =
+  lazy val genNixProjectTask =
     Def.task {
-      val fetcher = new CoursierArtifactFetcher(
-        scalaVersion.value,
-        scalaBinaryVersion.value,
-        sLog.value
-      )
+      val fetcher = new CoursierArtifactFetcher(sLog.value)
 
       val sVersion = scalaVersion.value
       val isDotty = ScalaInstance.isDotty(sVersion)
-      fetcher.buildNixRepo(allDependencies.value.toSet -- projectDependencies.value, externalResolvers.value, CoursierPlugin.autoImport.coursierCredentials.value)
+
+      val modules = allDependencies.value.toSet -- projectDependencies.value
+      val deps = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
+
+      //coursier must take dependencies one at a time, otherwise it only resolves the most recent version of a module, which causes missed dependencies.
+      val (a,b) = deps.toSeq.map(fetcher.buildNixProject(externalResolvers.value, CoursierPlugin.autoImport.coursierCredentials.value)).unzip
+      (a.flatten,b.flatten)
     }
   lazy val genNixCommand =
     Command.command("genNix") { initState =>
@@ -26,19 +28,28 @@ object NixPlugin extends AutoPlugin {
       val repoFile = extracted.get(nixRepoFile)
       var state = initState
 
-      val repos = NixRepoCollection((for {
+      val moduleResolversTupleCollection = (for {
         project <- extracted.structure.allProjectRefs
-        file <- Project.runTask(genNixRepo in project, state) match {
-          case Some((_state, Value(file))) =>
+        modulesResolversTuple <- Project.runTask(genNixProject in project, state) match {
+          case Some((_state, Value(taskOutput))) =>
             state = _state
-            Some(file)
+            Some(taskOutput)
+          case Some((_state, Inc(inc:Incomplete))) => 
+            state = _state
+            state.log.error(s"genNixProject task did not complete $inc for project $project")
+            None
           case None =>
             state.log.warn(s"NixPlugin not enabled for project $project, skipping...")
             None
         }
-      } yield (project, file)).toMap)
+      } yield modulesResolversTuple)
 
-      IO.write(repoFile, repos.toNix)
+      val (modulesSeqSeq,resolversSeqSeq) = moduleResolversTupleCollection.unzip
+
+      val modules = modulesSeqSeq.flatten.distinct
+      val resolvers = resolversSeqSeq.flatten.distinct
+
+      IO.write(repoFile, NixWriter(state.log, modules, resolvers))
       state
     }
 
@@ -48,13 +59,13 @@ object NixPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
-    genNixRepo := genNixRepoTask.value,
+    genNixProject:= genNixProjectTask.value,
     commands += genNixCommand
   )
 
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
-    val genNixRepo = taskKey[NixRepo]("generate a Nix definition for building the maven repo")
+    val genNixProject = taskKey[(Seq[se.nullable.sbtix.GenericModule], Seq[sbt.Resolver])]("generate a Nix definition for building the maven repo")
   }
 
 }

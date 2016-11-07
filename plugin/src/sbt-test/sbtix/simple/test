@@ -1,5 +1,8 @@
 > compile
 > genNix
+> reload plugins
+> genNix
 $ exists repo.nix
+$ exists project/repo.nix
 $ exec nix-build --show-trace
 $ exec result/bin/three
