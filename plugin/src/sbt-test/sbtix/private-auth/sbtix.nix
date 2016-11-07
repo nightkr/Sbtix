@@ -10,7 +10,7 @@ rec {
     mkRepo = name: artifacts: runCommand name {}
         (let
             parentDirs = filePath: 
-                concatStringsSep "/" (init (splitString "/" filePath));
+                lib.concatStringsSep "/" (init (splitString "/" filePath));
             linkArtifact = outputPath: urlAttrs:
                 [ "mkdir -p \"$out/${parentDirs outputPath}\""
                   "ln -fsn \"${fetchurl urlAttrs}\" \"$out/${outputPath}\""
