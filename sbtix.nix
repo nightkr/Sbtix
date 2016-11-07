@@ -1,12 +1,6 @@
-{ runCommand, fetchurl, lib, stdenv, utillinux, jdk, sbt, writeText }:
+{ runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText }:
+with stdenv.lib;
 rec {
-    unshareify = cmd:
-        let
-            useUnshare = builtins.getEnv "TRAVIS" == "true";
-            unsharePrefix = "${utillinux}/bin/unshare -n -- ";
-        in
-            lib.optionalString useUnshare unsharePrefix + cmd;
-
     mkRepo = name: artifacts: runCommand name {}
         (let
             parentDirs = filePath: 
@@ -56,9 +50,9 @@ rec {
              -Dsbt.override.build.repos=true
              -Dsbt.repository.config=${sbtixRepos}
              ${sbtOptions}'';
+            
 
-
-            buildPhase = unshareify "sbt compile";
+            buildPhase = ''sbt compile'';
         } // args // {
             repo = null;
             buildInputs = [ jdk sbt ] ++ buildInputs;

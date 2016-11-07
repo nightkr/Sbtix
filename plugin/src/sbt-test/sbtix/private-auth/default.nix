@@ -5,7 +5,10 @@ in
     sbtix.buildSbtProject {
         name = "sbtix-private-auth";
         src = ./.;
-        repo = import ./repo.nix;
+        repo = [ (import ./repo.nix)
+                 (import ./project/repo.nix)
+                 (import ./manual-repo.nix)
+               ];
 
         installPhase =
             ''
