@@ -16,10 +16,9 @@ let
                ];
 
         installPhase =''
-          sbt publish
-          cd target
+          sbt publish-local
           mkdir -p $out/plugin-repo
-          cp ./sbtixRepo/* $out/plugin-repo -r
+          cp ./.ivy2/local/* $out/plugin-repo -r
         '';
   };
 

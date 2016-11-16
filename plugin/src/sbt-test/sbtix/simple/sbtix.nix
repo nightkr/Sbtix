@@ -35,18 +35,22 @@ rec {
             dontPatchELF      = true;
             dontStrip         = true;
 
+            # COURSIER_CACHE env variable is needed if one wants to use non-sbtix repositories in the below repo list, which is sometimes useful.
+            COURSIER_CACHE = "./.coursier/cache/v1";
+     
             # SBT Launcher Configuration
             # http://www.scala-sbt.org/0.13.5/docs/Launcher/Configuration.html
             sbtixRepos = writeText "sbtixRepos" ''
               [repositories]
-              # name: url(, pattern)(,descriptorOptional)(,skipConsistencyCheck)
-                ${repoDefs}
+              ${repoDefs}
+              local
             '';
 
             # set environment variable to affect all SBT commands
             SBT_OPTS = ''
              -Dsbt.ivy.home=./.ivy2/
              -Dsbt.boot.directory=./.sbt/boot/
+             -Dsbt.global.staging=./.staging
              -Dsbt.override.build.repos=true
              -Dsbt.repository.config=${sbtixRepos}
              ${sbtOptions}'';
