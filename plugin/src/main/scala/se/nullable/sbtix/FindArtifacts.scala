@@ -30,7 +30,7 @@ object FindArtifactsOfRepo {
 
 class FindArtifactsOfRepo(repoName: String, root: String) {
 
-  def findArtifacts(logger: Logger, modules: Seq[GenericModule]): Seq[NixArtifact] = modules.flatMap { ga =>
+  def findArtifacts(logger: Logger, modules: Set[GenericModule]): Set[NixArtifact] = modules.flatMap { ga =>
     val rootUrl = new URL(root);
 
     val authedRootURI = ga.authed(rootUrl) //authenticated version of the rootUrl
@@ -50,7 +50,7 @@ class FindArtifactsOfRepo(repoName: String, root: String) {
     }
   }
 
-  def findMetaArtifacts(logger: Logger, metaArtifacts: Seq[MetaArtifact]): Seq[NixArtifact] = {
+  def findMetaArtifacts(logger: Logger, metaArtifacts: Set[MetaArtifact]): Set[NixArtifact] = {
     metaArtifacts.map { meta =>
           NixArtifact(
             repoName,
