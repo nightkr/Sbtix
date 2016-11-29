@@ -20,7 +20,6 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 * Alpha quality, beware (and please report any issues!)
 * Nix file for SBT compiler interface dependencies currently must be created manually.
 * You must use the Coursier dependency resolver instead of Ivy (because SBT's Ivy resolver does not report the original artifact URLs)
-* Parent poms are not yet being located and must be added manually.
 
 ## How?
 
@@ -55,6 +54,12 @@ in
                  (import ./repo.nix)
                  (import ./project/repo.nix)
                ];
+
+        installPhase =''
+          sbt publish-local
+          mkdir -p $out/
+          cp ./.ivy2/local/* $out/ -r
+        '';
     }
 ```
 
@@ -70,45 +75,27 @@ In order to use a private repository, add your credentials to `coursierCredentia
 
 ### FAQ
 
-Q: Why do I get an assertion error when I try to generate `repo.nix` files?
+Q: Why I am getting errors trying to generate `repo.nix` files when using the PlayFramework?
+
+A: You probably need to add the following resolver to your project for Sbtix to find.
 
 ```
-java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom)))
-        at scala.Predef$.assert(Predef.scala:179)
-        at se.nullable.sbtix.CoursierArtifactFetcher.buildNixProject(CoursierArtifactFetcher.scala:29)
-        at se.nullable.sbtix.NixPlugin$$anonfun$genNixProjectTask$1.apply(NixPlugin.scala:21)
-        at se.nullable.sbtix.NixPlugin$$anonfun$genNixProjectTask$1.apply(NixPlugin.scala:12)
-        at scala.Function1$$anonfun$compose$1.apply(Function1.scala:47)
-        at sbt.$tilde$greater$$anonfun$$u2219$1.apply(TypeFunctions.scala:40)
-        at sbt.std.Transform$$anon$4.work(System.scala:63)
-        at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:228)
-        at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:228)
-        at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:17)
-        at sbt.Execute.work(Execute.scala:237)
-        at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:228)
-        at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:228)
-        at sbt.ConcurrentRestrictions$$anon$4$$anonfun$1.apply(ConcurrentRestrictions.scala:159)
-        at sbt.CompletionService$$anon$2.call(CompletionService.scala:28)
-        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-        at java.lang.Thread.run(Thread.java:745)
-[error](*:genNixProject) java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom)))
-[error] genNixProject task did not complete Incomplete(node=Some(ScopedKey(Scope(Select(ProjectRef(file:/home/cessationoftime/workspace/sbtix/plugin/project/,project)),Global,Global,Global),genNixProject)), tpe=Error, msg=None, causes=List(), directCause=Some(java.lang.AssertionError: assertion failed: ArrayBuffer((Dependency(org.scala-sbt:scripted-plugin,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/scripted-plugin/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/scripted-plugin/0.13.12/scripted-plugin-0.13.12.pom)), (Dependency(org.scala-sbt:sbt,0.13.12,default(compile),Set(),Attributes(jar,),false,true),List(not found: /home/cessationoftime/.ivy2/local/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml, not found: https://repo1.maven.org/maven2/org/scala-sbt/sbt/0.13.12/sbt-0.13.12.pom))))) for project ProjectRef(file:/home/cessationoftime/workspace/sbtix/plugin/project/,project)
-```
-
-A: You likely need to add additional resolvers to your `build.sbt` or `project/plugins.sbt` before you can generate Nix expressions for it. 
-  * Once [this Coursier issue](https://github.com/alexarchambault/coursier/issues/292) is closed we can move the additional resolvers into the sbtix plugin's global configuration.
-
-These resolvers are usually what is needed.
-
-```
-resolvers += Resolver.typesafeIvyRepo("releases")
-
-resolvers += Resolver.sbtPluginRepo("releases")
-
 // if using PlayFramework
 resolvers += Resolver.url("sbt-plugins-releases", url("https://dl.bintray.com/playframework/sbt-plugin-releases"))(Resolver.ivyStylePatterns) 
 ```
+
+Q: When I `nix-build` it sbt complains `java.io.IOException: Cannot run program "git": error=2, No such file or directory`
+
+A: You are likely depending on a project via git.  This isn't recommended usage for sbtix since it leads to non-deterministic builds. However you can enable this by making two small changes to sbtix.nix, in order to make git a buildInput.
+
+top of sbtix.nix with git as buildinput
+```
+{ runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText, git }:
+```
+
+bottom of sbtix.nix with git as buildinput
+```
+buildInputs = [ jdk sbt git ] ++ buildInputs;
+```
+
+

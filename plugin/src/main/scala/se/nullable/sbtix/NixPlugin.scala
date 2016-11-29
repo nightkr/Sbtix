@@ -10,31 +10,34 @@ object NixPlugin extends AutoPlugin {
 
   lazy val genNixProjectTask =
     Def.task {
-      val fetcher = new CoursierArtifactFetcher(sLog.value)
-
-      val sVersion = scalaVersion.value
-      val isDotty = ScalaInstance.isDotty(sVersion)
+      // use all resolvers except the projectResolver and local ivy/maven file Resolvers
+      val exceptResolvers = Seq(projectResolver.value, Resolver.mavenLocal, Resolver.defaultLocal)
+      val genNixResolvers = (fullResolvers.value ++ externalResolvers.value).distinct.diff(exceptResolvers)
+      
+      val logger = sLog.value
 
       val modules = allDependencies.value.toSet -- projectDependencies.value
-      val deps = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
+      
+     
+      val depends = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
+                           .filterNot { _.module.organization == "se.nullable.sbtix" }  //ignore the sbtix dependency that gets added because of the global sbtix plugin
 
-      //coursier must take dependencies one at a time, otherwise it only resolves the most recent version of a module, which causes missed dependencies.
-      val (a,b) = deps.toSeq.map(fetcher.buildNixProject(externalResolvers.value, CoursierPlugin.autoImport.coursierCredentials.value)).unzip
-      (a.flatten,b.flatten)
+      (depends,genNixResolvers, CoursierPlugin.autoImport.coursierCredentials.value)
     }
+
   lazy val genNixCommand =
     Command.command("genNix") { initState =>
       val extracted = Project.extract(initState)
       val repoFile = extracted.get(nixRepoFile)
       var state = initState
 
-      val moduleResolversTupleCollection = (for {
+      val dependencyResolverTupleCollection = (for {
         project <- extracted.structure.allProjectRefs
-        modulesResolversTuple <- Project.runTask(genNixProject in project, state) match {
+        dependencyResolverTuple <- Project.runTask(genNixProject in project, state) match {
           case Some((_state, Value(taskOutput))) =>
             state = _state
             Some(taskOutput)
-          case Some((_state, Inc(inc:Incomplete))) => 
+          case Some((_state, Inc(inc: Incomplete))) =>
             state = _state
             state.log.error(s"genNixProject task did not complete $inc for project $project")
             None
@@ -42,14 +45,25 @@ object NixPlugin extends AutoPlugin {
             state.log.warn(s"NixPlugin not enabled for project $project, skipping...")
             None
         }
-      } yield modulesResolversTuple)
+      } yield dependencyResolverTuple)
 
-      val (modulesSeqSeq,resolversSeqSeq) = moduleResolversTupleCollection.unzip
+      val (dependencySeqSet, resolverSeqSeq,credentialsSeq) = dependencyResolverTupleCollection.unzip3
 
-      val modules = modulesSeqSeq.flatten.distinct
-      val resolvers = resolversSeqSeq.flatten.distinct
+      val dependencies = dependencySeqSet.flatten.distinct
+      val resolvers = resolverSeqSeq.flatten.distinct
+      val credentials = Map(credentialsSeq.flatten.distinct :_*)
 
-      IO.write(repoFile, NixWriter(state.log, modules, resolvers))
+      val fetcher = new CoursierArtifactFetcher(state.log, resolvers, credentials)
+      val (repos,artifacts,errors) =  fetcher(dependencies)
+      
+      val flatErrors = errors.flatMap(_.errors)
+      
+      if (flatErrors.size > 0) { 
+        state.log.error("\n\nSbtix Resolution Errors:\n")
+        flatErrors.foreach( e => state.log.error(s"${e.toString()}\n"))
+      }
+      
+      IO.write(repoFile, NixWriter(repos, artifacts))
       state
     }
 
@@ -59,13 +73,12 @@ object NixPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
-    genNixProject:= genNixProjectTask.value,
-    commands += genNixCommand
-  )
+    genNixProject := genNixProjectTask.value,
+    commands += genNixCommand)
 
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
-    val genNixProject = taskKey[(Seq[se.nullable.sbtix.GenericModule], Seq[sbt.Resolver])]("generate a Nix definition for building the maven repo")
+    val genNixProject = taskKey[(Set[coursier.Dependency], Seq[Resolver], Map[String,coursier.Credentials])]("generate a Nix definition for building the maven repo")
   }
 
 }

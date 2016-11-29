@@ -1,88 +1,65 @@
 package se.nullable.sbtix
 
-import java.io.File
-import java.net.{URI, URL}
+import java.net.{ URI, URL }
 
-import sbt.ProjectRef
 import coursier._
 import coursier.core.Authentication
-import sbt.{Logger, ModuleID}
+import sbt.{ Logger, ModuleID }
 
 import scala.sys.process._
+import java.nio.file.Paths
 
+object FindArtifactsOfRepo {
+    def fetchChecksum(originalUrl: String, artifactType: String, url: URL): String = {
 
-object FindArtifacts {
- 
-    def apply(repoName:String,root:String)(logger:Logger, modules:Seq[GenericModule]) : Seq[NixArtifact] = {
-      val rootUrl = new URL(root);
-
-       
-
-       def findArtifacts(url: URL, localFile: File, auth: Option[Authentication]): Seq[NixArtifact] = {
-
-        def authed(url:URL) = {
-          auth match {
-              case Some(a) => 
-                new URI(url.getProtocol, s"${a.user}:${a.password}", url.getHost, url.getPort, url.getPath, url.getQuery, url.getRef)
-              case None => url.toURI
-          }
-        }
-
-        val authedRootURI = authed(rootUrl)
-
-        val authedUri = authed(url)
-
-        val isIvy = localFile.getParentFile().getName() == "jars"
-
-        val localSearchLocation = if (isIvy) {
-           localFile.getParentFile().getParentFile()
+    val procLogger = sys.process.ProcessLogger {
+      mess =>
+        if (mess.startsWith("path is")) {
+          val modMess = mess.replace("path is ", "")
+          println(s"$artifactType ${originalUrl} => $modMess")
+        } else if (mess.startsWith("error: unable to download")) {
+          System.err.println(mess)
         } else {
-           localFile.getParentFile()
+          System.err.println(mess)
         }
-
-        def parentURI(uri:URI) = if (uri.getPath().endsWith("/")) uri.resolve("..") else uri.resolve(".")
-
-        val calculatedParentURI = if (isIvy) {
-          parentURI(parentURI(authedUri))
-        } else {
-          parentURI(authedUri)
-        }
-
-        def calculateURI(f:File) = if (isIvy) {
-          calculatedParentURI.resolve(f.getParentFile().getName() + "/" + f.getName())
-        } else {
-          calculatedParentURI.resolve(f.getName())
-        }
-
-        def recursiveListFiles(f: File): Array[File] = {
-           val these = f.listFiles
-              these ++ these.filter(_.isDirectory).flatMap(recursiveListFiles)
-        }
-
-        val allArtifacts = recursiveListFiles(localSearchLocation)
-        val targetArtifacts = allArtifacts.filter(f => """.*(\.jar|\.pom|ivy.xml)$""".r.findFirstIn(f.getName).isDefined)
-
-        targetArtifacts.map{ artifactLocalFile =>
-
-          val calcUrl = calculateURI(artifactLocalFile).toURL
-
-          logger.info(s"Fetching $calcUrl")
-
-          NixArtifact(
-            repoName,
-            calcUrl.toString.replace(authedRootURI.toString,"").stripPrefix("/"),
-            calcUrl.toString,
-            fetchChecksum(artifactLocalFile.toURI.toURL)
-          )
-        }
-      }
-
-      def fetchChecksum(url: URL): String = {
-        Seq("nix-prefetch-url", url.toString, "--type", "sha256").!!.trim()
-      }
-
-    modules.flatMap{ ga =>
-        findArtifacts(new URL(ga.artifact.url),ga.localFile, ga.artifact.authentication)
     }
+
+    Seq("nix-prefetch-url", url.toString, "--type", "sha256").!!(procLogger).trim()
   }
 }
+
+class FindArtifactsOfRepo(repoName: String, root: String) {
+
+  def findArtifacts(logger: Logger, modules: Seq[GenericModule]): Seq[NixArtifact] = modules.flatMap { ga =>
+    val rootUrl = new URL(root);
+
+    val authedRootURI = ga.authed(rootUrl) //authenticated version of the rootUrl
+
+    val allArtifacts = recursiveListFiles(ga.localSearchLocation) //get list of files at location
+    val targetArtifacts = allArtifacts.filter(f => """.*(\.jar|\.pom|ivy.xml)$""".r.findFirstIn(f.getName).isDefined) //filter for interesting files
+
+    targetArtifacts.map { artifactLocalFile =>
+
+      val calcUrl = ga.calculateURI(artifactLocalFile).toURL
+
+      NixArtifact(
+        repoName,
+        calcUrl.toString.replace(authedRootURI.toString, "").stripPrefix("/"),
+        calcUrl.toString,
+        FindArtifactsOfRepo.fetchChecksum(calcUrl.toString, "Artifact",artifactLocalFile.toURI.toURL))
+    }
+  }
+
+  def findMetaArtifacts(logger: Logger, metaArtifacts: Seq[MetaArtifact]): Seq[NixArtifact] = {
+    metaArtifacts.map { meta =>
+          NixArtifact(
+            repoName,
+            meta.artifactUrl.replace(root, "").stripPrefix("/"),
+            meta.artifactUrl,
+            meta.checkSum
+            )
+    }
+  }
+
+}
+
