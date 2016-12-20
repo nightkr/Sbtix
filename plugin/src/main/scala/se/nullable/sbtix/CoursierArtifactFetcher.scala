@@ -78,18 +78,18 @@ case class MetaArtifact(artifactUrl: String, checkSum:String) extends Comparable
   }
 }
 
-class CoursierArtifactFetcher(logger: Logger, resolvers: Seq[Resolver], credentials: Map[String, Credentials]) {
+class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credentials: Map[String, Credentials]) {
 
   // Collects pom.xml and ivy.xml urls from Coursier internals
   val metaArtifactCollector = new ConcurrentSkipListSet[MetaArtifact]()
 
-  def apply(depends: Seq[Dependency]): (Seq[NixRepo], Seq[NixArtifact], Seq[ResolutionErrors]) = {
+  def apply(depends: Set[Dependency]): (Set[NixRepo], Set[NixArtifact], Set[ResolutionErrors]) = {
     val (mods1,errors) = depends.map(x => buildNixProject(x)).unzip
 
     val mods = mods1.flatten
     
     //remove metaArtifacts that we already have a module for. We do not need to look them up twice.
-    val metaArtifacts = metaArtifactCollector.toSeq.filterNot { meta =>mods.exists { meta.matchesGenericModule} }.distinct
+    val metaArtifacts = metaArtifactCollector.toSet.filterNot { meta =>mods.exists { meta.matchesGenericModule} }
     
     //object to work with the rootUrl of Resolvers
     val nixResolver = resolvers.map(NixResolver.resolve)
@@ -100,9 +100,9 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Seq[Resolver], credenti
     //retrieve metaArtifacts that were missed. Mostly parent POMS
     val (metaRepoSeq, metaArtifactsSeqSeq) = nixResolver.flatMap(_.filterMetaArtifacts(logger, metaArtifacts)).unzip
     
-    val nixArtifacts = (artifactsSeqSeq.flatten ++ metaArtifactsSeqSeq.flatten).distinct
+    val nixArtifacts = (artifactsSeqSeq.flatten ++ metaArtifactsSeqSeq.flatten)
 
-    val nixRepos = (repoSeq ++ metaRepoSeq).distinct
+    val nixRepos = (repoSeq ++ metaRepoSeq)
 
     (nixRepos, nixArtifacts, errors)
   }
@@ -200,7 +200,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Seq[Resolver], credenti
     val repos = resolvers.flatMap { resolver =>
       FromSbt.repository(resolver, ivyProps, logger, credentials.get(resolver.name).map(_.authentication))
     }
-     val fetch = Fetch.from(repos, CacheFetch_WithCollector())
+     val fetch = Fetch.from(repos.toSeq, CacheFetch_WithCollector())
      val resolution = res.process.run(fetch, 100).unsafePerformSync
 
     assert(resolution.isDone)

@@ -31,16 +31,16 @@ case class NixResolver(private val name: String, rootUrl: String, pattern: Optio
   private val nixRepo = NixRepo(repoName, pattern)
   private val finder = new FindArtifactsOfRepo(repoName, rootUrl)
 
-  def filterArtifacts(logger: Logger, modules: Seq[GenericModule]): Option[(NixRepo, Seq[NixArtifact])] = {
+  def filterArtifacts(logger: Logger, modules: Set[GenericModule]): Option[(NixRepo, Set[NixArtifact])] = {
     modules.filter(m => isMatch(m.url.toString)) match {
-      case Nil => None
+      case mods if mods.isEmpty => None
       case mods => Some((nixRepo, finder.findArtifacts(logger, mods)))
     }
   }
 
-  def filterMetaArtifacts(logger: Logger, metaArtifacts: Seq[MetaArtifact]): Option[(NixRepo, Seq[NixArtifact])] = {
+  def filterMetaArtifacts(logger: Logger, metaArtifacts: Set[MetaArtifact]): Option[(NixRepo, Set[NixArtifact])] = {
     metaArtifacts.filter(m => isMatch(m.artifactUrl)) match {
-      case Nil => None
+      case mods if mods.isEmpty => None
       case metas => Some((nixRepo, finder.findMetaArtifacts(logger, metas)))
     }
   }

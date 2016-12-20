@@ -3,7 +3,3 @@ if (sys.props.contains("plugin.version")) {
 } else {
   Seq()
 }
-
-resolvers += Resolver.typesafeIvyRepo("releases")
-
-resolvers += Resolver.sbtPluginRepo("releases")

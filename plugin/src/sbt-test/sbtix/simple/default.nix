@@ -10,9 +10,8 @@ in
                  (import ./manual-repo.nix)
                ];
 
-        installPhase =
-            ''
-                sbt three/stage
-                cp -r three/target/universal/stage $out
-            '';
+        installPhase = ''
+          sbt three/stage
+          cp -r three/target/universal/stage $out
+        '';
     }
