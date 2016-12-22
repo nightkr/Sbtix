@@ -1,4 +1,5 @@
-{ pkgs ? import <nixpkgs> {} }: with pkgs;
+{ pkgs ? (import ./pkgs.nix) {}}: with pkgs;
+
 let
     sbtix = pkgs.callPackage ./sbtix.nix {};
 in
