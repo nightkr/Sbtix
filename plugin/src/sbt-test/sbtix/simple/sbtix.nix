@@ -1,6 +1,5 @@
 { runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText }:
 with stdenv.lib;
-with import <nixpkgs> {};
 
 let sbtTemplate = repoDefs: versioning:
     let

@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+{ pkgs ? (import ./pkgs.nix) {}}: with pkgs;
 
 let
   version = "0.2";
