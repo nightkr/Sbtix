@@ -4,7 +4,7 @@ name := "sbtix"
 organization := "se.nullable.sbtix"
 version := "0.2-SNAPSHOT"
 
-addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.0-M14")
+addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.0-M15-1")
 
 ScriptedPlugin.scriptedSettings
 scriptedLaunchOpts ++= Seq(
