@@ -42,10 +42,16 @@ Sbtix provides a script which will connect your project to the sbtix global plug
 
  * create default.nix. As shown below. Edit as necessary.
 
-```
+```nix
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-    sbtix = pkgs.callPackage ./sbtix.nix {};
+    sbtixDir = fetchFromGitHub {
+    owner = "teozkr";
+    repo = "Sbtix";
+    rev = "<<current git rev>>"; # Replace as needed
+    sha256 = "1fy7y4ln63ynad5v9w4z8srb9c8j2lz67fjsf6a923czm9lh0000"; # Replace as needed
+    };
+    sbtix = pkgs.callPackage "${sbtixDir}/sbtix.nix" {};
 in
     sbtix.buildSbtProject {
         name = "sbtix-example";
@@ -63,8 +69,8 @@ in
     }
 ```
 
- * copy `manual-repo.nix` and `sbtix.nix` from the root of the sbtix git repository
- * generate your repo.nix files with one of the commands listed above. `sbtix-gen-all` is recommended.
+ * copy `manual-repo.nix` from the root of the sbtix git repository.
+ * generate your repo.nix files with one of the commands listed above. `sbtix-gen-all2` is recommended.
  * check the generated nix files into your source control. 
  * finally, run `nix-build` to build!
  * any additional missing dependencies that `nix-build` encounters should be fetched with `nix-prefetch-url` and added to `manual-repo.nix`.

@@ -1,6 +1,5 @@
 { runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText }:
 with stdenv.lib;
-with import <nixpkgs> {};
 
 let sbtTemplate = repoDefs: versioning:
     let
@@ -140,7 +139,7 @@ in rec {
              ${sbtOptions}'';
             
 
-            buildPhase = ''sbt compile'';
+            buildPhase = ''pwd && sbt compile'';
         } // args // {
             repo = null;
             buildInputs = [ jdk sbt ] ++ buildInputs;
