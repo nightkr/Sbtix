@@ -57,8 +57,8 @@ let sbtTemplate = repoDefs: versioning:
               mkdir -p $out
               # Copy the hidden ivy lock files. Only keep ivy cache folder, not ivy local. local might be empty now but I want to be sure it is not polluted in the future. 
               rm -rf ./.ivy2/local
-              cp -r ./.ivy2 $out/ivy
-              cp -r ./.sbt $out/sbt 
+              cp -r --remove-destination ./.ivy2 $out/ivy
+              cp -r --remove-destination ./.sbt $out/sbt 
             '';
     });
 
@@ -79,8 +79,8 @@ in rec {
             parentDirs = filePath: 
                 concatStringsSep "/" (init (splitString "/" filePath));
             linkArtifact = outputPath: urlAttrs:
-                [ "mkdir -p \"$out/${parentDirs outputPath}\""
-                  "ln -fsn \"${fetchurl urlAttrs}\" \"$out/${outputPath}\""
+                [ ''mkdir -p "$out/${parentDirs outputPath}"''
+                  ''ln -fsn "${fetchurl urlAttrs}" "$out/${outputPath}"''
                 ];
         in
             lib.concatStringsSep "\n" (lib.concatLists (lib.mapAttrsToList linkArtifact artifacts)));
