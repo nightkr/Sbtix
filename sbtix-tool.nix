@@ -1,4 +1,4 @@
-{ callPackage, writeText, writeScriptBin, stdenv }:
+{ callPackage, writeText, writeScriptBin, stdenv, sbt }:
 let
   version = "0.2";
   versionSnapshotSuffix = "-SNAPSHOT";
@@ -52,25 +52,25 @@ let
 
 
     #the sbt.global.base directory must be writable
-    sbt -Dsbt.global.base=$SBTIX_GLBASE_DIR "$@"
+    ${sbt}/bin/sbt -Dsbt.global.base=$SBTIX_GLBASE_DIR "$@"
   '';
 
   sbtixGenScript = writeScriptBin "sbtix-gen" ''
     #! ${stdenv.shell}
 
-    sbtix genNix
+    ${sbtixScript}/bin/sbtix genNix
   '';
 
   sbtixGenallScript = writeScriptBin "sbtix-gen-all" ''
     #! ${stdenv.shell}
 
-    sbtix genNix "reload plugins" genNix
+    ${sbtixScript}/bin/sbtix genNix "reload plugins" genNix
   '';
 
   sbtixGenall2Script = writeScriptBin "sbtix-gen-all2" ''
     #! ${stdenv.shell}
 
-    sbtix genNix "reload plugins" genNix "reload plugins" genNix
+    ${sbtixScript}/bin/sbtix genNix "reload plugins" genNix "reload plugins" genNix
   '';
 
 in
