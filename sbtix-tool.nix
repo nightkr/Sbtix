@@ -1,4 +1,4 @@
-{ callPackage, writeText, writeScriptBin, stdenv, sbt }:
+{ callPackage, writeText, writeScriptBin, stdenv, sbt, nix-prefetch-scripts }:
 let
   version = "0.2";
   versionSnapshotSuffix = "-SNAPSHOT";
@@ -29,6 +29,8 @@ let
 
   sbtixScript = writeScriptBin "sbtix" ''
     #! ${stdenv.shell}
+
+    export PATH=${nix-prefetch-scripts}/bin:$PATH
 
     # remove the ivy cache of sbtix so sbt retrieves from the sbtix nix repo. 
     # without this your version of sbtix may be overriden by the local ivy cache.
