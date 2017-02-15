@@ -8,7 +8,7 @@ import sbt.Logger
 import scala.sys.process._
 
 object FindArtifactsOfRepo {
-  private val semaphore = new Semaphore(10, false)
+  private val semaphore = new Semaphore(4, false)
 
   def fetchChecksum(originalUrl: String, artifactType: String, url: URL): String = {
 
