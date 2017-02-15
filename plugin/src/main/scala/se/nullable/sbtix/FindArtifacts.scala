@@ -1,16 +1,16 @@
 package se.nullable.sbtix
 
-import java.net.{ URI, URL }
+import java.net.URL
+import java.util.concurrent.Semaphore
 
-import coursier._
-import coursier.core.Authentication
-import sbt.{ Logger, ModuleID }
+import sbt.Logger
 
 import scala.sys.process._
-import java.nio.file.Paths
 
 object FindArtifactsOfRepo {
-    def fetchChecksum(originalUrl: String, artifactType: String, url: URL): String = {
+  private val semaphore = new Semaphore(10, false)
+
+  def fetchChecksum(originalUrl: String, artifactType: String, url: URL): String = {
 
     val procLogger = sys.process.ProcessLogger {
       mess =>
@@ -24,7 +24,9 @@ object FindArtifactsOfRepo {
         }
     }
 
+    semaphore.acquireUninterruptibly()
     Seq("nix-prefetch-url", url.toString, "--type", "sha256").!!(procLogger).trim()
+    semaphore.release()
   }
 }
 
@@ -35,7 +37,8 @@ class FindArtifactsOfRepo(repoName: String, root: String) {
 
     val authedRootURI = ga.authed(rootUrl) //authenticated version of the rootUrl
 
-    val allArtifacts = recursiveListFiles(ga.localSearchLocation) //get list of files at location
+    val allArtifacts = recursiveListFiles(ga.localSearchLocation)
+    //get list of files at location
     val targetArtifacts = allArtifacts.filter(f => """.*(\.jar|\.pom|ivy.xml)$""".r.findFirstIn(f.getName).isDefined) //filter for interesting files
 
     targetArtifacts.map { artifactLocalFile =>
@@ -46,18 +49,18 @@ class FindArtifactsOfRepo(repoName: String, root: String) {
         repoName,
         calcUrl.toString.replace(authedRootURI.toString, "").stripPrefix("/"),
         calcUrl.toString,
-        FindArtifactsOfRepo.fetchChecksum(calcUrl.toString, "Artifact",artifactLocalFile.toURI.toURL))
+        FindArtifactsOfRepo.fetchChecksum(calcUrl.toString, "Artifact", artifactLocalFile.toURI.toURL))
     }
   }
 
   def findMetaArtifacts(logger: Logger, metaArtifacts: Set[MetaArtifact]): Set[NixArtifact] = {
     metaArtifacts.map { meta =>
-          NixArtifact(
-            repoName,
-            meta.artifactUrl.replace(root, "").stripPrefix("/"),
-            meta.artifactUrl,
-            meta.checkSum
-            )
+      NixArtifact(
+        repoName,
+        meta.artifactUrl.replace(root, "").stripPrefix("/"),
+        meta.artifactUrl,
+        meta.checkSum
+      )
     }
   }
 
