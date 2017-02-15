@@ -25,8 +25,9 @@ object FindArtifactsOfRepo {
     }
 
     semaphore.acquireUninterruptibly()
-    Seq("nix-prefetch-url", url.toString, "--type", "sha256").!!(procLogger).trim()
+    val checksum = Seq("nix-prefetch-url", url.toString, "--type", "sha256").!!(procLogger).trim()
     semaphore.release()
+    checksum
   }
 }
 
