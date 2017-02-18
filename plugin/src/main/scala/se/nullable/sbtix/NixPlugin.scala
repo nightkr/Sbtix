@@ -15,11 +15,13 @@ object NixPlugin extends AutoPlugin {
       // use all resolvers except the projectResolver and local ivy/maven file Resolvers
       val exceptResolvers = Set(projectResolver.value, Resolver.mavenLocal, Resolver.defaultLocal)
       val genNixResolvers = (fullResolvers.value ++ externalResolvers.value).toSet -- exceptResolvers
-      
+
       val logger = sLog.value
 
-      val modules = allDependencies.value.toSet -- projectDependencies.value
-      
+      val modules = (allDependencies.value.toSet
+                       -- nixProvidedDependencies.value
+                       -- projectDependencies.value)
+
       val depends = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
                            .filterNot { _.module.organization == "se.nullable.sbtix" }  //ignore the sbtix dependency that gets added because of the global sbtix plugin
 
@@ -76,11 +78,14 @@ object NixPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
+    nixProvidedDependencies := Seq(),
     genNixProject := genNixProjectTask.value,
-    commands += genNixCommand)
+    commands += genNixCommand
+  )
 
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
+    val nixProvidedDependencies = settingKey[Seq[ModuleID]]("dependencies that are provided by Sbtix (and shouldn't be considered by genNix/sbtix-gen-*)")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
   }
 
