@@ -6,5 +6,8 @@ before_install:
   - nix-env -i nix-prefetch-scripts
 sudo: required
 script:
-  - cd plugin
+  - pushd plugin
   - sbt scripted
+  - popd
+  - nix-env -i -f .
+  - tests/multi-build/run.sh

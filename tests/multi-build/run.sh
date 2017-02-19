@@ -21,3 +21,4 @@ pushd three
 sbtix-gen-all
 nix-build
 ./result/bin/mb-three
+popd
