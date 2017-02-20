@@ -1,4 +1,4 @@
-{ runCommand, fetchurl, lib, stdenv, jdk, sbt, writeText }:
+{ runCommand, fetchurl, lib, stdenv, jdk, jre, sbt, writeText, makeWrapper }:
 with stdenv.lib;
 
 let sbtTemplate = repoDefs: versioning:
@@ -21,7 +21,7 @@ let sbtTemplate = repoDefs: versioning:
         # http://www.scala-sbt.org/0.13.5/docs/Launcher/Configuration.html
         sbtixRepos = writeText "sbtixRepos" ''
         [repositories]
-        ${repoDefs}
+        ${concatStringsSep "\n  " repoDefs}
         local
         '';
     in stdenv.mkDerivation (rec {
@@ -85,32 +85,41 @@ in rec {
         in
             lib.concatStringsSep "\n" (lib.concatLists (lib.mapAttrsToList linkArtifact artifacts)));
     
-    repoConfig = repos: nixrepo:
-    let
-        repoPatternOptional = repoPattern:
-            optionalString (repoPattern != "") ", ${repoPattern}";
-        repoPath = repoName: repoPattern:
-            [ "${repoName}: file://${nixrepo}/${repoName}${repoPatternOptional repoPattern}" ];
-    in
-        lib.concatStringsSep "\n  " (lib.concatLists (lib.mapAttrsToList repoPath repos));
+    repoConfig = {repos, nixrepo, name}:
+        let
+            repoPatternOptional = repoPattern:
+                optionalString (repoPattern != "") ", ${repoPattern}";
+            repoPath = repoName: repoPattern:
+                [ "${name}-${repoName}: file://${nixrepo}/${repoName}${repoPatternOptional repoPattern}" ];
+        in
+            lib.concatLists (lib.mapAttrsToList repoPath repos);
+
+    ivyRepoPattern = "[organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]";
 
     mergeAttr = attr: repo:
         fold (a: b: a // b) {} (catAttrs attr repo);
 
-    buildSbtProject = args@{repo, name, buildInputs ? [], sbtOptions ? "", ...}:
+    buildSbtProject = args@{repo, name, buildInputs ? [], sbtixBuildInputs ? [], sbtOptions ? "", ...}:
       let
           versionings = unique (flatten (catAttrs "versioning" repo));
           artifacts = mergeAttr "artifacts" repo;
           repos = mergeAttr "repos" repo;
           nixrepo = mkRepo "${name}-repo" artifacts;
-          repoDefs = repoConfig repos nixrepo;
+          thisFetchedDependencies = { inherit repos nixrepo name; };
+
+          fetchedDependencies = [thisFetchedDependencies] ++ concatMap (d: d.fetchedRepos) sbtixBuildInputs;
+          repoDefs = concatMap repoConfig fetchedDependencies;
+
+          builtDependencies = concatMap (d: [ d ] ++ d.builtRepos) sbtixBuildInputs;
+
           sbtSetupTemplate = mergeSbtTemplates(map (sbtTemplate repoDefs) versionings);
 
           # SBT Launcher Configuration
           # http://www.scala-sbt.org/0.13.5/docs/Launcher/Configuration.html
           sbtixRepos = writeText "sbtixRepos" ''
             [repositories]
-            ${repoDefs}
+            ${concatStringsSep "\n  " (map (d: "${d.name}: file://${d}, ${ivyRepoPattern}") builtDependencies)}
+            ${concatStringsSep "\n  " repoDefs}
             local
             '';
 
@@ -131,17 +140,40 @@ in rec {
 
             # set environment variable to affect all SBT commands
             SBT_OPTS = ''
-             -Dsbt.ivy.home=./.ivy2/
-             -Dsbt.boot.directory=./.sbt/boot/
-             -Dsbt.global.staging=./.staging
-             -Dsbt.override.build.repos=true
-             -Dsbt.repository.config=${sbtixRepos}
-             ${sbtOptions}'';
+              -Dsbt.ivy.home=./.ivy2/
+              -Dsbt.boot.directory=./.sbt/boot/
+              -Dsbt.global.staging=./.staging
+              -Dsbt.override.build.repos=true
+              -Dsbt.repository.config=${sbtixRepos}
+              ${sbtOptions}
+            '';
             
 
             buildPhase = ''pwd && sbt compile'';
         } // args // {
             repo = null;
-            buildInputs = [ jdk sbt ] ++ buildInputs;
-        });
+            buildInputs = [ makeWrapper jdk sbt ] ++ buildInputs;
+        }) // {
+            builtRepos = builtDependencies;
+            fetchedRepos = fetchedDependencies;
+        };
+
+    buildSbtLibrary = args: buildSbtProject ({
+        installPhase = ''
+          sbt publishLocal
+          mkdir -p $out/
+          cp ./.ivy2/local/* $out/ -r
+        '';
+    } // args);
+
+    buildSbtProgram = args: buildSbtProject ({
+        installPhase = ''
+          sbt stage
+          mkdir -p $out/
+          cp target/universal/stage/* $out/ -r
+          for p in $out/bin/*; do
+            wrapProgram "$p" --prefix PATH : ${jre}/bin
+          done
+        '';
+    } // args);
 }

@@ -40,32 +40,26 @@ Sbtix provides a script which will connect your project to the sbtix global plug
 
 ### Creating a build
 
- * create default.nix. As shown below. Edit as necessary.
+ * create default.nix as shown below. Edit as necessary. This assumes that you're building a program using [sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/index.html), use `buildSbtLibrary` instead if you want to build a library or `buildSbtProject` if you want to use a free-form `installPhase`.
 
 ```nix
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
     sbtixDir = fetchFromGitHub {
-    owner = "teozkr";
-    repo = "Sbtix";
-    rev = "<<current git rev>>"; # Replace as needed
-    sha256 = "1fy7y4ln63ynad5v9w4z8srb9c8j2lz67fjsf6a923czm9lh0000"; # Replace as needed
+        owner = "teozkr";
+        repo = "Sbtix";
+        rev = "<<current git rev>>"; # Replace as needed
+        sha256 = "1fy7y4ln63ynad5v9w4z8srb9c8j2lz67fjsf6a923czm9lh0000"; # Replace as needed
     };
     sbtix = pkgs.callPackage "${sbtixDir}/sbtix.nix" {};
 in
-    sbtix.buildSbtProject {
+    sbtix.buildSbtProgram {
         name = "sbtix-example";
         src = ./.;
         repo = [ (import ./manual-repo.nix)
                  (import ./repo.nix)
                  (import ./project/repo.nix)
                ];
-
-        installPhase =''
-          sbt publish-local
-          mkdir -p $out/
-          cp ./.ivy2/local/* $out/ -r
-        '';
     }
 ```
 
