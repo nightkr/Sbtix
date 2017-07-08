@@ -34,9 +34,9 @@
       url = "https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom";
       sha256 = "0m4lallnlhyfj3z24ispxzwvsxzaznhw6zsmk4j74sibr5kqh7xm";
     };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.12/srcs/compiler-interface-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.12/srcs/compiler-interface-sources.jar";
-      sha256 = "0rjjdc283wdv861yy9x0ssn5bh7mm371sznvp5hsayynd7h0r0z7";
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.15/srcs/compiler-interface-sources.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.15/srcs/compiler-interface-sources.jar";
+      sha256 = "1b2p8c8sypvi9hfbbbzv59sqpjssyx91m43s9vwxc5sa2fn5lk5g";
     };
   };
 }
