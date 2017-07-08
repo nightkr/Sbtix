@@ -2,36 +2,20 @@
 {
   "versioning" = [{
       "scalaVersion" = "2.10.6";
-      "sbtVersion" = "0.13.12";
+      "sbtVersion" = "0.13.15";
     }];
   "repos" = {
     "nix-public" = "";
     "nix-typesafe-ivy-releases" = "[organisation]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]";
   };
   "artifacts" = {
-    "nix-public/com/jcraft/jsch/0.1.46/jsch-0.1.46-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/com/jcraft/jsch/0.1.46/jsch-0.1.46-javadoc.jar";
-      sha256 = "0vk1s621wi7lfd3jbcjxxm4d21882xap3cyawminmbmj5951q1gp";
+    "nix-public/com/jcraft/jsch/0.1.50/jsch-0.1.50.jar" = {
+      url = "https://repo1.maven.org/maven2/com/jcraft/jsch/0.1.50/jsch-0.1.50.jar";
+      sha256 = "15di2xp89g3nw4shdmfl6vygqpx57ar8dyrz65d9qhjgx3yfgybx";
     };
-    "nix-public/com/jcraft/jsch/0.1.46/jsch-0.1.46-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/com/jcraft/jsch/0.1.46/jsch-0.1.46-sources.jar";
-      sha256 = "19qpqci29bwxg46fn4p2ppib2qsvivhlx60ms5fdrvq6hb3nl8f7";
-    };
-    "nix-public/com/jcraft/jsch/0.1.46/jsch-0.1.46.jar" = {
-      url = "https://repo1.maven.org/maven2/com/jcraft/jsch/0.1.46/jsch-0.1.46.jar";
-      sha256 = "04nr5cqy0c2wilcyi9y86m5yvi5wngps8zayqgcg9pw162f65ka8";
-    };
-    "nix-public/com/jcraft/jsch/0.1.46/jsch-0.1.46.pom" = {
-      url = "https://repo1.maven.org/maven2/com/jcraft/jsch/0.1.46/jsch-0.1.46.pom";
-      sha256 = "1i7gc2170pn0k6jhdhf38yga9nv3ny39mz8aflysvvvhwp0wwq7b";
-    };
-    "nix-public/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2-javadoc.jar";
-      sha256 = "0frgicl2yrz5iwd7pgqi6v1gyvi66iv5wdy2rx651i3sx99vmxsa";
-    };
-    "nix-public/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2-sources.jar";
-      sha256 = "13ji93614qhcsqn389xk3pkd0gg0fxjpf4zxfvvy0hlqp964p3qy";
+    "nix-public/com/jcraft/jsch/0.1.50/jsch-0.1.50.pom" = {
+      url = "https://repo1.maven.org/maven2/com/jcraft/jsch/0.1.50/jsch-0.1.50.pom";
+      sha256 = "1c5x6zm8yfgbvbxlprlw03nz9m5bpd7n2bsapjnfvp7hbycksvjk";
     };
     "nix-public/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2.jar" = {
       url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2.jar";
@@ -41,14 +25,6 @@
       url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.10/0.4.2/fastparse-utils_2.10-0.4.2.pom";
       sha256 = "0qp58mmikk3h2149px8h4aqa8vynhvxjw8d7i1c5ngwrd1804bmf";
     };
-    "nix-public/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2-javadoc.jar";
-      sha256 = "1570mx9mn58fksf2aklwc3i64biybw0fwqnizbvzscqn8kwjbc6a";
-    };
-    "nix-public/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2-sources.jar";
-      sha256 = "1i2vyxlg6lfpmgfz2cl6dajx96fmax24az8qqw0whp7pxm1zqxh7";
-    };
     "nix-public/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2.jar" = {
       url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2.jar";
       sha256 = "1vlf62107nd9lq7d9sf6wymnmy94km1z03hi8fy5aqjxhxlacac2";
@@ -56,14 +32,6 @@
     "nix-public/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2.pom" = {
       url = "https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.10/0.4.2/fastparse_2.10-0.4.2.pom";
       sha256 = "1b6g80hm5k4r1fhqr4rbz8j225hi8nylm5kqkph45d3gy93bf729";
-    };
-    "nix-public/com/lihaoyi/sourcecode_2.10/0.1.3/sourcecode_2.10-0.1.3-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.10/0.1.3/sourcecode_2.10-0.1.3-javadoc.jar";
-      sha256 = "1whklkw7ykylggqsq4i4759qybk3lmsxcqz178c01l5b3rlq9sra";
-    };
-    "nix-public/com/lihaoyi/sourcecode_2.10/0.1.3/sourcecode_2.10-0.1.3-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.10/0.1.3/sourcecode_2.10-0.1.3-sources.jar";
-      sha256 = "076dd7klyxawx01f3v67njyy8nl1ck9498li2ykz4nihs27ggif4";
     };
     "nix-public/com/lihaoyi/sourcecode_2.10/0.1.3/sourcecode_2.10-0.1.3.jar" = {
       url = "https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.10/0.1.3/sourcecode_2.10-0.1.3.jar";
@@ -77,14 +45,6 @@
       url = "https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer-parent/2.6/paranamer-parent-2.6.pom";
       sha256 = "142n45rzlgjvjmb2aj9r6acvzf07vcfr2knwqxm3lmlanqbxkgjp";
     };
-    "nix-public/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6-javadoc.jar";
-      sha256 = "0c5smzl9d2pcwvvbrqcamy88hmi5qwry6yn4nr2284d28m3iwyj4";
-    };
-    "nix-public/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6-sources.jar";
-      sha256 = "0daxdh17rc2pbh1ipv48k39lcg0g0ii75j87i5qjrqcg4v8f4ci5";
-    };
     "nix-public/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6.jar" = {
       url = "https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6.jar";
       sha256 = "1grs2kfh9z5xn5h1z0dqiqbhj5l6k9ww6mbb42n3gzkmin2w2qxr";
@@ -92,14 +52,6 @@
     "nix-public/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6.pom" = {
       url = "https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.6/paranamer-2.6.pom";
       sha256 = "0jcnwq4yh2nzbsx1x1kvnxrs0xrznjclyfxg31nfrxdq1cqd66q5";
-    };
-    "nix-public/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1-javadoc.jar";
-      sha256 = "025a5z5i3jy592vfxyk40n2b351sdlrghn662xz5ibsa72y35z6p";
-    };
-    "nix-public/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1-sources.jar";
-      sha256 = "08nq5l8f6n24nzga94xgympv307m1na1y96mkl177h5xlyri8rcr";
     };
     "nix-public/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1.jar" = {
       url = "https://repo1.maven.org/maven2/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1.jar";
@@ -109,14 +61,6 @@
       url = "https://repo1.maven.org/maven2/io/get-coursier/coursier-cache_2.10/1.0.0-M15-1/coursier-cache_2.10-1.0.0-M15-1.pom";
       sha256 = "0n4ds90rhkkwh1gcxk6gdqf9xzky6xrx84b521yvb9fwh19za4da";
     };
-    "nix-public/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1-javadoc.jar";
-      sha256 = "01p9ypagmg76kfxjxm9qf7n6gjipv1dfpvi80183bl8jsm541wki";
-    };
-    "nix-public/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1-sources.jar";
-      sha256 = "0a0l83axjdprpbk4f1gsrf41yz6fslrksldf5yshhdxyib9xr54f";
-    };
     "nix-public/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1.jar" = {
       url = "https://repo1.maven.org/maven2/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1.jar";
       sha256 = "1zn06b6zl4wzikrf2qb3qm86gs4ddwkmkw9v824ygssa7sg1wz80";
@@ -124,14 +68,6 @@
     "nix-public/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1.pom" = {
       url = "https://repo1.maven.org/maven2/io/get-coursier/coursier_2.10/1.0.0-M15-1/coursier_2.10-1.0.0-M15-1.pom";
       sha256 = "1vvz6kd1dvdsshn0l29s4w8lsa32l3msjl7f7admvar4w4sa152n";
-    };
-    "nix-public/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1-javadoc.jar";
-      sha256 = "1hsplrwgn24imcdjcdcax15mddkfq67yx9g6r7m937gfz0dxshpz";
-    };
-    "nix-public/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1-sources.jar";
-      sha256 = "1j74k5dn90hjplr08ik07s8dpdi7whl91hj66d736297xz0ig7rk";
     };
     "nix-public/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1.jar" = {
       url = "https://repo1.maven.org/maven2/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1.jar";
@@ -141,57 +77,17 @@
       url = "https://repo1.maven.org/maven2/io/get-coursier/sbt-coursier_2.10_0.13/1.0.0-M15-1/sbt-coursier-1.0.0-M15-1.pom";
       sha256 = "131nq3qiqiqc4qy2435y1cy8ljd6d7811cqpda4vf1v9aj11vsqp";
     };
-    "nix-public/jline/jline/2.13/jline-2.13-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/jline/jline/2.13/jline-2.13-javadoc.jar";
-      sha256 = "0x5rrizd00fsyzn7zdzggsa1vvh9yz95dkzgfx1shah248zas48g";
+    "nix-public/jline/jline/2.14.3/jline-2.14.3.jar" = {
+      url = "https://repo1.maven.org/maven2/jline/jline/2.14.3/jline-2.14.3.jar";
+      sha256 = "0912i3cn9f357dbk005pv1n0jvyb4s8bz1jspn1jqnvbszzjdp7q";
     };
-    "nix-public/jline/jline/2.13/jline-2.13-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/jline/jline/2.13/jline-2.13-sources.jar";
-      sha256 = "1ax3bfk36nli750l369bs6ygaprj5frw9dykzik3md0yljbd86cs";
-    };
-    "nix-public/jline/jline/2.13/jline-2.13.jar" = {
-      url = "https://repo1.maven.org/maven2/jline/jline/2.13/jline-2.13.jar";
-      sha256 = "15vzwipdd8lalanjvsz448fh30zcqinrrdkk41k04xzzvp0cklm6";
-    };
-    "nix-public/jline/jline/2.13/jline-2.13.pom" = {
-      url = "https://repo1.maven.org/maven2/jline/jline/2.13/jline-2.13.pom";
-      sha256 = "0hrc2pbldis48nx7msjn4xbz04nk9ickkxyd0jk43qjqp27dfqms";
+    "nix-public/jline/jline/2.14.3/jline-2.14.3.pom" = {
+      url = "https://repo1.maven.org/maven2/jline/jline/2.14.3/jline-2.14.3.pom";
+      sha256 = "1ics4ipmhnz93j0rprydxq306f2zldpywl2xmaqg4mxi38rq1hby";
     };
     "nix-public/org/codehaus/codehaus-parent/4/codehaus-parent-4.pom" = {
       url = "https://repo1.maven.org/maven2/org/codehaus/codehaus-parent/4/codehaus-parent-4.pom";
       sha256 = "1pqlw2ilzagcl5ahq9dv60cxw59yrvrwf9q6z0679qf2x1yj71vb";
-    };
-    "nix-public/org/fusesource/fusesource-pom/1.8/fusesource-pom-1.8.pom" = {
-      url = "https://repo1.maven.org/maven2/org/fusesource/fusesource-pom/1.8/fusesource-pom-1.8.pom";
-      sha256 = "1hgjxw27kbvhw4r6n1g7d71s55wi53qac8nsl0z7bq9wikr07w5i";
-    };
-    "nix-public/org/fusesource/jansi/jansi-project/1.11/jansi-project-1.11.pom" = {
-      url = "https://repo1.maven.org/maven2/org/fusesource/jansi/jansi-project/1.11/jansi-project-1.11.pom";
-      sha256 = "1s4wrh9gzbfcfhi3m87wi2rk9s2hxf9111yl0i7cyygrandw9acb";
-    };
-    "nix-public/org/fusesource/jansi/jansi/1.11/jansi-1.11-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/fusesource/jansi/jansi/1.11/jansi-1.11-javadoc.jar";
-      sha256 = "12ab3qq7xmscdr4wqlp6pr9jfccd68z4ni44170mgaaibicsk5l9";
-    };
-    "nix-public/org/fusesource/jansi/jansi/1.11/jansi-1.11-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/fusesource/jansi/jansi/1.11/jansi-1.11-sources.jar";
-      sha256 = "00m1hn77rq2s809aga22qz8xncp6a7d2cfkk7c6z70y9yq77md0b";
-    };
-    "nix-public/org/fusesource/jansi/jansi/1.11/jansi-1.11.jar" = {
-      url = "https://repo1.maven.org/maven2/org/fusesource/jansi/jansi/1.11/jansi-1.11.jar";
-      sha256 = "1f30glhywfjjksfzwpjfxvnrdrr68xawwckicbz5fqpws8z1d0ly";
-    };
-    "nix-public/org/fusesource/jansi/jansi/1.11/jansi-1.11.pom" = {
-      url = "https://repo1.maven.org/maven2/org/fusesource/jansi/jansi/1.11/jansi-1.11.pom";
-      sha256 = "1jd56xdki0fk6s6qwvdmqa0ajwmsdvfr4iyyycrq0sahfkf5m5xh";
-    };
-    "nix-public/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10-javadoc.jar";
-      sha256 = "1rzzfyk6s1s9gk29mf94misma47c39ddfi60bszq9pncp064hsgi";
-    };
-    "nix-public/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10-sources.jar";
-      sha256 = "0xiva2kyfi5f4k8nznbjvr1lfbkpp4jns5gks6j8h9gm3qhqmljh";
     };
     "nix-public/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10.jar" = {
       url = "https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10.jar";
@@ -201,14 +97,6 @@
       url = "https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.10/3.2.10/json4s-ast_2.10-3.2.10.pom";
       sha256 = "10a5ccin3d6g37qja0g1yip5nbm18xbglbd8g88ml7z810sx48vr";
     };
-    "nix-public/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10-javadoc.jar";
-      sha256 = "08h8g6slgnx4zfy8hb76py22a53jv2ix2d9aynddigzsnndwcnqs";
-    };
-    "nix-public/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10-sources.jar";
-      sha256 = "1n07661ih9gnpz4ncg10v5phsm6lc3yynj4qlx3bb34i34wnnk18";
-    };
     "nix-public/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10.jar" = {
       url = "https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10.jar";
       sha256 = "0d2i33ljkk96dyhv799dy198yn4k0ib04qbs7rk616l4mh0fxik3";
@@ -216,14 +104,6 @@
     "nix-public/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10.pom" = {
       url = "https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.10/json4s-core_2.10-3.2.10.pom";
       sha256 = "1fhzpzpx9xk9lx8m3za793qf8kwipc4cs338865z6k3wg8xdhvv9";
-    };
-    "nix-public/org/jsoup/jsoup/1.9.2/jsoup-1.9.2-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/jsoup/jsoup/1.9.2/jsoup-1.9.2-javadoc.jar";
-      sha256 = "074vff5nbszy8lx7hl8ws8qzsccrzg1b9gbbj56gsjpi0d7qj98i";
-    };
-    "nix-public/org/jsoup/jsoup/1.9.2/jsoup-1.9.2-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/jsoup/jsoup/1.9.2/jsoup-1.9.2-sources.jar";
-      sha256 = "111322r3kbxanfry16wk5jnar3s10jrcjw3j9zpnamcb0ny8a90q";
     };
     "nix-public/org/jsoup/jsoup/1.9.2/jsoup-1.9.2.jar" = {
       url = "https://repo1.maven.org/maven2/org/jsoup/jsoup/1.9.2/jsoup-1.9.2.jar";
@@ -233,14 +113,6 @@
       url = "https://repo1.maven.org/maven2/org/jsoup/jsoup/1.9.2/jsoup-1.9.2.pom";
       sha256 = "0zh9xn8qcgjyhki5kbhb3rhbhd12avwqy6n9fqfzymdq3c41k8lk";
     };
-    "nix-public/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1-javadoc.jar";
-      sha256 = "1ran8271fzfr726vcpjv20yp4fcybsbgfvwrl1y48p50zcxc0hv7";
-    };
-    "nix-public/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1-sources.jar";
-      sha256 = "0wgjx89cl6h8v798891iwbxgp0bk9g7srycw89zsni3d4a53b33x";
-    };
     "nix-public/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1.jar" = {
       url = "https://repo1.maven.org/maven2/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1.jar";
       sha256 = "0p6wa4brziq40vaqacijgg8xn2cpazv1sfngv0h618wnqk4q429y";
@@ -249,14 +121,6 @@
       url = "https://repo1.maven.org/maven2/org/scala-lang/modules/scala-pickling_2.10/0.10.1/scala-pickling_2.10-0.10.1.pom";
       sha256 = "1rc5c9xca1qbqibryv5k8a51pvhf4zpnxcvwrswzwc0afjkynfmw";
     };
-    "nix-public/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6-javadoc.jar";
-      sha256 = "19zxj7prmz3fsb2xqfsj66nvnp0bn1r4xqcc4jrx1mq8drzmla5v";
-    };
-    "nix-public/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6-sources.jar";
-      sha256 = "1pdgzpv284mhb94cw7vxsnc33j6ig5lw44rkwjg8c7520a7jvikm";
-    };
     "nix-public/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6.jar" = {
       url = "https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6.jar";
       sha256 = "0fzwhlw9pl92b3mgci85qqz8s0fdci9dyh28lnjcdcjxpqrmjbpb";
@@ -264,14 +128,6 @@
     "nix-public/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6.pom" = {
       url = "https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.10.6/scala-compiler-2.10.6.pom";
       sha256 = "0spli5785blg6q9rhgh10vgwk01v69zs3ncn1sam5rzbwpkhashi";
-    };
-    "nix-public/org/scala-lang/scala-library/2.10.6/scala-library-2.10.6-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.6/scala-library-2.10.6-javadoc.jar";
-      sha256 = "1byyv6q4jjf31d12cnagp280sk98aws7whw6ijr9icm6ypq4yd4q";
-    };
-    "nix-public/org/scala-lang/scala-library/2.10.6/scala-library-2.10.6-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.6/scala-library-2.10.6-sources.jar";
-      sha256 = "0h10arb5k756bb8hq55lpq28vw24ncnin5yymfriafyllb1frc41";
     };
     "nix-public/org/scala-lang/scala-library/2.10.6/scala-library-2.10.6.jar" = {
       url = "https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.6/scala-library-2.10.6.jar";
@@ -289,14 +145,6 @@
       url = "https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.4/scala-reflect-2.10.4.pom";
       sha256 = "0h5n2fk69xwkliv3xnp8v8n3rpcaiznixdpa9w9raxmrs4wcgf5p";
     };
-    "nix-public/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6-javadoc.jar";
-      sha256 = "1byyv6q4jjf31d12cnagp280sk98aws7whw6ijr9icm6ypq4yd4q";
-    };
-    "nix-public/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6-sources.jar";
-      sha256 = "1svmakb8wphpxghpx731sc5nx57hcrl5a206hdmf1g3x6g0113rs";
-    };
     "nix-public/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6.jar" = {
       url = "https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6.jar";
       sha256 = "0vgdn6mzzxqwrai1hsjcpsjxqnn38nv1caw6mhmwh3q4zq8jd7xb";
@@ -305,45 +153,21 @@
       url = "https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.6/scala-reflect-2.10.6.pom";
       sha256 = "1085xmln652gzf3dn2hvyhnfx9pnwsipb54jr5rdxqm30pb1p8i3";
     };
-    "nix-public/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a-javadoc.jar";
-      sha256 = "1nhpqp53vr7f6hpgnfy1iqdmixdjqzvgcnzx0dv0mfgz0annn64c";
+    "nix-public/org/scala-sbt/ivy/ivy/2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4/ivy-2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4.jar" = {
+      url = "https://repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4/ivy-2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4.jar";
+      sha256 = "0fcqkj3vg2mfmcjahm2z8wy3lfbgq567n7kkjs8135yiwr0ws6m5";
     };
-    "nix-public/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a-sources.jar";
-      sha256 = "0s6arw99dxddjx77gigmf5xjb4p29r8ww4r1kh08ny8g12nfgfzq";
+    "nix-public/org/scala-sbt/ivy/ivy/2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4/ivy-2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4.pom" = {
+      url = "https://repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4/ivy-2.3.0-sbt-48dd0744422128446aee9ac31aa356ee203cc9f4.pom";
+      sha256 = "0hlkyxivan8wi6vfl19mwppig887qpjdyljjin668zpg6a8hgn2h";
     };
-    "nix-public/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a.jar";
-      sha256 = "0plwywjg9dhig3wwfnmfg4a6f2f5yjqix707yxyv4s9d853idih4";
+    "nix-public/org/scala-sbt/launcher-interface/1.0.1/launcher-interface-1.0.1.jar" = {
+      url = "https://repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.0.1/launcher-interface-1.0.1.jar";
+      sha256 = "0zby99mp7mf5ra95a0536kl7f8y972a1ldqjhrj88yhw1mgfyxkp";
     };
-    "nix-public/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a.pom" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/ivy/ivy/2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a/ivy-2.3.0-sbt-2cc8d2761242b072cedb0a04cb39435c4fa24f9a.pom";
-      sha256 = "020x9h05rgr16dba9yl8naxq6rjrqbdfds8x52sbqqfykgva1ry1";
-    };
-    "nix-public/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1-javadoc.jar";
-      sha256 = "1cbhic72b0nijbaawmwq4sayqc2ic1zzh952s0ijc4wnjldzka3b";
-    };
-    "nix-public/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1-sources.jar";
-      sha256 = "091kkmh61qwl7sp6p34v1yj2c17ny5jm2al78ij0vmr1h8n9kvyg";
-    };
-    "nix-public/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1.jar";
-      sha256 = "1nqz6hzwz6r17gzj0mylbbmspdimgdin97xgiv7cy3026bszjfsm";
-    };
-    "nix-public/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1.pom" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.0.0-M1/launcher-interface-1.0.0-M1.pom";
-      sha256 = "03ai9k80jlz2hand2sryibqv7rr97r2j4skyxyb58cafzvr79j3w";
-    };
-    "nix-public/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2-javadoc.jar";
-      sha256 = "0invzqvfqsjz3dcprmxy7li8p5kgwsfi50s94fr3wr6vsq3iinv4";
-    };
-    "nix-public/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2-sources.jar";
-      sha256 = "120pi7fn8s4wxywa9fq704c821j3zqcsv4d6sw4nqnl0byd6xf7h";
+    "nix-public/org/scala-sbt/launcher-interface/1.0.1/launcher-interface-1.0.1.pom" = {
+      url = "https://repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.0.1/launcher-interface-1.0.1.pom";
+      sha256 = "0ysandpwxf1rh7dpzxr07a8527sdssx8hqd2396yqw3hwp9jkdrd";
     };
     "nix-public/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2.jar" = {
       url = "https://repo1.maven.org/maven2/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2.jar";
@@ -353,13 +177,13 @@
       url = "https://repo1.maven.org/maven2/org/scala-sbt/serialization_2.10/0.1.2/serialization_2.10-0.1.2.pom";
       sha256 = "19fw8dlfiy333rdxqnys59nrnn5wj4fmy1srflyrlw6nf0hlfbwm";
     };
-    "nix-public/org/scala-sbt/test-interface/1.0/test-interface-1.0-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0-javadoc.jar";
-      sha256 = "19cqgksv49x40z4zkplxavy6bh3kspys89lgnzdg03f2f6vn2f56";
+    "nix-public/org/scala-sbt/template-resolver/0.1/template-resolver-0.1.jar" = {
+      url = "https://repo1.maven.org/maven2/org/scala-sbt/template-resolver/0.1/template-resolver-0.1.jar";
+      sha256 = "0mkw92467i4jip5kbzvl5v1zwzv05alb3hb97l6z9bp641mxbf0b";
     };
-    "nix-public/org/scala-sbt/test-interface/1.0/test-interface-1.0-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0-sources.jar";
-      sha256 = "1bd533m6mffi3kglhy75dr3bsw4d498ivvr5s6fvvw7lklf4j563";
+    "nix-public/org/scala-sbt/template-resolver/0.1/template-resolver-0.1.pom" = {
+      url = "https://repo1.maven.org/maven2/org/scala-sbt/template-resolver/0.1/template-resolver-0.1.pom";
+      sha256 = "0nsx88y1b3nqpd6r80bb1rpaaskfhcxdbfaqngykrxz8gvq3i2q3";
     };
     "nix-public/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar" = {
       url = "https://repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar";
@@ -369,14 +193,6 @@
       url = "https://repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.pom";
       sha256 = "0bknid634xcq5r8fs1bx0ydxs3rhzgmzq1400h7y29n2s2lhdfk1";
     };
-    "nix-public/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1-javadoc.jar";
-      sha256 = "0wf58784jnlnbdqiby0kfsw1m3sdc6y8z79picf4zjbs3qzpz2mh";
-    };
-    "nix-public/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1-sources.jar";
-      sha256 = "1xwa9xxjjar9w5g0k344sn4x446hb1vh5nf3gqpn47x33h63v7xh";
-    };
     "nix-public/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1.jar" = {
       url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1.jar";
       sha256 = "0hmz6viibw9jlzzv30kamp18wb30hlilh6nz6w6xvx8jpzx8f7jq";
@@ -384,14 +200,6 @@
     "nix-public/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1.pom" = {
       url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.1/quasiquotes_2.10-2.0.1.pom";
       sha256 = "1b04njqa804m3mf946q92ljb5nqi42cc61xw58r3dhdqvq60gajv";
-    };
-    "nix-public/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0-javadoc.jar";
-      sha256 = "10b8f0in6bd81954nknc1j5sckq9gq9iqwsm5wp1azz6wq42lck7";
-    };
-    "nix-public/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0-sources.jar";
-      sha256 = "0bq74ma0z7b1hwqm71a4gyd1hnn5w496f6wl3mr31i5qz78b9371";
     };
     "nix-public/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0.jar" = {
       url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0.jar";
@@ -401,14 +209,6 @@
       url = "https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.1.0/quasiquotes_2.10-2.1.0.pom";
       sha256 = "03k66gjsvq1ycfi32sn6wcs374cii130wzvv7ahjcfbqbg3f6j5f";
     };
-    "nix-public/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7-javadoc.jar";
-      sha256 = "1mfb70kbvn3jc1y88m53fiy8ali60rxl7zkdq5s1zjdw58lf0zlz";
-    };
-    "nix-public/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7-sources.jar";
-      sha256 = "14qqc7g1lvd1iz19ik4npqjw8cjfzbfzp1h3yf6wd24jq9fyidap";
-    };
     "nix-public/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7.jar" = {
       url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7.jar";
       sha256 = "0gnz0mhym3g8175g5rbibik5mc345xc25ig662c6npms364qwiwl";
@@ -417,14 +217,6 @@
       url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-concurrent_2.10/7.2.7/scalaz-concurrent_2.10-7.2.7.pom";
       sha256 = "1yha06bwn7jig4i4h6a00wmngl23r0fnp0g5xfcpxwpn813z34s1";
     };
-    "nix-public/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7-javadoc.jar";
-      sha256 = "1ajwv9ydyxgg3xlxfhfim1msw5p9q5mmg59rs0rf9mk35xx0pl88";
-    };
-    "nix-public/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7-sources.jar";
-      sha256 = "1p9hkp3qlpm30adz586c0ha447ra26l1b43xxnllk0dhgcq41baf";
-    };
     "nix-public/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7.jar" = {
       url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7.jar";
       sha256 = "1cqqx9gj962i40ym85ldgkivb9499b9bbdlrw9yv6gib72g2ym26";
@@ -432,14 +224,6 @@
     "nix-public/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7.pom" = {
       url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-core_2.10/7.2.7/scalaz-core_2.10-7.2.7.pom";
       sha256 = "0y4x8p18q30m95gxb0va8s5kf5crvw196wx6snnhqz7ldhzqlibx";
-    };
-    "nix-public/org/scalaz/scalaz-effect_2.10/7.2.7/scalaz-effect_2.10-7.2.7-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-effect_2.10/7.2.7/scalaz-effect_2.10-7.2.7-javadoc.jar";
-      sha256 = "1ssglxs476ar694cryiv4ipjs1c7a19r2vnynw76wqp5np57lr03";
-    };
-    "nix-public/org/scalaz/scalaz-effect_2.10/7.2.7/scalaz-effect_2.10-7.2.7-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-effect_2.10/7.2.7/scalaz-effect_2.10-7.2.7-sources.jar";
-      sha256 = "05697lfcm2vycvld7w81y906vyjccsnyi96bm2ckm1d40bvc4k6g";
     };
     "nix-public/org/scalaz/scalaz-effect_2.10/7.2.7/scalaz-effect_2.10-7.2.7.jar" = {
       url = "https://repo1.maven.org/maven2/org/scalaz/scalaz-effect_2.10/7.2.7/scalaz-effect_2.10-7.2.7.jar";
@@ -457,14 +241,6 @@
       url = "https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom";
       sha256 = "0yl2hbwz2kn1hll1i00ddzn8f89bfdcjwdifz0pj2j15k1gjch7v";
     };
-    "nix-public/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0-javadoc.jar";
-      sha256 = "1jz9wcwd0lc2viy9rxdpswzrh0syygw75mi66k9g9da6rljyiksi";
-    };
-    "nix-public/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0-sources.jar";
-      sha256 = "06b505wm75qrd6978r3hy1fldv8yydmrckpxqcxrpdm8iyas5bgl";
-    };
     "nix-public/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0.jar" = {
       url = "https://repo1.maven.org/maven2/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0.jar";
       sha256 = "0p2g6lcqks4pycv8wr34i6cz9gvv71qv7ngv1rrihgj37jrapcg0";
@@ -472,14 +248,6 @@
     "nix-public/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0.pom" = {
       url = "https://repo1.maven.org/maven2/org/spire-math/jawn-parser_2.10/0.6.0/jawn-parser_2.10-0.6.0.pom";
       sha256 = "1shmrq62mg2p12sadgwj1bp0yr5fx24byqjw8g5v245syqbgvgri";
-    };
-    "nix-public/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0-javadoc.jar" = {
-      url = "https://repo1.maven.org/maven2/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0-javadoc.jar";
-      sha256 = "0agmggzg7brgydzjifybwb1qhblyq54353m4vma8wnd0010v76j8";
-    };
-    "nix-public/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0-sources.jar" = {
-      url = "https://repo1.maven.org/maven2/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0-sources.jar";
-      sha256 = "1612jkwaz2fxx2bnk5fn74dkv2n85n3fm0jm3bsjhn627y1dyhw8";
     };
     "nix-public/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0.jar" = {
       url = "https://repo1.maven.org/maven2/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0.jar";
@@ -489,437 +257,293 @@
       url = "https://repo1.maven.org/maven2/org/spire-math/json4s-support_2.10/0.6.0/json4s-support_2.10-0.6.0.pom";
       sha256 = "09x0xr7bvmsbicflz3qzc9fw2afpx9k37y2dwvp46myyscbm1pji";
     };
-    "nix-typesafe-ivy-releases/org.scala-sbt/actions/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/actions/0.13.12/ivys/ivy.xml";
-      sha256 = "00j9slggkaxcrxjaibrhwrzn3kb0jz8yrgs3y20i6b3j6kfh4y18";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/actions/0.13.12/jars/actions.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/actions/0.13.12/jars/actions.jar";
-      sha256 = "1acran9f36hbhj3pfivcg01psn5yrv82wsyfil03778p32nibr80";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/actions/0.13.12/srcs/actions-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/actions/0.13.12/srcs/actions-sources.jar";
-      sha256 = "0isp7gxfgyscnkv8iwk4wzag7icpm5xm4jxyh56jnh4aq8d2qva8";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/api/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/api/0.13.12/ivys/ivy.xml";
-      sha256 = "15j1ir1xd6q6qgl83przwk19139b7dqpv1awnz09lgqr1h5v4vqr";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/api/0.13.12/jars/api.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/api/0.13.12/jars/api.jar";
-      sha256 = "1p8jgcjqpyb0yxv9r208fdlry5rs9rnap5szm08xsrlymzfavi3j";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/api/0.13.12/srcs/api-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/api/0.13.12/srcs/api-sources.jar";
-      sha256 = "0j25c91sg6r64hjw6qh3i2n56zdn1f4xlkynqwci45bq9wk6lxm5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/apply-macro/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/apply-macro/0.13.12/ivys/ivy.xml";
-      sha256 = "1491d5lswidp56swnwylwy9lfrkkijk02xnn4cby7s8y6a5sbcy5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/apply-macro/0.13.12/jars/apply-macro.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/apply-macro/0.13.12/jars/apply-macro.jar";
-      sha256 = "1xdp1qj0vrvpci85pc4k793p9dic7zk0myz3cnpjb9hrc6c4qxzn";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/apply-macro/0.13.12/srcs/apply-macro-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/apply-macro/0.13.12/srcs/apply-macro-sources.jar";
-      sha256 = "0prb7kv87s3ap2563qwsj50w1yhy11pdvmplyz1972z1zk7x8nc1";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/cache/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cache/0.13.12/ivys/ivy.xml";
-      sha256 = "0y601aj49602rgsmg9qs1j7c25na5lphhh65mmjiqng42118gpyk";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/cache/0.13.12/jars/cache.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cache/0.13.12/jars/cache.jar";
-      sha256 = "1ccmndzsbl5ziss3rjbcqvwddxchcj23g0hhnng6s73wbc7537kn";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/cache/0.13.12/srcs/cache-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cache/0.13.12/srcs/cache-sources.jar";
-      sha256 = "10nvadymqs9pzj0mfxrv455lvbkisxaj6dga8rp73rn4fb0hzrpq";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/classfile/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classfile/0.13.12/ivys/ivy.xml";
-      sha256 = "0zrq4q8vvnx3asmmlh7plpsx39z14367y6jarkszjrd1d4hhw5yy";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/classfile/0.13.12/jars/classfile.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classfile/0.13.12/jars/classfile.jar";
-      sha256 = "01vgj4lhpnswgf7hqzddnxh26lxxa6q2n810fcr7i50jnbh0a0wb";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/classfile/0.13.12/srcs/classfile-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classfile/0.13.12/srcs/classfile-sources.jar";
-      sha256 = "0w01vs9x81sqk0zdnvcna1hs8d6y35kp7dd51d501269w54fx09k";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/classpath/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classpath/0.13.12/ivys/ivy.xml";
-      sha256 = "02c6an2lyxnsgcvi1rrg6vk3hzvyaf85dbmrrcap8ijpqvclpg0s";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/classpath/0.13.12/jars/classpath.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classpath/0.13.12/jars/classpath.jar";
-      sha256 = "0r5iyg4si8ijjiysx6znkgxf3xrhcra1yyxhxvimjfy7v15bjaci";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/classpath/0.13.12/srcs/classpath-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classpath/0.13.12/srcs/classpath-sources.jar";
-      sha256 = "1ljwcqahz35734yqg84p17rvccw2cv8svqp4ll56b7slqd4h7m89";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/collections/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/collections/0.13.12/ivys/ivy.xml";
-      sha256 = "1vv1q5q6fkli9aahgavwlwip08dd12hr7vhznw0djch5v7kdd6s2";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/collections/0.13.12/jars/collections.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/collections/0.13.12/jars/collections.jar";
-      sha256 = "1zma2ajsry20s8mlzxf4f65nh4vy5mf45nj4ph0vzqd2davqibqn";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/collections/0.13.12/srcs/collections-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/collections/0.13.12/srcs/collections-sources.jar";
-      sha256 = "128s1kxjzbp5b1v7dbm7sms30lx8ndmcdrrjn3azjqlslqd1advc";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/command/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/command/0.13.12/ivys/ivy.xml";
-      sha256 = "00jm91vh2k6db02474kk7k969aaak1xgr201n2hqav1bgqsg0jh8";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/command/0.13.12/jars/command.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/command/0.13.12/jars/command.jar";
-      sha256 = "1l90i08ri4kndmj4knkimc5smq7fy1lsjb0vkspc5pfy4snj7djl";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/command/0.13.12/srcs/command-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/command/0.13.12/srcs/command-sources.jar";
-      sha256 = "1j4541br2ra9mb19gx6nm1p2mbp8h9w3np23qd0qyvv3ni8hg417";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compile/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compile/0.13.12/ivys/ivy.xml";
-      sha256 = "0y9964094sfyhmjc0452f8drpcymqxbky0bvrq067dihyg7mq2rx";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compile/0.13.12/jars/compile.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compile/0.13.12/jars/compile.jar";
-      sha256 = "127p9kjgp0lbyy1dfw24385q0f8zpp4fj91g1d213pclb8prix18";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compile/0.13.12/srcs/compile-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compile/0.13.12/srcs/compile-sources.jar";
-      sha256 = "0s01s0k3a7wdsa2sj0007yypj6a3y9nbqhfj3zvpylzkjm80ffnz";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-integration/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-integration/0.13.12/ivys/ivy.xml";
-      sha256 = "1fjwbj7pavnba31b05zqqyrzk4zzfc6l0z7sdl4lyrnsra6dr10m";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-integration/0.13.12/jars/compiler-integration.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-integration/0.13.12/jars/compiler-integration.jar";
-      sha256 = "0w1xdjjgnysic8pm33dv57cls0q0bck88ssj4q88i6991cymhvph";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-integration/0.13.12/srcs/compiler-integration-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-integration/0.13.12/srcs/compiler-integration-sources.jar";
-      sha256 = "12ip8ypv16handld2m1rjalsr9cnnpixwz76d346ymiylmdp3q05";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.12/ivys/ivy.xml";
-      sha256 = "0cp0hlvn7y4wc2p5a8d31fg3df65ypqrrskjpy3l7jvjhm4pav3s";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.12/jars/compiler-interface.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.12/jars/compiler-interface.jar";
-      sha256 = "1xzsj1dzd73wm09il565r02lmm8gq11a7vk0z1wyndjqksh1ka99";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.12/srcs/compiler-interface-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.12/srcs/compiler-interface-sources.jar";
-      sha256 = "0rjjdc283wdv861yy9x0ssn5bh7mm371sznvp5hsayynd7h0r0z7";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.12/ivys/ivy.xml";
-      sha256 = "1mb8n694s1xq1nfcvx62a5k1lfdirhrnp8f2bls35sr5p48kayf0";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.12/jars/compiler-ivy-integration.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.12/jars/compiler-ivy-integration.jar";
-      sha256 = "1a56zjhc407r7lld5asb13bw4qx7jjgna7l6nb6q6wh26gvprnnf";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.12/srcs/compiler-ivy-integration-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.12/srcs/compiler-ivy-integration-sources.jar";
-      sha256 = "0bbrka9pb5nm592brf17j7fwbqkp366fxhah1abcks0ixx2rval5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/completion/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/completion/0.13.12/ivys/ivy.xml";
-      sha256 = "1ggch019yspqq5bnprbs6wrid73w6afrzbl7hhljh196c6g7ys14";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/completion/0.13.12/jars/completion.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/completion/0.13.12/jars/completion.jar";
-      sha256 = "0dbcv3f3zbv84bii0nbf2z5kx423r6bdmy30ciaga6x6w6w07b6m";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/completion/0.13.12/srcs/completion-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/completion/0.13.12/srcs/completion-sources.jar";
-      sha256 = "0b0p8yvs175s1v40dhf33qs9rrkmzddhidlw08740lc7civc337y";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/control/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/control/0.13.12/ivys/ivy.xml";
-      sha256 = "1vfrdfk0yjwa9hx6v7kfsjp15hh2mgsdxn51cywgwg7vyzs0b464";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/control/0.13.12/jars/control.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/control/0.13.12/jars/control.jar";
-      sha256 = "01gpkvn4g8jb1w9vchb1i5my323abzkm762wn1i9w6lcbn8yv6l4";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/control/0.13.12/srcs/control-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/control/0.13.12/srcs/control-sources.jar";
-      sha256 = "0r79k03yrp4kvsxd9nbkxd2y2ahqb95jrp6w368cvaa6mdgfrdnd";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/cross/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cross/0.13.12/ivys/ivy.xml";
-      sha256 = "13yfgvc663rgzkr49rmy7wf6fkqcgyn42xgdk4nwc8jj6x4jb0g0";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/cross/0.13.12/jars/cross.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cross/0.13.12/jars/cross.jar";
-      sha256 = "0lx9ngi9m72lzdn9lxk2v96ppd7xg5s9p8g6z17j69y16909i5vp";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/cross/0.13.12/srcs/cross-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cross/0.13.12/srcs/cross-sources.jar";
-      sha256 = "19ppijsg7jp003kxppgprbgmk3rpv4hyp94fhn8m4r9z3px0j6jh";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/incremental-compiler/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/incremental-compiler/0.13.12/ivys/ivy.xml";
-      sha256 = "188vnphfz4mmsmc1amlb00vfi1qsdkk708m3i27lpz0q9bwr8iwf";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/incremental-compiler/0.13.12/jars/incremental-compiler.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/incremental-compiler/0.13.12/jars/incremental-compiler.jar";
-      sha256 = "01pfvfkmxdnjyvybnxad3379ahrbkpw8rdk0dap2vhs0r8yl8zbx";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/incremental-compiler/0.13.12/srcs/incremental-compiler-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/incremental-compiler/0.13.12/srcs/incremental-compiler-sources.jar";
-      sha256 = "0g1b9dax3c0yj2l0g66c2lz5r1yizws03acqmaffr03j6cfqj2gf";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/interface/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/interface/0.13.12/ivys/ivy.xml";
-      sha256 = "01a2a8r67qh68vzw9cf6r190ald07r1f6g554v6zcg9kj8q6sabz";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/interface/0.13.12/jars/interface.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/interface/0.13.12/jars/interface.jar";
-      sha256 = "0a699xsphch49xzg1g801azrghma1cnm7x6mal62wkhkzra4f90h";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/interface/0.13.12/srcs/interface-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/interface/0.13.12/srcs/interface-sources.jar";
-      sha256 = "19105zglvjbph6l2kqfy515nr2s7b9chq7bl9kbvwi03qn2hnra6";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/io/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/io/0.13.12/ivys/ivy.xml";
-      sha256 = "0iriwfw33ri6wijrkaxx9p7m33qqp9mh959rsi1fxwv87zzsawq7";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/io/0.13.12/jars/io.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/io/0.13.12/jars/io.jar";
-      sha256 = "044x5ydggh4w6zxwi8liv2bc5n0cvvdlvqsk1pgjis75nybm14w2";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/io/0.13.12/srcs/io-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/io/0.13.12/srcs/io-sources.jar";
-      sha256 = "1nfz9rxzf14zqsxf4gl391sa60hwfl09mwmqyjpdsg3mbzdp01k5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/ivy/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/ivy/0.13.12/ivys/ivy.xml";
-      sha256 = "1rw38izayxki9n80dmjhvy5j5ckf7lvf0b3rllnxja93vjagrhr2";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/ivy/0.13.12/jars/ivy.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/ivy/0.13.12/jars/ivy.jar";
-      sha256 = "1hw75qpd4qrpr41hcl0zfgx09in7n3idgzal2d5g7h07y5ljsxxx";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/ivy/0.13.12/srcs/ivy-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/ivy/0.13.12/srcs/ivy-sources.jar";
-      sha256 = "12zqvx1c27xl90mb24wxnkidw57bqpcfncjgw0hgbjviwzx5l250";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/logging/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logging/0.13.12/ivys/ivy.xml";
-      sha256 = "0wdpwl1y7m9l1jlzfmbjw67p8wdnj3ijfaj166hdz771i5kvksd5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/logging/0.13.12/jars/logging.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logging/0.13.12/jars/logging.jar";
-      sha256 = "0lgfa0r0647ib1v98y4608vz35ww8afq0dddj7sk2fwi1pqlpic5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/logging/0.13.12/srcs/logging-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logging/0.13.12/srcs/logging-sources.jar";
-      sha256 = "0hrdzvk013ghar2c3mzfpdqbbcvpzhyyn83xh3zqirw1i7mfqy6a";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/logic/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logic/0.13.12/ivys/ivy.xml";
-      sha256 = "1mz1qn4763way6dbz6x6l43lgc8av8hsglpr7pakhydz7sx5cnm7";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/logic/0.13.12/jars/logic.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logic/0.13.12/jars/logic.jar";
-      sha256 = "0p41igy3gcqgkr4hx10151jzlxnhgjblllbp4dy1xnzssl1bnnwy";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/logic/0.13.12/srcs/logic-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logic/0.13.12/srcs/logic-sources.jar";
-      sha256 = "0yzs5a01balv384ga0mwrrwp2ww1dn9pjspsv5as6kwdkwg2hn09";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/main-settings/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main-settings/0.13.12/ivys/ivy.xml";
-      sha256 = "01kbw6g9143mpfmr7nxvxalx5kqfk70pg63ppi34i8bp4cq8f6v1";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/main-settings/0.13.12/jars/main-settings.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main-settings/0.13.12/jars/main-settings.jar";
-      sha256 = "0cp7iz9nkr2yz5xwa9a2g876w9hp5nfzxvsj8pkx578y956bdm8f";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/main-settings/0.13.12/srcs/main-settings-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main-settings/0.13.12/srcs/main-settings-sources.jar";
-      sha256 = "0nbi87nxfks71j3knjbkli76q6s7kdl06fv110qj6spvypj5bydw";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/main/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main/0.13.12/ivys/ivy.xml";
-      sha256 = "0zm56w1y70031pcxqy3sy35y4yjsksiwm0ajzl3p63wmn2pmwf8m";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/main/0.13.12/jars/main.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main/0.13.12/jars/main.jar";
-      sha256 = "1l7z39fiwjrcj4i8npgyngd5g4sx24aziamw4khry7a5k6h58sbv";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/main/0.13.12/srcs/main-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main/0.13.12/srcs/main-sources.jar";
-      sha256 = "16b0rskg325c40g119g018f7hryxmc43pgpz4hajnmzylnvi58z2";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/persist/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/persist/0.13.12/ivys/ivy.xml";
-      sha256 = "1acimbpbr4m9ffw217hmjw97n2c95zsipwwsqk596r4yq75vgw5p";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/persist/0.13.12/jars/persist.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/persist/0.13.12/jars/persist.jar";
-      sha256 = "0v9b75cxrfz2hafhlw77hgi8wm4czdrs0n97p04hgk6pwfy07ff0";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/persist/0.13.12/srcs/persist-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/persist/0.13.12/srcs/persist-sources.jar";
-      sha256 = "1fkg6w79mn10prz8d94rj1bmxm3wzwlbp70iflwlsdyk0iicasab";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/process/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/process/0.13.12/ivys/ivy.xml";
-      sha256 = "1rq4359gphwj70ip3s0ri7wyly52jkmg4ha4x16325cmcbvy2m9k";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/process/0.13.12/jars/process.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/process/0.13.12/jars/process.jar";
-      sha256 = "1abcdjv0hxzqxa17mhirmm10yhgkxpakazdgl4b6ndy3livjavkq";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/process/0.13.12/srcs/process-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/process/0.13.12/srcs/process-sources.jar";
-      sha256 = "1mgzdaj7xxbqlcmbg569ahvscaqw4d0kknknb8hgfl1m3bv23f4r";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/relation/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/relation/0.13.12/ivys/ivy.xml";
-      sha256 = "0ys7v45vfxjhsj2gdnzx5ym78pr4wygikp16d6y2p4gy1z43klbd";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/relation/0.13.12/jars/relation.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/relation/0.13.12/jars/relation.jar";
-      sha256 = "0v8vwa0ds2rr8i4w2r7q50ccw9gvmb6sqsnz9hay1niryf9zs1x9";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/relation/0.13.12/srcs/relation-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/relation/0.13.12/srcs/relation-sources.jar";
-      sha256 = "15hcrx86lx4vy9rwqkp0albvjpgqwhx825m0s2j09ygbs930zy9h";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/run/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/run/0.13.12/ivys/ivy.xml";
-      sha256 = "0dw060hc0s8vabs3a20s8g501jbki46jg73kq704a955z5z8k1nk";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/run/0.13.12/jars/run.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/run/0.13.12/jars/run.jar";
-      sha256 = "1kqk20zgz5qhfvbchsk6falmygsg1d9f6qdmp9qrcvch521wa6rj";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/run/0.13.12/srcs/run-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/run/0.13.12/srcs/run-sources.jar";
-      sha256 = "1yblhpwcy253vyhi3388475ihjmvk3m7ddqh7wx00yz4ljsw2sm0";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/sbt-launch/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.12/ivys/ivy.xml";
-      sha256 = "168xhqq048c9mi7ix0cr7bzmwqd7c4vfm04ibqp7dfffmy590fh9";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/sbt-launch/0.13.12/jars/sbt-launch.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.12/jars/sbt-launch.jar";
-      sha256 = "1mlvamrka83milpkc90ww5rns5yc3nrzwyg0wq5mwcs8jsz0gid7";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.12/ivys/ivy.xml";
-      sha256 = "1z51c01p6cxpavcsyxbc6smnxiwyh450azrzhqvhhh1pbb9svsik";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/sbt/0.13.12/jars/sbt.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.12/jars/sbt.jar";
-      sha256 = "1v36jy5bkjh3qxypwpvvnvysnngih4lvfj06387pidpm2c48b9ga";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/sbt/0.13.12/srcs/sbt-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.12/srcs/sbt-sources.jar";
-      sha256 = "01jkykyxhlzanx6y369230jd1zai6vrv0mr7cawdbjbl665hys4y";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-framework/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-framework/0.13.12/ivys/ivy.xml";
-      sha256 = "1mj5a7n8zg2a4kpvhhh3hhbxwbyds5x571piylar729hxzbm1sad";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-framework/0.13.12/jars/scripted-framework.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-framework/0.13.12/jars/scripted-framework.jar";
-      sha256 = "01kq0b3nglv9ajidl319r94bwvywfnad7r74ybcf3jzj7b6axp2l";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-framework/0.13.12/srcs/scripted-framework-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-framework/0.13.12/srcs/scripted-framework-sources.jar";
-      sha256 = "04cg4yyg2zyzw28jcxmw7rygah24jn2y7r20pfb3c0bkwsgq83a9";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-sbt/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-sbt/0.13.12/ivys/ivy.xml";
-      sha256 = "02im2ndrq19waxcmv7ilv28z05y6vl47qwqma0kbxqhxqlay44hk";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-sbt/0.13.12/jars/scripted-sbt.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-sbt/0.13.12/jars/scripted-sbt.jar";
-      sha256 = "0pysq1vgarpf7yghahmky6cx1xj9rm1q8ndpqqcq9ldlk19fhvjd";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-sbt/0.13.12/srcs/scripted-sbt-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-sbt/0.13.12/srcs/scripted-sbt-sources.jar";
-      sha256 = "0s8cq6f9hxclymbxsy23g9bc29kqjvqvkyqvv57lbf16manz11gd";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/task-system/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/task-system/0.13.12/ivys/ivy.xml";
-      sha256 = "1w1rs8vnk80s3apx4sva8flc4s006vj4ln0dynv17l7rd12d7b9k";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/task-system/0.13.12/jars/task-system.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/task-system/0.13.12/jars/task-system.jar";
-      sha256 = "0p26mabhmjpykk9q7lqbkjrygricjff2g97inac3jzqfpmcgciqd";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/task-system/0.13.12/srcs/task-system-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/task-system/0.13.12/srcs/task-system-sources.jar";
-      sha256 = "1qvmm9na2c9s408jmvjik920jqg085dvbwkpixv3rs4yqjmhx79g";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/tasks/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tasks/0.13.12/ivys/ivy.xml";
-      sha256 = "05ypz6y8wlvl7507whacmgq2nmjrwix1rycyfrqychpj4ika0wil";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/tasks/0.13.12/jars/tasks.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tasks/0.13.12/jars/tasks.jar";
-      sha256 = "1ybbggl7zs49sf821h42qzkqw2bvnxbayhf224pmxrn46xa4a8i4";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/tasks/0.13.12/srcs/tasks-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tasks/0.13.12/srcs/tasks-sources.jar";
-      sha256 = "1plk0cifcyx2vnkky2qqzp4ksmkq2fwry6lnhb0rs7ncjd34xh6y";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/test-agent/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/test-agent/0.13.12/ivys/ivy.xml";
-      sha256 = "1460675cv5i3frppazw162n2a294h642bs27cqclvad565dhjp26";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/test-agent/0.13.12/jars/test-agent.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/test-agent/0.13.12/jars/test-agent.jar";
-      sha256 = "0ilb3xmlvs8kjy2i8nfpa9pvhchlka9g1cc2g1zzjkzmqxw94vv4";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/test-agent/0.13.12/srcs/test-agent-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/test-agent/0.13.12/srcs/test-agent-sources.jar";
-      sha256 = "08j29ra22lk5gfcjvlmlnykc9kxix3zwmqsvvkb5fnl7hkplm5jy";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/testing/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/testing/0.13.12/ivys/ivy.xml";
-      sha256 = "0amjd08bfi4kdcm51n0q5xw3vp4j8rpj9z930ai26jqzj5ggwa3f";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/testing/0.13.12/jars/testing.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/testing/0.13.12/jars/testing.jar";
-      sha256 = "0693z4716x5yaz6bpmchkc1frprmn27d65qb4gvzjc9mc7q1krw0";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/testing/0.13.12/srcs/testing-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/testing/0.13.12/srcs/testing-sources.jar";
-      sha256 = "04kzrpghbpci2c9xy1r622a8x851wjs3mfg6ql7n804yg3ff8y0w";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/tracking/0.13.12/ivys/ivy.xml" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tracking/0.13.12/ivys/ivy.xml";
-      sha256 = "0bwx6w7hflzd71x1irj2z2cdvggj5226m6g6ady1injd7z07ir7x";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/tracking/0.13.12/jars/tracking.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tracking/0.13.12/jars/tracking.jar";
-      sha256 = "0g83p9pll5h9v1p3ckxs9j49rrkqixis1ac0xq2w1zh1d5fp9ikl";
-    };
-    "nix-typesafe-ivy-releases/org.scala-sbt/tracking/0.13.12/srcs/tracking-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tracking/0.13.12/srcs/tracking-sources.jar";
-      sha256 = "0pdp44ihihhhw4vappl478hi91ys93ikl0wflkns5dxz7m92j3m5";
-    };
-    "nix-typesafe-ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/docs/sbinary_2.10-javadoc.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/docs/sbinary_2.10-javadoc.jar";
-      sha256 = "11phc9hsdiswgk8bxjldq20das8i2467y4v3j37wcklap521jbwy";
+    "nix-typesafe-ivy-releases/org.scala-sbt/actions/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/actions/0.13.15/ivys/ivy.xml";
+      sha256 = "077i34n5nps0lr48zq6h43iyr2xicxkr560l5r47ak4vizp0y9gf";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/actions/0.13.15/jars/actions.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/actions/0.13.15/jars/actions.jar";
+      sha256 = "0hanwi44rgf5j63bachna7fmsgabn2d4gq9kb196f8y9iknf6va6";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/api/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/api/0.13.15/ivys/ivy.xml";
+      sha256 = "142kb4a84070m7pfj7p5cqrapxqzhk2hw6fhhrf5nwmxklf8czac";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/api/0.13.15/jars/api.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/api/0.13.15/jars/api.jar";
+      sha256 = "1pnfmfxbhybxn5x5b8v5071h7nxv6sw0fff12r4brkh22c7pyvkj";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/apply-macro/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/apply-macro/0.13.15/ivys/ivy.xml";
+      sha256 = "0aivff8qc99jzw7i3yncdxzxmbpjci0bkxla216l63w7izclyshy";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/apply-macro/0.13.15/jars/apply-macro.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/apply-macro/0.13.15/jars/apply-macro.jar";
+      sha256 = "188639ddvzw64gp9w64ff9j57v6nlwfc9wrqqsa8rwwxr92n3k89";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/cache/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cache/0.13.15/ivys/ivy.xml";
+      sha256 = "10q7fcmqdvzmixyi14y7pxbhfp4k17nv4ysar2q25f85hklfdb94";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/cache/0.13.15/jars/cache.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cache/0.13.15/jars/cache.jar";
+      sha256 = "01zkiqzxbxl6jq4zcn66q0b5v2nx8sn4415rvv98gs27g6k3vbh1";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/classfile/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classfile/0.13.15/ivys/ivy.xml";
+      sha256 = "0dgwlkqhffp70cihad92rlammrm8hf22aj7snqqv76aaxpl5baip";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/classfile/0.13.15/jars/classfile.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classfile/0.13.15/jars/classfile.jar";
+      sha256 = "0bk0r0hjkknn4zqyamn1hfak316bikvzw3x6mc6p9d35nds4qd7n";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/classpath/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classpath/0.13.15/ivys/ivy.xml";
+      sha256 = "1y7k5napxb54m5191rjky25ljagqwidrlyxx439jhpdbwd733vv1";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/classpath/0.13.15/jars/classpath.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/classpath/0.13.15/jars/classpath.jar";
+      sha256 = "1d6j3krn1ykl858njvmznc7m49kszcd4hyx04i0a0zldnsrz44zh";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/collections/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/collections/0.13.15/ivys/ivy.xml";
+      sha256 = "1nl6xkch5dfv9nxj0s6gyb7c37yx4pqm7v11c1mz0p69jrbvgq7k";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/collections/0.13.15/jars/collections.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/collections/0.13.15/jars/collections.jar";
+      sha256 = "1c489xcmxn2600wfcsl6rk1drwf7qwp3499ka8d66fzc97m41h36";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/command/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/command/0.13.15/ivys/ivy.xml";
+      sha256 = "1qmsphfxswclhbhc926zqg7iyx19ilgdswfx9vafns1v7hd1vmps";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/command/0.13.15/jars/command.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/command/0.13.15/jars/command.jar";
+      sha256 = "0gg0fhrppmr74gzxbqwjq6xh3v9i61yzsr68id5khhlnhbm5p6w3";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compile/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compile/0.13.15/ivys/ivy.xml";
+      sha256 = "0j2v89gcsqfl7fq5mbmnfmifp6d09zic0aj0g0k79dl6106pqj0p";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compile/0.13.15/jars/compile.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compile/0.13.15/jars/compile.jar";
+      sha256 = "0wd1b3b1g8l11y9qdikl0w0s4qd2hgshgnc2j4a3ypz0dfvgq020";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-integration/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-integration/0.13.15/ivys/ivy.xml";
+      sha256 = "1i2rb08dc1yvy8rqzxcyycnh3zy1m7bk2d06gz46983qgncz089i";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-integration/0.13.15/jars/compiler-integration.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-integration/0.13.15/jars/compiler-integration.jar";
+      sha256 = "1jbcfdahf1af7d6a8h6rxnfjzrfdbm2p20pwvmn8sp79a5bwrgwp";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.15/ivys/ivy.xml";
+      sha256 = "0jzjwls4hcw150xcdc8indfmvd9124vwd2dbnwxnrq0ga2cahxb0";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-interface/0.13.15/jars/compiler-interface.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-interface/0.13.15/jars/compiler-interface.jar";
+      sha256 = "1m8zmm53dmmcrq18fmg8iljgv367s3jsg7acmpg3h87zkna6cgjf";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.15/ivys/ivy.xml";
+      sha256 = "0vc30r2mfh3kxy5xvay4yqwbi99i6phw8jgjr7rzrw6ahkdzz83s";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.15/jars/compiler-ivy-integration.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/compiler-ivy-integration/0.13.15/jars/compiler-ivy-integration.jar";
+      sha256 = "0hjazxg2g7zgh912dj1n79jhgqqpv135x068scrhzv82jjw20rlh";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/completion/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/completion/0.13.15/ivys/ivy.xml";
+      sha256 = "08w814igsraq4xi9d5f6rcc1w5ki22fv202xzik8h60xczjark5x";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/completion/0.13.15/jars/completion.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/completion/0.13.15/jars/completion.jar";
+      sha256 = "11f3vyzk6xx8iarnpnkmcfsj8rmrik8gmyymd7jdmjjbik7895rp";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/control/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/control/0.13.15/ivys/ivy.xml";
+      sha256 = "044s4v0r11r13sds041nzgr8a0v2kmp48w89254zmaaddmw0h2zq";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/control/0.13.15/jars/control.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/control/0.13.15/jars/control.jar";
+      sha256 = "0nfi9bhmgqyv3wh64v73pf2vl0pj2mnyknj9r895xgrpr2sck27b";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/cross/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cross/0.13.15/ivys/ivy.xml";
+      sha256 = "14xnkmswqy8brln4jqgcig863ml2a0yyzvm8h5wbd1w3ah62hi96";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/cross/0.13.15/jars/cross.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/cross/0.13.15/jars/cross.jar";
+      sha256 = "08bmpwqxhpbypf3lxm1ns2s1fwn6hfz30xl0n3d8lf9slgd8s2k7";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/incremental-compiler/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/incremental-compiler/0.13.15/ivys/ivy.xml";
+      sha256 = "1albbxqv13sjbpk6jc37hdai3cz57z7d1jk76p9638xs4wmzdyna";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/incremental-compiler/0.13.15/jars/incremental-compiler.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/incremental-compiler/0.13.15/jars/incremental-compiler.jar";
+      sha256 = "145iys4v1bnpbbh4y9xpbk730f0i243amv3x7w22hkikypl7hbli";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/interface/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/interface/0.13.15/ivys/ivy.xml";
+      sha256 = "08ipf8zgmrsp6rjy6hi1jiiwqq8dym5fcfggqwm3wz1zdp90iqpa";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/interface/0.13.15/jars/interface.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/interface/0.13.15/jars/interface.jar";
+      sha256 = "1arpbcsfjn21r00v1sgyafqdbmirh2q2zdj63rcwxwyw6y6i7g4l";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/io/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/io/0.13.15/ivys/ivy.xml";
+      sha256 = "0zfds598bp62vv7vivjxjs1kkpnhgai7km7kdkg6ci2snvx0aija";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/io/0.13.15/jars/io.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/io/0.13.15/jars/io.jar";
+      sha256 = "1qn8lnxxvgsv8p004dyq6272r5zxrgz5whf616w4819mxck9aq99";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/ivy/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/ivy/0.13.15/ivys/ivy.xml";
+      sha256 = "00byzwf657483fjbb67lzkv9yyvsaw8q8lqcqnc1yhqr4p7cbnr5";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/ivy/0.13.15/jars/ivy.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/ivy/0.13.15/jars/ivy.jar";
+      sha256 = "0h9vhhkr0qi5ygkxz7wvsi3g421r0a0amwgv75dmwmdxl25xr6l4";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/logging/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logging/0.13.15/ivys/ivy.xml";
+      sha256 = "0lwrrag9l6dnyxxcc0w3rx7dkws6pcdvrs88xb8bhq5218mlr5n9";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/logging/0.13.15/jars/logging.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logging/0.13.15/jars/logging.jar";
+      sha256 = "1paad0m3cj5kzpxpr1q674shdwr7xaxk6alhn92r6p9ikq5dr53j";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/logic/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logic/0.13.15/ivys/ivy.xml";
+      sha256 = "1hz68kw64an09vr82jql0vis2g7q9675mmn7467i1my7y56bdl3h";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/logic/0.13.15/jars/logic.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/logic/0.13.15/jars/logic.jar";
+      sha256 = "1ia8d9ajwgrk91dyj05mh61z84v87pynq2jk46q1fnqlj5dins7j";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/main-settings/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main-settings/0.13.15/ivys/ivy.xml";
+      sha256 = "0w3iafa1h70kzzg2mm2h4pds7wchqzbmisnzsj352b3dwq6sg9b7";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/main-settings/0.13.15/jars/main-settings.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main-settings/0.13.15/jars/main-settings.jar";
+      sha256 = "0rv93nf83pbr96n1hiqx31f8zc6ghqbwn7gmvxaqaf9msnplfbpw";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/main/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main/0.13.15/ivys/ivy.xml";
+      sha256 = "0hh2dgvdkdjkb6482kidlnwsmci84qwml7q69bc2ys2lsf9vabmz";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/main/0.13.15/jars/main.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/main/0.13.15/jars/main.jar";
+      sha256 = "0c85xawfli71mf52wcxzf4vs68jp0287s3q2fppcn30vgp1pawmw";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/persist/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/persist/0.13.15/ivys/ivy.xml";
+      sha256 = "100czcx8lh0nx0s2lpbvl7z06r8swbh5k95ml1x6wy57vgg5p36b";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/persist/0.13.15/jars/persist.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/persist/0.13.15/jars/persist.jar";
+      sha256 = "0wlciddm33qg768ihfa88xri0235zg18f8faiv8dmwxz67xpby2k";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/process/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/process/0.13.15/ivys/ivy.xml";
+      sha256 = "15w5sm9f5ny1xz2z38zfapanhbcw5pra0989mizgfqrap4bv728r";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/process/0.13.15/jars/process.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/process/0.13.15/jars/process.jar";
+      sha256 = "12rnn85sdzrl9gagdz7d747zx5ghj109n0n4xziw2zlrq7h35vjx";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/relation/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/relation/0.13.15/ivys/ivy.xml";
+      sha256 = "00ddj6y1gnijs5s3m1bk0i1133gf5c75rs70fjqzrxjdyw2rlwv6";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/relation/0.13.15/jars/relation.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/relation/0.13.15/jars/relation.jar";
+      sha256 = "1ga5zx7s9p0jyzr4bamap1zzxqnpvmhky3b7vzdb5gsjgybf4np7";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/run/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/run/0.13.15/ivys/ivy.xml";
+      sha256 = "02h1v95fhl8654ydqxqjw4s62dlrfrvmncpvqvz2pgrsk8jjlbsq";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/run/0.13.15/jars/run.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/run/0.13.15/jars/run.jar";
+      sha256 = "099r2krnkmfyx0cdm8bylxrxk0znfx8g5rjq0wyh857l915x72hc";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/sbt-launch/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.15/ivys/ivy.xml";
+      sha256 = "0wxhanki8i4h0ljs9gx5ybdy4jc69dmygg3jd1b4k9van0117p7j";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/sbt-launch/0.13.15/jars/sbt-launch.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.15/jars/sbt-launch.jar";
+      sha256 = "14zbr3bf5c42zxypp958qglmgbc5kfna0y5yjmw9yk5bmyqsg9fi";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/sbt/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.15/ivys/ivy.xml";
+      sha256 = "19r0ppirpxy521q82xy0vq2ky8lsg20ndp14v7nmwpfc2bid6mb5";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/sbt/0.13.15/jars/sbt.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.15/jars/sbt.jar";
+      sha256 = "0jqbga8qdv8a2l2amxd6mbyqj16s73biyraan1q5rdkyd3i0s3lh";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-framework/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-framework/0.13.15/ivys/ivy.xml";
+      sha256 = "0cvp9yqn1q68d03v75c2ngwgjlkh5h28hr3sgjk11l0ligk9517m";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-framework/0.13.15/jars/scripted-framework.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-framework/0.13.15/jars/scripted-framework.jar";
+      sha256 = "0b28yk22yk5whql03xmdy172vicvfd1kq7xa2fjd3lgfa2vvbbzi";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-sbt/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-sbt/0.13.15/ivys/ivy.xml";
+      sha256 = "1nfwadi6gih4ifbckknzq9gvrbcpv205b4kfcizdi9mhs08scv3f";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/scripted-sbt/0.13.15/jars/scripted-sbt.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/scripted-sbt/0.13.15/jars/scripted-sbt.jar";
+      sha256 = "0x277pw2gzbn430cd26sfilnjaigr43ry7czrivnx9jjh13sjshq";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/task-system/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/task-system/0.13.15/ivys/ivy.xml";
+      sha256 = "1778b2hjnwb11rqalbl5sccxhb63q0d139drppw8166mky9hagfs";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/task-system/0.13.15/jars/task-system.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/task-system/0.13.15/jars/task-system.jar";
+      sha256 = "0hq0isj2cdzpli4qsdnvbnkc6km0dznv9sr2b84a4pn7kyv47wp2";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/tasks/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tasks/0.13.15/ivys/ivy.xml";
+      sha256 = "1ipnbjjnr2h96rkl04zm7rw4dv27irqnd7dddx6bghj5k67jq20v";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/tasks/0.13.15/jars/tasks.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tasks/0.13.15/jars/tasks.jar";
+      sha256 = "1mr0ahqnx1wwcwk08krpvrvr9nsxwhcwcja91hnyy40gdlj79bjg";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/test-agent/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/test-agent/0.13.15/ivys/ivy.xml";
+      sha256 = "0y8ppz2fi8krccr2m3nc7igyqnxll70wchf44ps874a9hjlvlfjn";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/test-agent/0.13.15/jars/test-agent.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/test-agent/0.13.15/jars/test-agent.jar";
+      sha256 = "0s7512bzfajqlcm817p6l5gnmi6zp81amhgz527qn6p6m1l85qzb";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/testing/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/testing/0.13.15/ivys/ivy.xml";
+      sha256 = "1h50cbpgxmm9fpsiynni0lvhmgs1gdhan3j6k3hah5iv6x1yradk";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/testing/0.13.15/jars/testing.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/testing/0.13.15/jars/testing.jar";
+      sha256 = "04bndxmaah5hw60hpplg2lj1sns8f8yi6rpmr33mrsxjamh3vhni";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/tracking/0.13.15/ivys/ivy.xml" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tracking/0.13.15/ivys/ivy.xml";
+      sha256 = "0wzf37isnh3h748hwcpbr5qglp52jzm9hdpg5c1svyasbsp1856b";
+    };
+    "nix-typesafe-ivy-releases/org.scala-sbt/tracking/0.13.15/jars/tracking.jar" = {
+      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/tracking/0.13.15/jars/tracking.jar";
+      sha256 = "0fa53k7621xg25zyy9dyd14szvj1w9qrh8pdw6w4pq8vlx5jzfjx";
     };
     "nix-typesafe-ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/ivys/ivy.xml" = {
       url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/ivys/ivy.xml";
@@ -928,10 +552,6 @@
     "nix-typesafe-ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/jars/sbinary_2.10.jar" = {
       url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/jars/sbinary_2.10.jar";
       sha256 = "0qhk0ldkkqknqbq5f3gh81f48fpi1fivf1dj880156r80fvrd8nl";
-    };
-    "nix-typesafe-ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/srcs/sbinary_2.10-sources.jar" = {
-      url = "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-tools.sbinary/sbinary_2.10/0.4.2/srcs/sbinary_2.10-sources.jar";
-      sha256 = "1g4mlfcgc5qyivd28wgnx3szk30qkpr1s5vz48hwgdj0wcnhc7kw";
     };
   };
 }
