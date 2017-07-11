@@ -76,12 +76,15 @@ object NixPlugin extends AutoPlugin {
   lazy val genCompositionCommand =
     Command.command("genComposition") { state =>
       val proj = Project.extract(state)
+      val cmpFile = proj.get(compositionFile)
 
-      if (proj.get(generateComposition)) IO.write(
-        proj.get(compositionFile),
+      // generation behavior is optional.
+      // `cmpFile.exists` needs to be triggered as the file is generated once and should be editable
+      // by the developer
+      if (proj.get(generateComposition) && !cmpFile.exists) IO.write(
+        cmpFile,
         Source.fromInputStream(getClass.getResourceAsStream(s"/compositions/${proj.get(compositionType)}.nix"))
-          .getLines
-          .mkString("\n")
+          .getLines.mkString("\n")
           .replace("{{ name }}", proj.currentProject.id)
       )
 
