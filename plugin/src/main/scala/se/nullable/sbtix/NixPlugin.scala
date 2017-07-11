@@ -79,7 +79,7 @@ object NixPlugin extends AutoPlugin {
 
       if (proj.get(generateComposition)) IO.write(
         proj.get(compositionFile),
-        Source.fromInputStream(getClass.getResourceAsStream("/compositions/application.nix"))
+        Source.fromInputStream(getClass.getResourceAsStream(s"/compositions/${proj.get(compositionType)}.nix"))
           .getLines
           .mkString("\n")
           .replace("{{ name }}", proj.currentProject.id)
@@ -94,8 +94,10 @@ object NixPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
+
     compositionFile := baseDirectory.value / "default.nix",
     generateComposition := false, // don't override current default behavior
+    compositionType := "program",
 
     genNixProject := genNixProjectTask.value,
 
@@ -110,8 +112,11 @@ object NixPlugin extends AutoPlugin {
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
+
+    // parameters for composition file
     val compositionFile = settingKey[File]("path to the file which contains the composition")
     val generateComposition = settingKey[Boolean]("Whether or not to generate a composition")
+    val compositionType = settingKey[String]("project type to be built by SBTix (`program`, `library` or `project`)")
   }
 
 }

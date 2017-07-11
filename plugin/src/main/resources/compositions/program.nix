@@ -1,3 +1,4 @@
+# this file originates from SBTix
 { pkgs ? import <nixpkgs> {} }:
 
 with pkgs;
