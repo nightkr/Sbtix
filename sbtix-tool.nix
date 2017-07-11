@@ -72,11 +72,7 @@ let
   sbtixGenall2Script = writeScriptBin "sbtix-gen-all2" ''
     #! ${stdenv.shell}
 
-    #${sbtixScript}/bin/sbtix genNix "reload plugins" genNix "reload plugins" genNix
-
-    if [[ "$1" = "--with-composition" ]]; then
-      ${sbtixScript}/bin/sbtix genComposition
-    fi
+    ${sbtixScript}/bin/sbtix genNix "reload plugins" genNix "reload plugins" genNix genComposition
   '';
 
 in

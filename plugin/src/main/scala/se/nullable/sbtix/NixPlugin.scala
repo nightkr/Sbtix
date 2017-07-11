@@ -76,7 +76,8 @@ object NixPlugin extends AutoPlugin {
   lazy val genCompositionCommand =
     Command.command("genComposition") { state =>
       val proj = Project.extract(state)
-      IO.write(
+
+      if (proj.get(generateComposition)) IO.write(
         proj.get(compositionFile),
         Source.fromInputStream(getClass.getResourceAsStream("/compositions/application.nix"))
           .getLines
@@ -94,6 +95,7 @@ object NixPlugin extends AutoPlugin {
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
     compositionFile := baseDirectory.value / "default.nix",
+    generateComposition := false, // don't override current default behavior
 
     genNixProject := genNixProjectTask.value,
 
@@ -109,6 +111,7 @@ object NixPlugin extends AutoPlugin {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
     val compositionFile = settingKey[File]("path to the file which contains the composition")
+    val generateComposition = settingKey[Boolean]("Whether or not to generate a composition")
   }
 
 }
