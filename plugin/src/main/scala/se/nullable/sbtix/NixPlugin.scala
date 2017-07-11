@@ -4,6 +4,8 @@ import coursier.CoursierPlugin
 import sbt.Keys._
 import sbt._
 
+import scala.io.Source
+
 object NixPlugin extends AutoPlugin {
 
   lazy val genNixProjectTask =
@@ -71,14 +73,34 @@ object NixPlugin extends AutoPlugin {
       state
     }
 
+  lazy val genCompositionCommand =
+    Command.command("genComposition") { state =>
+      val proj = Project.extract(state)
+      IO.write(
+        proj.get(compositionFile),
+        Source.fromInputStream(getClass.getResourceAsStream("/compositions/application.nix"))
+          .getLines
+          .mkString("\n")
+          .replace("{{ name }}", proj.currentProject.id)
+      )
+
+      state
+    }
+
   override def requires: Plugins = CoursierPlugin
 
   override def trigger: PluginTrigger = allRequirements
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
+    compositionFile := baseDirectory.value / "default.nix",
+
     genNixProject := genNixProjectTask.value,
-    commands += genNixCommand
+
+    commands ++= Seq(
+      genNixCommand,
+      genCompositionCommand
+    )
   )
 
   case class GenProjectData(scalaVersion: String, sbtVersion: String, dependencies: Set[coursier.Dependency], resolvers: Set[Resolver], credentials: Set[(String, coursier.Credentials)])
@@ -86,6 +108,7 @@ object NixPlugin extends AutoPlugin {
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
+    val compositionFile = settingKey[File]("path to the file which contains the composition")
   }
 
 }
