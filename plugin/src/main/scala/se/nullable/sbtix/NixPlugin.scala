@@ -83,9 +83,7 @@ object NixPlugin extends AutoPlugin {
       // by the developer
       if (proj.get(generateComposition) && !cmpFile.exists) IO.write(
         cmpFile,
-        Source.fromInputStream(getClass.getResourceAsStream(s"/compositions/${proj.get(compositionType)}.nix"))
-          .getLines.mkString("\n")
-          .replace("{{ name }}", proj.currentProject.id)
+        CompositionWriter(proj.get(compositionType), proj.currentProject.id)
       )
 
       state
