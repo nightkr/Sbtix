@@ -3,5 +3,8 @@
 target
 result
 tests/**/repo.nix
+tests/*/repo.nix
 .ensime_cache
 .ensime
+
+tests/template-generation/default.nix

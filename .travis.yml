@@ -11,3 +11,4 @@ script:
   - popd
   - nix-env -i -f .
   - tests/multi-build/run.sh
+  - tests/template-generation/run.sh

@@ -97,7 +97,7 @@ object NixPlugin extends AutoPlugin {
     nixRepoFile := baseDirectory.value / "repo.nix",
 
     compositionFile := baseDirectory.value / "default.nix",
-    generateComposition := false, // don't override current default behavior
+    generateComposition := true, // let's set it to true, existing files won't be changed
     compositionType := "program",
 
     genNixProject := genNixProjectTask.value,

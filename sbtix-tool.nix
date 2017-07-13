@@ -61,18 +61,21 @@ let
     #! ${stdenv.shell}
 
     ${sbtixScript}/bin/sbtix genNix
+    ${sbtixScript}/bin/sbtix genComposition
   '';
 
   sbtixGenallScript = writeScriptBin "sbtix-gen-all" ''
     #! ${stdenv.shell}
 
     ${sbtixScript}/bin/sbtix genNix "reload plugins" genNix
+    ${sbtixScript}/bin/sbtix genComposition
   '';
 
   sbtixGenall2Script = writeScriptBin "sbtix-gen-all2" ''
     #! ${stdenv.shell}
 
-    ${sbtixScript}/bin/sbtix genNix "reload plugins" genNix "reload plugins" genNix genComposition
+    ${sbtixScript}/bin/sbtix genNix "reload plugins" genNix "reload plugins" genNix
+    ${sbtixScript}/bin/sbtix genComposition
   '';
 
 in
