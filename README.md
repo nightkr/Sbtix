@@ -98,4 +98,8 @@ bottom of sbtix.nix with git as buildinput
 buildInputs = [ jdk sbt git ] ++ buildInputs;
 ```
 
+Q: how to disable the generation of a `default.nix`?
+A: You have to add `generateComposition := false` to your `build.sbt`.
 
+Q: how to use a different type of SBT build in `default.nix`
+A: You can change the value of `compositionType` in your `build.sbt`. Allowed values are `program`, `library` and `project`. In the end the `sbtix.buildSbt{compositionType}` API in the nix expressions will be used.

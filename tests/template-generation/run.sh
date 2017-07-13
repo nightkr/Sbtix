@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -euxo pipefail
 
@@ -10,4 +10,3 @@ done
 
 sbtix-gen-all
 nix-build
-./result/bin/tmpl-gen-test
