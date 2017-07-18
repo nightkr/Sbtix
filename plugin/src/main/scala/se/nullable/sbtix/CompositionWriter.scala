@@ -28,19 +28,9 @@ object CompositionWriter {
        |      (import ./project/repo.nix)
        |      (import ./manual-repo.nix)
        |    ];
-       |    ${writeInstallPhase(compositionType)}
        |  }
      """.stripMargin
   )
-
-  private def writeInstallPhase(compType: String) =
-    if (compType == "project") indent(indent(s"""
-       |installPhase = ''
-       |  # `buildSbtProject` is the simplest derivation provided by SBTix
-       |  # you can specify which steps to be done in the `installPhase` directly
-       |'';
-     """.stripMargin))
-    else "\n"
 
   private def stripWhitespace(t:String) = t.split("\n") map { (l:String) => l.replaceAll("^\\s+$", "") } mkString "\n"
 }

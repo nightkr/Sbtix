@@ -77,13 +77,18 @@ object NixPlugin extends AutoPlugin {
     Command.command("genComposition") { state =>
       val proj = Project.extract(state)
       val cmpFile = proj.get(compositionFile)
+      val t = proj.get(compositionType)
+
+      if (t == "project") {
+        state.log.warn("Composition type `project` is internal and should be avoided!")
+      }
 
       // generation behavior is optional.
       // `cmpFile.exists` needs to be triggered as the file is generated once and should be editable
       // by the developer
       if (proj.get(generateComposition) && !cmpFile.exists) IO.write(
         cmpFile,
-        CompositionWriter(proj.get(compositionType), proj.currentProject.id)
+        CompositionWriter(t, proj.currentProject.id)
       )
 
       state
