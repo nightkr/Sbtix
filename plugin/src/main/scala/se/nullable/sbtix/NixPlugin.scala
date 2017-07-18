@@ -4,6 +4,8 @@ import coursier.CoursierPlugin
 import sbt.Keys._
 import sbt._
 
+import scala.io.Source
+
 object NixPlugin extends AutoPlugin {
 
   lazy val genNixProjectTask =
@@ -71,14 +73,44 @@ object NixPlugin extends AutoPlugin {
       state
     }
 
+  lazy val genCompositionCommand =
+    Command.command("genComposition") { state =>
+      val proj = Project.extract(state)
+      val cmpFile = proj.get(compositionFile)
+      val t = proj.get(compositionType)
+
+      if (t == "project") {
+        state.log.warn("Composition type `project` is internal and should be avoided!")
+      }
+
+      // generation behavior is optional.
+      // `cmpFile.exists` needs to be triggered as the file is generated once and should be editable
+      // by the developer
+      if (proj.get(generateComposition) && !cmpFile.exists) IO.write(
+        cmpFile,
+        CompositionWriter(t, proj.currentProject.id)
+      )
+
+      state
+    }
+
   override def requires: Plugins = CoursierPlugin
 
   override def trigger: PluginTrigger = allRequirements
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
+
+    compositionFile := baseDirectory.value / "default.nix",
+    generateComposition := false, // let's set it to true, existing files won't be changed
+    compositionType := "program",
+
     genNixProject := genNixProjectTask.value,
-    commands += genNixCommand
+
+    commands ++= Seq(
+      genNixCommand,
+      genCompositionCommand
+    )
   )
 
   case class GenProjectData(scalaVersion: String, sbtVersion: String, dependencies: Set[coursier.Dependency], resolvers: Set[Resolver], credentials: Set[(String, coursier.Credentials)])
@@ -86,6 +118,11 @@ object NixPlugin extends AutoPlugin {
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
+
+    // parameters for composition file
+    val compositionFile = settingKey[File]("path to the file which contains the composition")
+    val generateComposition = settingKey[Boolean]("Whether or not to generate a composition")
+    val compositionType = settingKey[String]("project type to be built by SBTix (`program`, `library` or `project`)")
   }
 
 }
