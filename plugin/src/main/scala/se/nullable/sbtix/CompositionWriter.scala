@@ -9,16 +9,7 @@ object CompositionWriter {
        |with pkgs;
        |
        |let
-       |  sbtix =
-       |    let
-       |      sbtixDir = fetchFromGitHub {
-       |        owner = "teozkr";
-       |        repo = "Sbtix";
-       |        rev = "5277d96745afcc04a0873102f4a5f80cfc68fa23";
-       |        sha256 = "17h2ijb50q76al72hpggv35bbqiayyzvybmfwyx1cr5xzlpvzcqh";
-       |      };
-       |    in
-       |      callPackage "$${sbtixDir}/sbtix.nix" {};
+       |  sbtix = callPackage ./sbtix.nix {};
        |in
        |  sbtix.buildSbt${compositionType.capitalize} {
        |    name = "$buildName";
