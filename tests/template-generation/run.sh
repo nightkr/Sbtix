@@ -8,5 +8,5 @@ for f in {,project/}repo.nix; do
   fi
 done
 
-sbtix-gen-all
+sbtix-gen-all2
 nix-build
