@@ -49,9 +49,9 @@ let
         owner = "teozkr";
         repo = "Sbtix";
         rev = "<<current git rev>>"; # Replace as needed
-        sha256 = "1fy7y4ln63ynad5v9w4z8srb9c8j2lz67fjsf6a923czm9lh0000"; # Replace as needed
+        sha256 = "<<<corresponding sha256 hash>>>"; # Replace as needed
     };
-    sbtix = pkgs.callPackage "${sbtixDir}/sbtix.nix" {};
+    sbtix = pkgs.callPackage "${sbtixDir}/plugin/nix-exprs/sbtix.nix" {};
 in
     sbtix.buildSbtProgram {
         name = "sbtix-example";

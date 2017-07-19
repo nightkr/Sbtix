@@ -3,7 +3,7 @@ let
   version = "0.2";
   versionSnapshotSuffix = "-SNAPSHOT";
 
-  sbtix = callPackage ./sbtix.nix {};
+  sbtix = callPackage ./plugin/nix-exprs/sbtix.nix {};
 
   sbtixPluginRepo = sbtix.buildSbtProject {
         name = "sbtix-plugin";

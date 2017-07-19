@@ -86,10 +86,16 @@ object NixPlugin extends AutoPlugin {
       // generation behavior is optional.
       // `cmpFile.exists` needs to be triggered as the file is generated once and should be editable
       // by the developer
-      if (proj.get(generateComposition) && !cmpFile.exists) IO.write(
-        cmpFile,
-        CompositionWriter(t, proj.currentProject.id)
-      )
+      if (proj.get(generateComposition)) {
+        if (!cmpFile.exists) IO.write(
+          cmpFile,
+          CompositionWriter(t, proj.currentProject.id)
+        )
+        if (!proj.get(sbtix).exists) IO.write(
+          proj.get(sbtix),
+          Source.fromInputStream(getClass.getResourceAsStream("/sbtix.nix")).getLines().mkString("\n")
+        )
+      }
 
       state
     }
@@ -102,8 +108,9 @@ object NixPlugin extends AutoPlugin {
     nixRepoFile := baseDirectory.value / "repo.nix",
 
     compositionFile := baseDirectory.value / "default.nix",
-    generateComposition := false, // let's set it to true, existing files won't be changed
+    generateComposition := false,
     compositionType := "program",
+    sbtix := baseDirectory.value / "sbtix.nix",
 
     genNixProject := genNixProjectTask.value,
 
@@ -123,6 +130,7 @@ object NixPlugin extends AutoPlugin {
     val compositionFile = settingKey[File]("path to the file which contains the composition")
     val generateComposition = settingKey[Boolean]("Whether or not to generate a composition")
     val compositionType = settingKey[String]("project type to be built by SBTix (`program`, `library` or `project`)")
+    val sbtix = settingKey[File]("path for sbtix.nix file")
   }
 
 }

@@ -1,4 +1,4 @@
-{pkgs ? import <nixpkgs> {}, sbtix ? pkgs.callPackage ../../../sbtix.nix {}}:
+{pkgs ? import <nixpkgs> {}, sbtix ? pkgs.callPackage ../../../plugin/nix-exprs/sbtix.nix {}}:
 let
     one = pkgs.callPackage ../one/one.nix {
         inherit sbtix;
