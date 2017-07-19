@@ -1,3 +1,4 @@
+# This file originates from SBTix
 { runCommand, fetchurl, lib, stdenv, jdk, jre, sbt, writeText, makeWrapper }:
 with stdenv.lib;
 
