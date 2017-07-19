@@ -25,7 +25,6 @@ let sbtTemplate = repoDefs: versioning:
         local
         '';
     in stdenv.mkDerivation (rec {
-            
             name = "sbt-setup-template";
 
             dontPatchELF      = true;
@@ -48,17 +47,17 @@ let sbtTemplate = repoDefs: versioning:
 
               ln -s ${buildProperties} ./project/build.properties
             '';
-            
+
             buildInputs = [ jdk sbt ];
 
             buildPhase = ''sbt compile:compileIncremental'';
-            
+
             installPhase =''
               mkdir -p $out
-              # Copy the hidden ivy lock files. Only keep ivy cache folder, not ivy local. local might be empty now but I want to be sure it is not polluted in the future. 
+              # Copy the hidden ivy lock files. Only keep ivy cache folder, not ivy local. local might be empty now but I want to be sure it is not polluted in the future.
               rm -rf ./.ivy2/local
               cp -r --remove-destination ./.ivy2 $out/ivy
-              cp -r --remove-destination ./.sbt $out/sbt 
+              cp -r --remove-destination ./.sbt $out/sbt
             '';
     });
 
@@ -70,13 +69,13 @@ let sbtTemplate = repoDefs: versioning:
                   "chmod -R u+rw $out"
                 ];
         in
-            lib.concatStringsSep "\n" (["mkdir -p $out"] ++ lib.concatLists (map copyTemplate templates)) 
+            lib.concatStringsSep "\n" (["mkdir -p $out"] ++ lib.concatLists (map copyTemplate templates))
         );
 
 in rec {
     mkRepo = name: artifacts: runCommand name {}
         (let
-            parentDirs = filePath: 
+            parentDirs = filePath:
                 concatStringsSep "/" (init (splitString "/" filePath));
             linkArtifact = outputPath: urlAttrs:
                 [ ''mkdir -p "$out/${parentDirs outputPath}"''
@@ -84,7 +83,7 @@ in rec {
                 ];
         in
             lib.concatStringsSep "\n" (lib.concatLists (lib.mapAttrsToList linkArtifact artifacts)));
-    
+
     repoConfig = {repos, nixrepo, name}:
         let
             repoPatternOptional = repoPattern:
@@ -124,7 +123,6 @@ in rec {
             '';
 
       in stdenv.mkDerivation (rec {
-            
             dontPatchELF      = true;
             dontStrip         = true;
 
@@ -147,7 +145,6 @@ in rec {
               -Dsbt.repository.config=${sbtixRepos}
               ${sbtOptions}
             '';
-            
 
             buildPhase = ''pwd && sbt compile'';
         } // args // {

@@ -18,7 +18,7 @@ Additionally, this means that Nix can do a better job of enforcing purity where 
 ## Why not? (caveats)
 
 * Alpha quality, beware (and please report any issues!)
-* Nix file for SBT compiler interface dependencies currently must be created manually.
+* Nix file for SBT compiler interface dependencies must currently be created manually.
 * You must use the Coursier dependency resolver instead of Ivy (because SBT's Ivy resolver does not report the original artifact URLs)
 
 ## How?
@@ -29,7 +29,7 @@ cd Sbtix
 nix-env -f . -i sbtix
 ```
 
-Sbtix provides a script which will connect your project to the sbtix global plugin and launch sbt, it does this by setting the `sbt.global.base` directory to `$HOME/.sbtix`.  
+Sbtix provides a script which will connect your project to the sbtix global plugin and launch sbt, it does this by setting the `sbt.global.base` directory to `$HOME/.sbtix`.
 
 ### Sbtix commands
 
@@ -65,13 +65,40 @@ in
 
  * copy `manual-repo.nix` from the root of the sbtix git repository.
  * generate your repo.nix files with one of the commands listed above. `sbtix-gen-all2` is recommended.
- * check the generated nix files into your source control. 
+ * check the generated nix files into your source control.
  * finally, run `nix-build` to build!
  * any additional missing dependencies that `nix-build` encounters should be fetched with `nix-prefetch-url` and added to `manual-repo.nix`.
 
+### Project Types
+
+Libraries and programs need to be "installed" in different ways. Sbtix currently knows how to install "programs" and Maven-style libraries.
+The project type is selected by the builder function you use. Use `sbtix.buildSbtProgram` for building programs, and `sbtix.buildSbtLibrary`.
+
+There is also `sbtix.buildSbtProject`, which allows you to define a custom Nix `installPhase`.
+
+#### Programs
+
+Programs must have a `stage` task, and it is assumed that calling this task will put its output in `target/universal/stage`. This folder is then copied
+to be the Nix build output.
+
+This is generally fulfilled by SBT-Native-Packager's [sbt-np-jaa](Java Application Archetype).
+
+[sbt-np-jaa]: http://www.scala-sbt.org/sbt-native-packager/archetypes/java_app/index.html
+
+#### Libraries
+
+Libraries are built by running SBT's built-in `publishLocal` task and then copying the resulting Ivy local repo to the Nix output folder.
+
+### Source Dependencies
+
+Sbtix builds can depend on other Sbtix builds by adding the attr `sbtixBuildInputs` to their call to `buildSbt*`. It's used like Nix's `buildInputs`,
+but makes them available to Ivy/Coursier.
+
 ### Authentication
 
-In order to use a private repository, add your credentials to `coursierCredentials`. Note that the key should be the name of the repository, see `plugin/src/sbt-test/sbtix/private-auth/build.sbt` for an example! Also, you must currently set the credentials for each project, `in ThisBuild` doesn't work currently. This is for consistency with Coursier-SBT.
+In order to use a private repository, add your credentials to `coursierCredentials`. Note that the key should be the name of the repository, see
+`plugin/src/sbt-test/sbtix/private-auth/build.sbt` for an example! Also, you must currently set the credentials for each SBT subproject, `in ThisBuild`
+doesn't currently work. This is for consistency with Coursier-SBT.
 
 ### FAQ
 
@@ -81,7 +108,7 @@ A: You probably need to add the following resolver to your project for Sbtix to 
 
 ```
 // if using PlayFramework
-resolvers += Resolver.url("sbt-plugins-releases", url("https://dl.bintray.com/playframework/sbt-plugin-releases"))(Resolver.ivyStylePatterns) 
+resolvers += Resolver.url("sbt-plugins-releases", url("https://dl.bintray.com/playframework/sbt-plugin-releases"))(Resolver.ivyStylePatterns)
 ```
 
 Q: When I `nix-build` it sbt complains `java.io.IOException: Cannot run program "git": error=2, No such file or directory`
@@ -98,8 +125,10 @@ bottom of sbtix.nix with git as buildinput
 buildInputs = [ jdk sbt git ] ++ buildInputs;
 ```
 
-Q: how to disable the generation of a `default.nix`?
+Q: How do I disable the generation of a `default.nix`?
+
 A: You have to add `generateComposition := false` to your `build.sbt`.
 
-Q: how to use a different type of SBT build in `default.nix`
-A: You can change the value of `compositionType` in your `build.sbt`. Allowed values are `program`, `library` and `project`. In the end the `sbtix.buildSbt{compositionType}` API in the nix expressions will be used.
+Q: How do I use a different type of SBT build in `default.nix`
+
+A: You can change the value of `compositionType` in your `build.sbt`. Allowed values are `program` and `library`. In the end the `sbtix.buildSbt{compositionType}` API in the nix expressions will be used.
