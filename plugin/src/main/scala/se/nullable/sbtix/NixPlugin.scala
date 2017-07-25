@@ -4,8 +4,6 @@ import coursier.CoursierPlugin
 import sbt.Keys._
 import sbt._
 
-import scala.io.Source
-
 object NixPlugin extends AutoPlugin {
 
   lazy val genNixProjectTask =
@@ -71,7 +69,7 @@ object NixPlugin extends AutoPlugin {
 
       if (!extracted.get(manualRepoFile).exists) IO.write(
         extracted.get(manualRepoFile),
-        Source.fromInputStream(getClass.getResourceAsStream("/manual-repo.nix")).getLines().mkString("\n")
+        resource2String("/manual-repo.nix")
       )
 
       IO.write(repoFile, NixWriter(versioning, repos, artifacts))
@@ -98,7 +96,7 @@ object NixPlugin extends AutoPlugin {
         )
         if (!proj.get(sbtix).exists) IO.write(
           proj.get(sbtix),
-          Source.fromInputStream(getClass.getResourceAsStream("/sbtix.nix")).getLines().mkString("\n")
+          resource2String("/sbtix.nix")
         )
       }
 
