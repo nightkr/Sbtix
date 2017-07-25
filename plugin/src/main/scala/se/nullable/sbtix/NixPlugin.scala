@@ -69,6 +69,11 @@ object NixPlugin extends AutoPlugin {
         flatErrors.foreach(e => state.log.error(s"${e.toString()}\n"))
       }
 
+      if (!extracted.get(manualRepoFile).exists) IO.write(
+        extracted.get(manualRepoFile),
+        Source.fromInputStream(getClass.getResourceAsStream("/manual-repo.nix")).getLines().mkString("\n")
+      )
+
       IO.write(repoFile, NixWriter(versioning, repos, artifacts))
       state
     }
@@ -106,6 +111,7 @@ object NixPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
+    manualRepoFile := baseDirectory.value / "manual-repo.nix",
 
     compositionFile := baseDirectory.value / "default.nix",
     generateComposition := false,
@@ -125,6 +131,7 @@ object NixPlugin extends AutoPlugin {
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
+    val manualRepoFile = settingKey[File]("path to `manual-repo.nix`")
 
     // parameters for composition file
     val compositionFile = settingKey[File]("path to the file which contains the composition")

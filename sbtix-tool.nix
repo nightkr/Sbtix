@@ -11,7 +11,7 @@ let
         src = ./plugin;
         repo = [ (import ./plugin/repo.nix)
                  (import ./plugin/project/repo.nix)
-                 (import ./manual-repo.nix)
+                 (import ./plugin/nix-exprs/manual-repo.nix)
                ];
 
         installPhase =''
