@@ -69,7 +69,7 @@ object NixPlugin extends AutoPlugin {
 
       if (!extracted.get(manualRepoFile).exists) IO.write(
         extracted.get(manualRepoFile),
-        resource2String("/manual-repo.nix")
+        resource2string("/manual-repo.nix")
       )
 
       IO.write(repoFile, NixWriter(versioning, repos, artifacts))
@@ -96,7 +96,7 @@ object NixPlugin extends AutoPlugin {
         )
         if (!proj.get(sbtix).exists) IO.write(
           proj.get(sbtix),
-          resource2String("/sbtix.nix")
+          resource2string("/sbtix.nix")
         )
       }
 
