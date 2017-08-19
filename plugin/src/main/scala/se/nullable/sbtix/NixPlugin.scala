@@ -4,8 +4,6 @@ import coursier.CoursierPlugin
 import sbt.Keys._
 import sbt._
 
-import scala.io.Source
-
 object NixPlugin extends AutoPlugin {
 
   lazy val genNixProjectTask =
@@ -69,6 +67,11 @@ object NixPlugin extends AutoPlugin {
         flatErrors.foreach(e => state.log.error(s"${e.toString()}\n"))
       }
 
+      if (!extracted.get(manualRepoFile).exists) IO.write(
+        extracted.get(manualRepoFile),
+        resource2string("/manual-repo.nix")
+      )
+
       IO.write(repoFile, NixWriter(versioning, repos, artifacts))
       state
     }
@@ -93,7 +96,7 @@ object NixPlugin extends AutoPlugin {
         )
         if (!proj.get(sbtix).exists) IO.write(
           proj.get(sbtix),
-          Source.fromInputStream(getClass.getResourceAsStream("/sbtix.nix")).getLines().mkString("\n")
+          resource2string("/sbtix.nix")
         )
       }
 
@@ -106,6 +109,7 @@ object NixPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     nixRepoFile := baseDirectory.value / "repo.nix",
+    manualRepoFile := baseDirectory.value / "manual-repo.nix",
 
     compositionFile := baseDirectory.value / "default.nix",
     generateComposition := false,
@@ -125,6 +129,7 @@ object NixPlugin extends AutoPlugin {
   object autoImport {
     val nixRepoFile = settingKey[File]("the path to put the nix repo definition in")
     val genNixProject = taskKey[GenProjectData]("generate a Nix definition for building the maven repo")
+    val manualRepoFile = settingKey[File]("path to `manual-repo.nix`")
 
     // parameters for composition file
     val compositionFile = settingKey[File]("path to the file which contains the composition")

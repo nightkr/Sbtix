@@ -3,6 +3,8 @@ package se.nullable
 import java.net.URI
 import java.io.File
 
+import scala.io.Source
+
 package object sbtix {
   def quote(s: String) = "\"" + s + "\""
 
@@ -16,5 +18,9 @@ package object sbtix {
   def recursiveListFiles(f: File): Array[File] = {
     val these = f.listFiles
     these ++ these.filter(_.isDirectory).flatMap(recursiveListFiles)
+  }
+
+  def resource2string(file: String): String = {
+    Source.fromInputStream(getClass.getResourceAsStream(file)).getLines mkString "\n"
   }
 }

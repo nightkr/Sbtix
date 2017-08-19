@@ -63,7 +63,6 @@ in
     }
 ```
 
- * copy `manual-repo.nix` from the root of the sbtix git repository.
  * generate your repo.nix files with one of the commands listed above. `sbtix-gen-all2` is recommended.
  * check the generated nix files into your source control.
  * finally, run `nix-build` to build!
