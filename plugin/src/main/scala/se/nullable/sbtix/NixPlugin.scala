@@ -94,7 +94,7 @@ object NixPlugin extends AutoPlugin {
           cmpFile,
           CompositionWriter(t, proj.currentProject.id)
         )
-        if (!proj.get(sbtix).exists) IO.write(
+        IO.write(
           proj.get(sbtix),
           resource2string("/sbtix.nix")
         )
