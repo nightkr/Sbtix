@@ -1,5 +1,6 @@
 > compile
 > genNix
+> genComposition
 > reload plugins
 > genNix
 $ exists repo.nix

@@ -112,7 +112,7 @@ object NixPlugin extends AutoPlugin {
     manualRepoFile := baseDirectory.value / "manual-repo.nix",
 
     compositionFile := baseDirectory.value / "default.nix",
-    generateComposition := false,
+    generateComposition := true,
     compositionType := "program",
     sbtix := baseDirectory.value / "sbtix.nix",
 

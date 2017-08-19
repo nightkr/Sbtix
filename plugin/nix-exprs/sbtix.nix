@@ -35,6 +35,7 @@ let sbtTemplate = repoDefs: versioning:
             SBT_OPTS = ''
              -Dsbt.ivy.home=./.ivy2/
              -Dsbt.boot.directory=./.sbt/boot/
+             -Dsbt.global.base=./.sbt
              -Dsbt.global.staging=./.staging
              -Dsbt.override.build.repos=true
              -Dsbt.repository.config=${sbtixRepos}
@@ -141,6 +142,7 @@ in rec {
             SBT_OPTS = ''
               -Dsbt.ivy.home=./.ivy2/
               -Dsbt.boot.directory=./.sbt/boot/
+              -Dsbt.global.base=./.sbt
               -Dsbt.global.staging=./.staging
               -Dsbt.override.build.repos=true
               -Dsbt.repository.config=${sbtixRepos}
