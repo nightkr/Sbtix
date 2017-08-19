@@ -131,3 +131,10 @@ A: You have to add `generateComposition := false` to your `build.sbt`.
 Q: How do I use a different type of SBT build in `default.nix`
 
 A: You can change the value of `compositionType` in your `build.sbt`. Allowed values are `program` and `library`. In the end the `sbtix.buildSbt{compositionType}` API in the nix expressions will be used.
+
+## Thanks
+
+- [Eelco Dolstra](https://github.com/edolstra) - For getting this whole Nix thing started
+- [Charles O'Farrel](https://github.com/charleso) - For writing [sbt2nix](https://github.com/charleso/sbt2nix)
+- [Chris Van Vranken](https://github.com/cessationoftime) - For sorting out a lot of dependency-fetching bugs, and adding SBT plugin support
+- [Maximilian Bosch](https://github.com/Ma27) - For fixing the UX of this thing
