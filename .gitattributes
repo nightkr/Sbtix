@@ -1,0 +1,2 @@
+repo.nix linguist-vendored=true
+manual-repo.nix linguist-vendored=true
