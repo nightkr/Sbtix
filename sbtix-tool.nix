@@ -47,9 +47,17 @@ let
     fi
 
     # if sbtix_plugin.sbt is a link or does not exist then update the link. If it is a regular file do not replace it.
-    if [ -L "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt" ] || [ ! -f "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt" ]; then
-      echo "Updating $HOME/.sbtix/plugins/sbtix_plugin.sbt symlink"
-      ln -sf ${pluginsSbtix} "$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt"
+    SBTIX_PLUGIN_FILE="$SBTIX_GLBASE_DIR/plugins/sbtix_plugin.sbt"
+    if [ -L "$SBTIX_PLUGIN_FILE" ] || [ ! -f "$SBTIX_PLUGIN_FILE" ]; then
+      echo "Updating $SBTIX_PLUGIN_FILE symlink"
+      ln -sf ${pluginsSbtix} "$SBTIX_PLUGIN_FILE"
+    else
+      echo "$SBTIX_PLUGIN_FILE is not a symlink, keeping it intact"
+    fi
+
+    if [ "$SBT_OPTS" != "" ]; then
+      echo '$SBT_OPTS is set, unsetting'
+      unset -v SBT_OPTS
     fi
 
 
