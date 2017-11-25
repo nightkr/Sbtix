@@ -171,7 +171,7 @@ in rec {
           sbt stage
           mkdir -p $out/
           cp target/universal/stage/* $out/ -r
-          for p in $out/bin/*; do
+          for p in $(find $out/bin/* -executable); do
             wrapProgram "$p" --prefix PATH : ${jre}/bin
           done
         '';
