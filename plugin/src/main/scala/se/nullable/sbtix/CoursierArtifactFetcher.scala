@@ -16,10 +16,11 @@ import scala.collection.JavaConversions._
 import java.util.concurrent.ExecutorService
 import scala.concurrent.duration.Duration
 import scala.util.control.NonFatal
+import scala.collection.JavaConverters._
 import java.nio.file.{ StandardCopyOption, Files => NioFiles }
 case class GenericModule(primaryArtifact: Artifact, dep: Dependency, localFile: java.io.File) {
   private val isIvy = localFile.getParentFile().getName() == "jars"
-  private val moduleId = ToSbt.moduleId(dep)
+  private val moduleId = ToSbt.moduleId((dep, Map()))
   val url = new URL(primaryArtifact.url)
 
   private val authedUri = authed(url)
@@ -63,17 +64,17 @@ case class MetaArtifact(artifactUrl: String, checkSum:String) extends Comparable
   override def compareTo(other: MetaArtifact): Int = {
     return artifactUrl.compareTo(other.artifactUrl)
   }
-  
+
   def matchesGenericModule(gm:GenericModule) = {
    val organ = gm.dep.module.organization
    val name = gm.dep.module.name
    val version = gm.dep.version
-   
+
    val slashOrgans = organ.replace(".", "/")
-   
+
    val mvn = s"$slashOrgans/$name/$version"
    val ivy = s"$organ/$name/$version"
-   
+
    artifactUrl.contains(mvn) || artifactUrl.contains(ivy)
   }
 }
@@ -87,10 +88,10 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
     val (mods1,errors) = depends.map(x => buildNixProject(x)).unzip
 
     val mods = mods1.flatten
-    
+
     //remove metaArtifacts that we already have a module for. We do not need to look them up twice.
-    val metaArtifacts = metaArtifactCollector.toSet.filterNot { meta =>mods.exists { meta.matchesGenericModule} }
-    
+    val metaArtifacts = metaArtifactCollector.asScala.toSet.filterNot { meta =>mods.exists { meta.matchesGenericModule} }
+
     //object to work with the rootUrl of Resolvers
     val nixResolver = resolvers.map(NixResolver.resolve)
 
@@ -99,7 +100,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
 
     //retrieve metaArtifacts that were missed. Mostly parent POMS
     val (metaRepoSeq, metaArtifactsSeqSeq) = nixResolver.flatMap(_.filterMetaArtifacts(logger, metaArtifacts)).unzip
-    
+
     val nixArtifacts = (artifactsSeqSeq.flatten ++ metaArtifactsSeqSeq.flatten)
 
     val nixRepos = (repoSeq ++ metaRepoSeq)
@@ -130,7 +131,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
       ).leftMap(_.describe).flatMap { f =>
 
         def notFound(f: File) = Left(s"${f.getCanonicalPath} not found")
- 
+
         def read(f: File) =
           try Right(new String(NioFiles.readAllBytes(f.toPath), "UTF-8").stripPrefix("\ufeff"))
           catch {
@@ -180,7 +181,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
             read(f)
         } else
           notFound(f)
-          
+
         if (res.isRight) {
               //only collect the http and https urls
              if (artifact.url.startsWith("http")) {
@@ -192,7 +193,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
         EitherT.fromEither(Task.now[Either[String, String]](res))
       }
   }
-  
+
   //coursier must take dependencies one at a time, otherwise it only resolves the most recent version of a module, which causes missed dependencies.
   private def buildNixProject(module: Dependency): (Seq[GenericModule],ResolutionErrors) = {
     val res = Resolution(Set(module))
@@ -208,23 +209,23 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
     val modules = resolution.dependencyArtifacts.flatMap {
       case ((dependency, artifact)) =>
         val downloadedArtifact = Cache.file(artifact).run.unsafePerformSync
-        
+
         downloadedArtifact.toOption.map { localFile => GenericModule(artifact, dependency, localFile) }
     }
-     (modules,ResolutionErrors(resolution.errors))
+     (modules,ResolutionErrors(resolution.metadataErrors))
   }
 
   private def ivyProps = Map("ivy.home" -> new File(sys.props("user.home"), ".ivy2").toString) ++ sys.props
 }
 
-case class ResolutionErrors(errors: Seq[(Dependency,Seq[String])]) {
-  
+case class ResolutionErrors(errors: Seq[(ModuleVersion, Seq[String])]) {
+
   def +(other:ResolutionErrors) = {
-    ResolutionErrors(errors ++ other.errors) 
+    ResolutionErrors(errors ++ other.errors)
   }
-  
+
   def +(other:Seq[ResolutionErrors]) = {
-    ResolutionErrors(errors ++ other.flatMap(_.errors)) 
+    ResolutionErrors(errors ++ other.flatMap(_.errors))
   }
-  
+
 }

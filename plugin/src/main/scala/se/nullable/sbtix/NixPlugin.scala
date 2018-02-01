@@ -18,7 +18,7 @@ object NixPlugin extends AutoPlugin {
         .filterNot(_.extraAttributes.contains("e:nix"))
         -- projectDependencies.value)
 
-      val depends = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
+      val depends = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value)).map(_._2)
         .filterNot {
           _.module.organization == "se.nullable.sbtix"
         } //ignore the sbtix dependency that gets added because of the global sbtix plugin
