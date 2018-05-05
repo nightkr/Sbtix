@@ -12,14 +12,14 @@ import scalaz.concurrent.Task
 
 import scalaz.{ -\/, \/-, EitherT }
 import java.util.concurrent.ConcurrentSkipListSet
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import java.util.concurrent.ExecutorService
 import scala.concurrent.duration.Duration
 import scala.util.control.NonFatal
 import java.nio.file.{ StandardCopyOption, Files => NioFiles }
 case class GenericModule(primaryArtifact: Artifact, dep: Dependency, localFile: java.io.File) {
   private val isIvy = localFile.getParentFile().getName() == "jars"
-  private val moduleId = ToSbt.moduleId(dep)
+  private val moduleId = ToSbt.moduleId(dep, Map())
   val url = new URL(primaryArtifact.url)
 
   private val authedUri = authed(url)
@@ -89,7 +89,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
     val mods = mods1.flatten
     
     //remove metaArtifacts that we already have a module for. We do not need to look them up twice.
-    val metaArtifacts = metaArtifactCollector.toSet.filterNot { meta =>mods.exists { meta.matchesGenericModule} }
+    val metaArtifacts = metaArtifactCollector.asScala.toSet.filterNot { meta =>mods.exists { meta.matchesGenericModule} }
     
     //object to work with the rootUrl of Resolvers
     val nixResolver = resolvers.map(NixResolver.resolve)
