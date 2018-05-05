@@ -185,7 +185,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
               //only collect the http and https urls
              if (artifact.url.startsWith("http")) {
                 //reduce the number of tried and failed metaArtifacts by checking if Coursier succeeded in its download
-                val checkSum = FindArtifactsOfRepo.fetchChecksum(artifact.url, "-Meta- Artifact",f.toURI().toURL())
+                val checkSum = FindArtifactsOfRepo.fetchChecksum(artifact.url, "-Meta- Artifact",f.toURI().toURL()).get // TODO this might be expressed in a monad
                 metaArtifactCollector.add(MetaArtifact(artifact.url,checkSum))
              }
         }
