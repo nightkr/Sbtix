@@ -25,8 +25,8 @@ case class GenericModule(primaryArtifact: Artifact, dep: Dependency, localFile: 
   private val authedUri = authed(url)
 
   /**
-   * remote location of the module and all related artifacts
-   */
+    * remote location of the module and all related artifacts
+    */
   private val calculatedParentURI = if (isIvy) {
     parentURI(parentURI(authedUri))
   } else {
@@ -34,8 +34,8 @@ case class GenericModule(primaryArtifact: Artifact, dep: Dependency, localFile: 
   }
 
   /**
-   * create the authenticated version of a given url
-   */
+    * create the authenticated version of a given url
+    */
   def authed(url: URL) = {
     primaryArtifact.authentication match {
       case Some(a) =>
@@ -45,8 +45,8 @@ case class GenericModule(primaryArtifact: Artifact, dep: Dependency, localFile: 
   }
 
   /**
-   * resolve the URI of a sibling artifact, based on the primary artifact's parent URI
-   */
+    * resolve the URI of a sibling artifact, based on the primary artifact's parent URI
+    */
   def calculateURI(f: File) = if (isIvy) {
     calculatedParentURI.resolve(f.getParentFile().getName() + "/" + f.getName())
   } else {
@@ -54,8 +54,8 @@ case class GenericModule(primaryArtifact: Artifact, dep: Dependency, localFile: 
   }
 
   /**
-   * local location of the module and all related artifacts
-   */
+    * local location of the module and all related artifacts
+    */
   val localSearchLocation = if (isIvy) { localFile.getParentFile().getParentFile() } else { localFile.getParentFile() }
 }
 
@@ -65,16 +65,16 @@ case class MetaArtifact(artifactUrl: String, checkSum:String) extends Comparable
   }
   
   def matchesGenericModule(gm:GenericModule) = {
-   val organ = gm.dep.module.organization
-   val name = gm.dep.module.name
-   val version = gm.dep.version
-   
-   val slashOrgans = organ.replace(".", "/")
-   
-   val mvn = s"$slashOrgans/$name/$version"
-   val ivy = s"$organ/$name/$version"
-   
-   artifactUrl.contains(mvn) || artifactUrl.contains(ivy)
+    val organ = gm.dep.module.organization
+    val name = gm.dep.module.name
+    val version = gm.dep.version
+    
+    val slashOrgans = organ.replace(".", "/")
+    
+    val mvn = s"$slashOrgans/$name/$version"
+    val ivy = s"$organ/$name/$version"
+    
+    artifactUrl.contains(mvn) || artifactUrl.contains(ivy)
   }
 }
 
@@ -108,8 +108,8 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
   }
 
   /**
-   * modification of coursier.Cache.Fetch()
-   */
+    * modification of coursier.Cache.Fetch()
+    */
   def CacheFetch_WithCollector(
     cache: File = Cache.default,
     cachePolicy: CachePolicy = CachePolicy.FetchMissing,
@@ -119,41 +119,41 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
     ttl: Option[Duration] = Cache.defaultTtl
   ): Fetch.Content[Task] = {
     artifact =>
-      Cache.file(
-        artifact,
-        cache,
-        cachePolicy,
-        checksums = checksums,
-        logger = logger,
-        pool = pool,
-        ttl = ttl
-      ).leftMap(_.describe).flatMap { f =>
+    Cache.file(
+      artifact,
+      cache,
+      cachePolicy,
+      checksums = checksums,
+      logger = logger,
+      pool = pool,
+      ttl = ttl
+    ).leftMap(_.describe).flatMap { f =>
 
-        def notFound(f: File) = Left(s"${f.getCanonicalPath} not found")
- 
-        def read(f: File) =
-          try Right(new String(NioFiles.readAllBytes(f.toPath), "UTF-8").stripPrefix("\ufeff"))
-          catch {
-            case NonFatal(e) =>
-              Left(s"Could not read (file:${f.getCanonicalPath}): ${e.getMessage}")
-          }
+      def notFound(f: File) = Left(s"${f.getCanonicalPath} not found")
+      
+      def read(f: File) =
+        try Right(new String(NioFiles.readAllBytes(f.toPath), "UTF-8").stripPrefix("\ufeff"))
+        catch {
+          case NonFatal(e) =>
+            Left(s"Could not read (file:${f.getCanonicalPath}): ${e.getMessage}")
+        }
 
-        val res = if (f.exists()) {
-          if (f.isDirectory) {
-            if (artifact.url.startsWith("file:")) {
+      val res = if (f.exists()) {
+        if (f.isDirectory) {
+          if (artifact.url.startsWith("file:")) {
 
-              val elements = f.listFiles().map { c =>
-                val name = c.getName
-                val name0 = if (c.isDirectory)
-                  name + "/"
-                else
-                  name
+            val elements = f.listFiles().map { c =>
+              val name = c.getName
+              val name0 = if (c.isDirectory)
+                            name + "/"
+                          else
+                            name
 
-                s"""<li><a href="$name0">$name0</a></li>"""
-              }.mkString
+              s"""<li><a href="$name0">$name0</a></li>"""
+            }.mkString
 
-              val page =
-                s"""<!DOCTYPE html>
+            val page =
+              s"""<!DOCTYPE html>
                    |<html>
                    |<head></head>
                    |<body>
@@ -164,33 +164,33 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
                    |</html>
                  """.stripMargin
 
-              Right(page)
-            } else {
-              val f0 = new File(f, ".directory")
+            Right(page)
+          } else {
+            val f0 = new File(f, ".directory")
 
-              if (f0.exists()) {
-                if (f0.isDirectory)
-                  Left(s"Woops: ${f.getCanonicalPath} is a directory")
-                else
-                  read(f0)
-              } else
+            if (f0.exists()) {
+              if (f0.isDirectory)
+                Left(s"Woops: ${f.getCanonicalPath} is a directory")
+              else
+                read(f0)
+            } else
                 notFound(f0)
-            }
-          } else
-            read(f)
+          }
         } else
+            read(f)
+      } else
           notFound(f)
-          
-        if (res.isRight) {
-              //only collect the http and https urls
-             if (artifact.url.startsWith("http")) {
-                //reduce the number of tried and failed metaArtifacts by checking if Coursier succeeded in its download
-                val checkSum = FindArtifactsOfRepo.fetchChecksum(artifact.url, "-Meta- Artifact",f.toURI().toURL()).get // TODO this might be expressed in a monad
-                metaArtifactCollector.add(MetaArtifact(artifact.url,checkSum))
-             }
+      
+      if (res.isRight) {
+        //only collect the http and https urls
+        if (artifact.url.startsWith("http")) {
+          //reduce the number of tried and failed metaArtifacts by checking if Coursier succeeded in its download
+          val checkSum = FindArtifactsOfRepo.fetchChecksum(artifact.url, "-Meta- Artifact",f.toURI().toURL()).get // TODO this might be expressed in a monad
+          metaArtifactCollector.add(MetaArtifact(artifact.url,checkSum))
         }
-        EitherT.fromEither(Task.now[Either[String, String]](res))
       }
+      EitherT.fromEither(Task.now[Either[String, String]](res))
+    }
   }
   
   //coursier must take dependencies one at a time, otherwise it only resolves the most recent version of a module, which causes missed dependencies.
@@ -200,8 +200,8 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
     val repos = resolvers.flatMap { resolver =>
       FromSbt.repository(resolver, ivyProps, logger, credentials.get(resolver.name).map(_.authentication))
     }
-     val fetch = Fetch.from(repos.toSeq, CacheFetch_WithCollector())
-     val resolution = res.process.run(fetch, 100).unsafePerformSync
+    val fetch = Fetch.from(repos.toSeq, CacheFetch_WithCollector())
+    val resolution = res.process.run(fetch, 100).unsafePerformSync
 
     assert(resolution.isDone)
 
@@ -211,7 +211,7 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
         
         downloadedArtifact.toOption.map { localFile => GenericModule(artifact, dependency, localFile) }
     }
-     (modules,ResolutionErrors(resolution.errors))
+    (modules,ResolutionErrors(resolution.errors))
   }
 
   private def ivyProps = Map("ivy.home" -> new File(sys.props("user.home"), ".ivy2").toString) ++ sys.props
@@ -220,11 +220,11 @@ class CoursierArtifactFetcher(logger: Logger, resolvers: Set[Resolver], credenti
 case class ResolutionErrors(errors: Seq[(Dependency,Seq[String])]) {
   
   def +(other:ResolutionErrors) = {
-    ResolutionErrors(errors ++ other.errors) 
+    ResolutionErrors(errors ++ other.errors)
   }
   
   def +(other:Seq[ResolutionErrors]) = {
-    ResolutionErrors(errors ++ other.flatMap(_.errors)) 
+    ResolutionErrors(errors ++ other.flatMap(_.errors))
   }
   
 }

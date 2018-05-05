@@ -16,6 +16,7 @@ object NixPlugin extends AutoPlugin {
 
       val modules = (allDependencies.value.toSet
         .filterNot(_.extraAttributes.contains("e:nix"))
+        + scalaCompilerBridgeSource.value
         -- projectDependencies.value)
 
       val depends = modules.flatMap(coursier.FromSbt.dependencies(_, scalaVersion.value, scalaBinaryVersion.value, "jar")).map(_._2)
