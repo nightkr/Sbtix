@@ -16,7 +16,6 @@ object NixResolver {
         NixResolver(ivy.name, root, Some(pattern))
       case mvn: MavenRepository => NixResolver(mvn.name, mvn.root, None)
       case cr: ChainedResolver => ???
-      case jn1: JavaNet1Repository => ???
       case raw: RawRepository => ???
     }
 
