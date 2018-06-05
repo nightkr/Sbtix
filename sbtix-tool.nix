@@ -15,7 +15,7 @@ let
                ];
 
         installPhase =''
-          sbt publish-local
+          sbt publishLocal
           mkdir -p $out/plugin-repo
           cp ./.ivy2/local/* $out/plugin-repo -r
         '';

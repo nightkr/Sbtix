@@ -593,6 +593,10 @@
       url = "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.8.1/log4j-core-2.8.1-sources.jar";
       sha256 = "EFB8BD06659BEDA231375B72FB38F44D884B7D086F34E050204FFC8EFE0CF6C2";
     };
+    "nix-public/org/apache/logging/log4j/log4j-core/2.8.1/log4j-core-2.8.1-tests.jar" = {
+      url = "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.8.1/log4j-core-2.8.1-tests.jar";
+      sha256 = "0pdkazd3ja1l9brlmy6pwnl91xih06c6avg119rii6sl83swq2dx";
+    };
     "nix-public/org/apache/logging/log4j/log4j-core/2.8.1/log4j-core-2.8.1.jar" = {
       url = "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.8.1/log4j-core-2.8.1.jar";
       sha256 = "815A73E20E90A413662EEFE8594414684DF3D5723EDCD76070E1A5AEE864616E";
