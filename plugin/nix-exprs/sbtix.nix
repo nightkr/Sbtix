@@ -22,7 +22,7 @@ let sbtTemplate = repoDefs: versioning:
         # http://www.scala-sbt.org/0.13.5/docs/Launcher/Configuration.html
         sbtixRepos = writeText "sbtixRepos" ''
         [repositories]
-        ${concatStringsSep "\n  " repoDefs}
+          ${concatStringsSep "\n  " repoDefs}
         local
         '';
     in stdenv.mkDerivation (rec {
@@ -52,7 +52,7 @@ let sbtTemplate = repoDefs: versioning:
 
             buildInputs = [ jdk sbt ];
 
-            buildPhase = ''sbt compile:compileIncremental'';
+            buildPhase = ''sbt update'';
 
             installPhase =''
               mkdir -p $out
@@ -119,8 +119,8 @@ in rec {
           # http://www.scala-sbt.org/0.13.5/docs/Launcher/Configuration.html
           sbtixRepos = writeText "sbtixRepos" ''
             [repositories]
-            ${concatStringsSep "\n  " (map (d: "${d.name}: file://${d}, ${ivyRepoPattern}") builtDependencies)}
-            ${concatStringsSep "\n  " repoDefs}
+              ${concatStringsSep "\n  " (map (d: "${d.name}: file://${d}, ${ivyRepoPattern}") builtDependencies)}
+              ${concatStringsSep "\n  " repoDefs}
             local
             '';
 
@@ -131,12 +131,12 @@ in rec {
             # COURSIER_CACHE env variable is needed if one wants to use non-sbtix repositories in the below repo list, which is sometimes useful.
             COURSIER_CACHE = "./.coursier/cache/v1";
 
-            configurePhase = ''
-              cp -Lr ${sbtSetupTemplate}/ivy ./.ivy2
-              cp -Lr ${sbtSetupTemplate}/sbt ./.sbt
-              chmod -R 755 ./.ivy2/
-              chmod -R 755 ./.sbt/
-            '';
+            # configurePhase = ''
+            #   cp -Lr ${sbtSetupTemplate}/ivy ./.ivy2
+            #   cp -Lr ${sbtSetupTemplate}/sbt ./.sbt
+            #   chmod -R 755 ./.ivy2/
+            #   chmod -R 755 ./.sbt/
+            # '';
 
             # set environment variable to affect all SBT commands
             SBT_OPTS = ''
